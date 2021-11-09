@@ -9,7 +9,7 @@
 
 	<fragment
 		android:id="@+id/mainScreenFragment"
-		android:name="com.example.seeweather.presentation.MainScreenFragment"
+		android:name="com.example.seeweather.presentation.mainscreen.MainScreenFragment"
 		android:label="MainScreenFragment"
 		tools:layout="@layout/main_screen_fragment"
 		/>
