@@ -1,9 +1,7 @@
 package com.example.seeweather.presentation.mainscreen
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -13,10 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.seeweather.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MainScreenFragment: Fragment() {
+@AndroidEntryPoint
+class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 
 	private val viewModel: MainScreenViewModel by viewModels()
 	private lateinit var cityField: EditText
@@ -40,17 +40,13 @@ class MainScreenFragment: Fragment() {
 		}
 	}
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		val rootView = inflater.inflate(R.layout.main_screen_fragment, container, false)
-		cityField = rootView.findViewById(R.id.city_field)
-		stateText = rootView.findViewById(R.id.state_text)
-		submitButton = rootView.findViewById<Button>(R.id.submit_btn).apply {
-			setOnClickListener { viewModel.sendRequest() }
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+
+		cityField = view.findViewById(R.id.city_field)
+		stateText = view.findViewById(R.id.state_text)
+		submitButton = view.findViewById<Button>(R.id.submit_btn).apply {
+			setOnClickListener { viewModel.sendRequest(cityField.text.toString()) }
 		}
-		return rootView
 	}
 }
