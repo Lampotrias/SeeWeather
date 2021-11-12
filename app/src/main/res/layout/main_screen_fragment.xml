@@ -109,6 +109,42 @@
 		app:layout_constraintBottom_toBottomOf="@+id/last_update_label"
 		/>
 
+	<TextView
+		android:id="@+id/pressure_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/pressure"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/last_update_label"
+		/>
+
+	<TextView
+		android:id="@+id/pressure"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toEndOf="@+id/pressure_label"
+		app:layout_constraintTop_toTopOf="@+id/pressure_label"
+		app:layout_constraintBottom_toBottomOf="@+id/pressure_label"
+		/>
+
+	<TextView
+		android:id="@+id/humidity_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/humidity"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/pressure_label"
+		/>
+
+	<TextView
+		android:id="@+id/humidity"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toEndOf="@+id/humidity_label"
+		app:layout_constraintTop_toTopOf="@+id/humidity_label"
+		app:layout_constraintBottom_toBottomOf="@+id/humidity_label"
+		/>
+
 	<EditText
 		android:id="@+id/city_field"
 		android:layout_width="wrap_content"

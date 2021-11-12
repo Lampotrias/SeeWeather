@@ -11,4 +11,6 @@ class CurrentWeatherModel(
 	val windDirection: WindDirection,
 	val windMph: Float = 0f,
 	val windKph: Float = 0f,
+	val pressureMb: Float = 0f,
+	val humidity: Int = 0,
 )

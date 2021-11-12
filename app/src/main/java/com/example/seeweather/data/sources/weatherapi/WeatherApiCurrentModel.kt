@@ -29,6 +29,12 @@ class WeatherApiCurrentModel {
 	@SerialName("wind_degree")
 	var windDegree: Int = Int.MIN_VALUE
 
+	@SerialName("pressure_mb")
+	var pressureMb: Float = 0f
+
+	@SerialName("humidity")
+	var humidity: Int = 0
+
 	@SerialName("wind_mph")
 	var windMph: Float = 0f
 
@@ -56,7 +62,9 @@ class WeatherApiCurrentModel {
 			imageUri,
 			WindDirection.valueOfOrDefault(windDirection, WindDirection.W),
 			windMph,
-			windKph
+			windKph,
+			pressureMb,
+			humidity
 		)
 	}
 }

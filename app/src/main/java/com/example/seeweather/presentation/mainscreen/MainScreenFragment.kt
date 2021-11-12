@@ -32,6 +32,8 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 	private lateinit var windPower: TextView
 	private lateinit var timeOfDay: TextView
 	private lateinit var lastUpdate: TextView
+	private lateinit var pressure: TextView
+	private lateinit var humidity: TextView
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -49,6 +51,8 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 							windPower.text = (result.result.windKph / 3.6).toString()
 							timeOfDay.text = if (result.result.isDay) "day" else "night"
 							lastUpdate.text = Date(result.result.lastUpdate * 1000).toString()
+							pressure.text = (result.result.pressureMb * 0.750062).toInt().toString()
+							humidity.text = result.result.humidity.toString() + "%"
 							"SUCCESS"
 						}
 					}
@@ -69,6 +73,8 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 		windPower = view.findViewById(R.id.wind_power)
 		timeOfDay = view.findViewById(R.id.time_of_day)
 		lastUpdate = view.findViewById(R.id.last_update)
+		pressure = view.findViewById(R.id.pressure)
+		humidity = view.findViewById(R.id.humidity)
 		submitButton = view.findViewById<Button>(R.id.submit_btn).apply {
 			setOnClickListener { viewModel.sendRequest(cityField.text.toString()) }
 		}

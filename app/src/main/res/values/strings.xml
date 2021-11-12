@@ -7,4 +7,6 @@
 	<string name="wind_power">Wind power: </string>
 	<string name="last_update">Last update: </string>
 	<string name="time_of_day">Time of day: </string>
+	<string name="pressure">"Pressure: "</string>
+	<string name="humidity">"Humidity: "</string>
 </resources>
