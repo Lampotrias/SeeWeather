@@ -2,4 +2,9 @@
 	<string name="app_name">SeeWeather</string>
 	<string name="default_city">Kaliningrad</string>
 	<string name="submit_button_text">Submit</string>
+	<string name="temperature">Temperature: </string>
+	<string name="wind_direction">Wind direction: </string>
+	<string name="wind_power">Wind power: </string>
+	<string name="last_update">Last update: </string>
+	<string name="time_of_day">Time of day: </string>
 </resources>
