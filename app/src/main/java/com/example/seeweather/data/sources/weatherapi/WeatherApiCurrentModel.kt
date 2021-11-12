@@ -1,5 +1,6 @@
 package com.example.seeweather.data.sources.weatherapi
 
+import android.net.Uri
 import com.example.seeweather.domain.CurrentWeatherModel
 import com.example.seeweather.domain.WindDirection
 import kotlinx.serialization.SerialName
@@ -41,13 +42,18 @@ class WeatherApiCurrentModel {
 
 	}
 
+	private val imageUri: Uri
+		get() {
+			return Uri.parse("https://" + condition.icon.replace("//", ""))
+		}
+
 	fun toDomainModel(): CurrentWeatherModel {
 		return CurrentWeatherModel(
 			lastUpdate,
 			tempC,
 			tempF,
 			isDay > 0,
-			condition.icon,
+			imageUri,
 			WindDirection.valueOfOrDefault(windDirection, WindDirection.W),
 			windMph,
 			windKph

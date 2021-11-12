@@ -1,5 +1,6 @@
 package com.example.seeweather.presentation.mainscreen
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -34,6 +35,8 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 						State.OK -> "OK"
 						State.ERROR -> "ERROR"
 					}
+					val uri = Uri.EMPTY
+					uri.isRelative
 					stateText.text = text
 				}
 			}
