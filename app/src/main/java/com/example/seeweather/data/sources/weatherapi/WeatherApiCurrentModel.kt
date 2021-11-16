@@ -45,7 +45,6 @@ class WeatherApiCurrentModel {
 	class Condition {
 		var icon: String = ""
 		var code: Int = 0
-
 	}
 
 	private val imageUri: Uri
