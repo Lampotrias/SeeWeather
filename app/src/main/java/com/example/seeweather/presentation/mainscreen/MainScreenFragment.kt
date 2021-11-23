@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.sql.Date
+import java.text.SimpleDateFormat
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
@@ -46,13 +47,13 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 						is State.ErrorResult -> "ERROR"
 						is State.SuccessResult -> {
 							icon.setImageURI(result.result.icon)
-							temperature.text = result.result.tempC.toString()
-							windDirection.text = result.result.windDirection.toString()
-							windPower.text = (result.result.windKph / 3.6).toString()
-							timeOfDay.text = if (result.result.isDay) "day" else "night"
-							lastUpdate.text = Date(result.result.lastUpdate * 1000).toString()
-							pressure.text = (result.result.pressureMb * 0.750062).toInt().toString()
-							humidity.text = result.result.humidity.toString() + "%"
+							temperature.text = result.result.temp.toString()
+//							windDirection.text = result.result.windDirection.toString()
+//							windPower.text = (result.result.windKph / 3.6).toString()
+//							timeOfDay.text = if (result.result.isDay) "day" else "night"
+							lastUpdate.text = SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(Date(result.result.lastUpdateLocal * 1000))
+//							pressure.text = (result.result.pressureMb * 0.750062).toInt().toString()
+//							humidity.text = result.result.humidity.toString() + "%"
 							"SUCCESS"
 						}
 					}

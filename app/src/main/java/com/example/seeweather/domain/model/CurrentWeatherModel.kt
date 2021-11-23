@@ -9,6 +9,5 @@ class CurrentWeatherModel(
 	val temp: Float = 0f,
 	val textStatus: String = "",
 	val city: String = "",
-	val isDay: Boolean = true,
 	val icon: Uri? = null,
 )
