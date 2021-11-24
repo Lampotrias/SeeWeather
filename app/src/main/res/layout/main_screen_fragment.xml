@@ -145,6 +145,42 @@
 		app:layout_constraintBottom_toBottomOf="@+id/humidity_label"
 		/>
 
+	<TextView
+		android:id="@+id/city_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/humidity"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/humidity_label"
+		/>
+
+	<TextView
+		android:id="@+id/city"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toEndOf="@+id/city_label"
+		app:layout_constraintTop_toTopOf="@+id/city_label"
+		app:layout_constraintBottom_toBottomOf="@+id/city_label"
+		/>
+
+	<TextView
+		android:id="@+id/status_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/humidity"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/city_label"
+		/>
+
+	<TextView
+		android:id="@+id/status"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toEndOf="@+id/status_label"
+		app:layout_constraintTop_toTopOf="@+id/status_label"
+		app:layout_constraintBottom_toBottomOf="@+id/status_label"
+		/>
+
 	<EditText
 		android:id="@+id/city_field"
 		android:layout_width="wrap_content"

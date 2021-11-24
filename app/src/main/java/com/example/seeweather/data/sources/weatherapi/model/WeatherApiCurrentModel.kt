@@ -1,8 +1,8 @@
-package com.example.seeweather.data.sources.weatherapi
+package com.example.seeweather.data.sources.weatherapi.model
 
 import android.net.Uri
+import com.example.seeweather.data.model.CurrentWeatherEntity
 import com.example.seeweather.domain.model.CurrentWeatherModel
-import com.example.seeweather.domain.WindDirection
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -53,13 +53,13 @@ class WeatherApiCurrentModel {
 			return Uri.parse("https://" + condition.icon.replace("//", ""))
 		}
 
-	fun toDomainModel(city: String): CurrentWeatherModel {
-		return CurrentWeatherModel(
-			lastUpdate,
-			lastUpdate,
+	fun toEntityModel(cityId: Long): CurrentWeatherEntity {
+		return CurrentWeatherEntity(
+			cityId,
 			tempC,
-			condition.text,
-			city
+			tempF,
+			"https://${condition.icon}",
+			condition.text
 		)
 	}
 }
