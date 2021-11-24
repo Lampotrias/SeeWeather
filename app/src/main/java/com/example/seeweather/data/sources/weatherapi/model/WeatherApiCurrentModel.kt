@@ -53,7 +53,7 @@ class WeatherApiCurrentModel {
 			return Uri.parse("https://" + condition.icon.replace("//", ""))
 		}
 
-	fun toEntityModel(cityId: Long): CurrentWeatherEntity {
+	fun toEntityModel(cityId: Int): CurrentWeatherEntity {
 		return CurrentWeatherEntity(
 			cityId,
 			tempC,
