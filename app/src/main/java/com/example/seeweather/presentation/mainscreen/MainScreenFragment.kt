@@ -1,6 +1,5 @@
 package com.example.seeweather.presentation.mainscreen
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,8 +15,6 @@ import com.facebook.drawee.view.SimpleDraweeView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.sql.Date
-import java.text.SimpleDateFormat
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint

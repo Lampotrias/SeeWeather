@@ -1,7 +1,6 @@
 package com.example.seeweather.domain.model
 
 import android.net.Uri
-import com.example.seeweather.domain.WindDirection
 
 class CurrentWeatherModel(
 //	val lastUpdateLocal: Long = 0L,

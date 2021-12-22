@@ -1,6 +1,5 @@
 package com.example.seeweather.data.sources.weatherapi.model
 
-import android.net.Uri
 import com.example.seeweather.data.model.HourEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -8,7 +8,6 @@ import com.example.seeweather.data.sources.weatherapi.model.WeatherApiCurrentMod
 import com.example.seeweather.data.sources.weatherapi.model.WeatherApiDayModel
 import com.example.seeweather.data.sources.weatherapi.model.WeatherApiHourModel
 import com.example.seeweather.domain.ResponseException
-import com.example.seeweather.domain.model.HourWeatherModel
 import com.example.seeweather.domain.model.RequestModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

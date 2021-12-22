@@ -1,7 +1,6 @@
 package com.example.seeweather.domain.model
 
 import android.net.Uri
-import com.example.seeweather.domain.WindDirection
 
 class DayWeatherModel(
 	val date: Long = 0L,
