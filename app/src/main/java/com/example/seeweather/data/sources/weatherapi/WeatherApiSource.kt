@@ -1,8 +1,10 @@
 package com.example.seeweather.data.sources.weatherapi
 
 import com.example.seeweather.data.WeatherRepoEntity
+import com.example.seeweather.data.cache.CacheWeather
 import com.example.seeweather.data.model.CurrentWeatherEntity
 import com.example.seeweather.data.model.GeneralEntityWeatherModel
+import com.example.seeweather.data.model.ServerUpdateModel
 import com.example.seeweather.data.sources.weatherapi.model.ErrorModel
 import com.example.seeweather.data.sources.weatherapi.model.WeatherApiCurrentModel
 import com.example.seeweather.data.sources.weatherapi.model.WeatherApiDayModel
@@ -18,7 +20,10 @@ import okhttp3.Request
 import org.json.JSONException
 import org.json.JSONObject
 
-class WeatherApiSource(private val okHttpClient: OkHttpClient) : WeatherRepoEntity {
+class WeatherApiSource(
+	private val okHttpClient: OkHttpClient,
+	private val cacheWeather: CacheWeather
+) : WeatherRepoEntity {
 
 	private val defaultDispatcher = Dispatchers.IO
 	private val kJson = Json { ignoreUnknownKeys = true }
@@ -67,12 +72,21 @@ class WeatherApiSource(private val okHttpClient: OkHttpClient) : WeatherRepoEnti
 								dayInfo.optJSONArray("hour")?.let { jsHours ->
 									for (j in 0 until jsHours.length()) {
 										hours.add(
-											kJson.decodeFromString(jsHours.getJSONObject(j).toString())
+											kJson.decodeFromString(
+												jsHours.getJSONObject(j).toString()
+											)
 										)
 									}
 								}
 							}
 						}
+
+						cacheWeather.setLastUpdate(
+							ServerUpdateModel(
+								json.getJSONObject("location").getLong("localtime_epoch"),
+								currentWeather.date,
+							)
+						)
 						return@withContext Result.success(
 							GeneralEntityWeatherModel(
 								currentWeather,
