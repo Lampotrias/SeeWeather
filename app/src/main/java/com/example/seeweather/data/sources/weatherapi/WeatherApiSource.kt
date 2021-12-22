@@ -58,7 +58,7 @@ class WeatherApiSource(private val okHttpClient: OkHttpClient) : WeatherRepoEnti
 								days.add(
 									kJson.decodeFromString<WeatherApiDayModel>(dayInfo.toString())
 										.also {
-											json.optJSONObject("astro")?.let { astro ->
+											dayInfo.optJSONObject("astro")?.let { astro ->
 												it.sunrise = astro.optString("sunrise")
 												it.sunset = astro.optString("sunset")
 											}
