@@ -41,18 +41,6 @@ class WeatherApiCurrentModel {
 	@SerialName("wind_kph")
 	var windKph: Float = 0f
 
-	@Serializable
-	class Condition {
-		var icon: String = ""
-		var code: Int = 0
-		var text: String = ""
-	}
-
-	private val imageUri: Uri
-		get() {
-			return Uri.parse("https://" + condition.icon.replace("//", ""))
-		}
-
 	fun toEntityModel(cityId: Int): CurrentWeatherEntity {
 		return CurrentWeatherEntity(
 			cityId,

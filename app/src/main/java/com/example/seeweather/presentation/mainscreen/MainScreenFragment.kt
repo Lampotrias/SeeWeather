@@ -48,10 +48,10 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 						State.INITIAL -> "INITIAL"
 						is State.ErrorResult -> "ERROR"
 						is State.SuccessResult -> {
-							icon.setImageURI(result.result.icon)
-							temperature.text = result.result.temp.toString()
-							statusText.text = result.result.textStatus
-							cityText.text = result.result.city
+							icon.setImageURI(result.result.currentWeatherModel.icon)
+							temperature.text = result.result.currentWeatherModel.temp.toString()
+							statusText.text = result.result.currentWeatherModel.textStatus
+							cityText.text = result.result.currentWeatherModel.city
 //							windDirection.text = result.result.windDirection.toString()
 //							windPower.text = (result.result.windKph / 3.6).toString()
 //							timeOfDay.text = if (result.result.isDay) "day" else "night"

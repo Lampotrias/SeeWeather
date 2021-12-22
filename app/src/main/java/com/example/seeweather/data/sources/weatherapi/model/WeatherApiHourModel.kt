@@ -1,5 +1,7 @@
 package com.example.seeweather.data.sources.weatherapi.model
 
+import android.net.Uri
+import com.example.seeweather.data.model.HourEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,7 +9,7 @@ import kotlinx.serialization.Serializable
 class WeatherApiHourModel {
 
 	@SerialName("time_epoch")
-	var timeEpoch: Long = 0L
+	var date: Long = 0L
 
 	@SerialName("temp_c")
 	var tempC: Float = 0f
@@ -36,9 +38,15 @@ class WeatherApiHourModel {
 	@SerialName("humidity")
 	var humidity: Int = 0
 
-	@Serializable
-	class Condition {
-		var icon: String = ""
-		var code: Int = 0
+	@SerialName("condition")
+	var condition = Condition()
+
+	fun toEntity(): HourEntity {
+		return HourEntity(
+			date,
+			tempC,
+			tempF,
+			condition.imageUri
+		)
 	}
 }

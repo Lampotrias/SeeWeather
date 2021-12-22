@@ -1,9 +1,8 @@
 package com.example.seeweather.data
 
-import com.example.seeweather.data.model.CurrentWeatherEntity
-import com.example.seeweather.domain.model.CurrentWeatherModel
+import com.example.seeweather.data.model.GeneralEntityWeatherModel
 import com.example.seeweather.domain.model.RequestModel
 
 interface WeatherRepoEntity {
-	suspend fun getCurrentWeather(requestModel: RequestModel): Result<CurrentWeatherEntity>
+	suspend fun getDataWeather(requestModel: RequestModel): Result<GeneralEntityWeatherModel>
 }
