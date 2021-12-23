@@ -1,10 +1,10 @@
 package com.example.seeweather.data.sources.network.weatherapi
 
-import com.example.seeweather.data.cache.CacheWeather
 import com.example.seeweather.data.model.CurrentWeatherEntity
 import com.example.seeweather.data.model.GeneralEntityWeatherModel
-import com.example.seeweather.data.model.ServerUpdateModel
 import com.example.seeweather.data.sources.DataSourceInterface
+import com.example.seeweather.data.sources.database.dao.ServerSyncStatusDao
+import com.example.seeweather.data.sources.database.model.ServerSyncTable
 import com.example.seeweather.data.sources.network.weatherapi.model.ErrorModel
 import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiCurrentModel
 import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiDayModel
@@ -19,12 +19,14 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONException
 import org.json.JSONObject
+import javax.inject.Inject
 
-class WeatherApiSource(
-	private val okHttpClient: OkHttpClient,
-	private val cacheWeather: CacheWeather
-) : DataSourceInterface {
+class WeatherApiSource @Inject constructor(
+	private val serverSyncStatusDao: ServerSyncStatusDao
+) :
+	DataSourceInterface {
 
+	private val okHttpClient = OkHttpClient()
 	private val defaultDispatcher = Dispatchers.IO
 	private val kJson = Json { ignoreUnknownKeys = true }
 
@@ -81,12 +83,14 @@ class WeatherApiSource(
 							}
 						}
 
-						cacheWeather.setLastUpdate(
-							ServerUpdateModel(
+						serverSyncStatusDao.updateStatus(
+							ServerSyncTable(
+								requestModel.serverId,
 								json.getJSONObject("location").getLong("localtime_epoch"),
-								currentWeather.date,
+								currentWeather.date
 							)
 						)
+
 						return@withContext Result.success(
 							GeneralEntityWeatherModel(
 								currentWeather,

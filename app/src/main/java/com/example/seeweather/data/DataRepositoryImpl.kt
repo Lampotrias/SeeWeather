@@ -10,7 +10,7 @@ import javax.inject.Inject
 class DataRepositoryImpl @Inject constructor(private val factory: DataSourceFactory): WeatherRepo {
 
 	override suspend fun getWeather(requestModel: RequestModel): Result<GeneralWeatherModel> {
-		val source = factory.create()
+		val source = factory.create(requestModel)
 		return source.getDataWeather(requestModel).map { EntityMapper.toDomainModel(requestModel, it) }
 	}
 }

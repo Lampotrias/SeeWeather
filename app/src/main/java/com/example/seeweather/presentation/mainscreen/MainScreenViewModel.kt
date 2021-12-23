@@ -4,11 +4,16 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.seeweather.domain.WeatherRepo
-import com.example.seeweather.domain.model.*
+import com.example.seeweather.domain.model.GeneralWeatherModel
+import com.example.seeweather.domain.model.RequestModel
+import com.example.seeweather.domain.model.SpeedUnit
+import com.example.seeweather.domain.model.TempUnit
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +27,9 @@ class MainScreenViewModel @Inject constructor(
 
 	fun sendRequest(city: String) {
 		viewModelScope.launch {
-			val result = repository.getWeather(RequestModel(city, "ru", TempUnit.C, SpeedUnit.KPH))
+			val result = withContext(Dispatchers.IO) {
+				repository.getWeather(RequestModel(1, city, "ru", TempUnit.C, SpeedUnit.KPH))
+			}
 			result.fold({
 				_uiState.value = State.SuccessResult(it)
 			}) {

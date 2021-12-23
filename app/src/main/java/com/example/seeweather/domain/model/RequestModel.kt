@@ -1,6 +1,7 @@
 package com.example.seeweather.domain.model
 
 data class RequestModel(
+	val serverId: Int,
 	val city: String,
 	val lang: String,
 	val tempUnit: TempUnit,

@@ -1,6 +1,7 @@
 package com.example.seeweather.presentation.mainscreen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -43,7 +44,10 @@ class MainScreenFragment: Fragment(R.layout.main_screen_fragment) {
 				viewModel.uiState.collect { result ->
 					val text = when (result) {
 						State.INITIAL -> "INITIAL"
-						is State.ErrorResult -> "ERROR"
+						is State.ErrorResult -> {
+							Log.e("Weather", result.e.toString())
+							"ERROR"
+						}
 						is State.SuccessResult -> {
 							icon.setImageURI(result.result.currentWeatherModel.icon)
 							temperature.text = result.result.currentWeatherModel.temp.toString()
