@@ -16,6 +16,15 @@ android {
 		versionCode 1
 		versionName "1.0"
 
+		javaCompileOptions {
+			annotationProcessorOptions {
+				arguments += [
+						"room.schemaLocation":"$projectDir/schemas".toString(),
+						"room.incremental":"true",
+						"room.expandProjection":"true"]
+			}
+		}
+
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 
@@ -71,6 +80,10 @@ dependencies {
 	implementation("com.squareup.okhttp3:okhttp:$okhttp_version")
 	implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 	implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlin_serialization_version"
+
+	// room
+	implementation "androidx.room:room-runtime:2.4.0"
+	kapt "androidx.room:room-compiler:2.4.0"
 
 	// Graphics
 	implementation "com.facebook.fresco:fresco:$fresco_version"
