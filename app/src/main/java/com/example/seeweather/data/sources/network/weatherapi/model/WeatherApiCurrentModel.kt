@@ -1,4 +1,4 @@
-package com.example.seeweather.data.sources.weatherapi.model
+package com.example.seeweather.data.sources.network.weatherapi.model
 
 import com.example.seeweather.data.model.CurrentWeatherEntity
 import kotlinx.serialization.SerialName

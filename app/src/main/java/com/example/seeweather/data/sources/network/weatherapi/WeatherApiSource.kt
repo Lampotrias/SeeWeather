@@ -1,14 +1,14 @@
-package com.example.seeweather.data.sources.weatherapi
+package com.example.seeweather.data.sources.network.weatherapi
 
-import com.example.seeweather.data.WeatherRepoEntity
 import com.example.seeweather.data.cache.CacheWeather
 import com.example.seeweather.data.model.CurrentWeatherEntity
 import com.example.seeweather.data.model.GeneralEntityWeatherModel
 import com.example.seeweather.data.model.ServerUpdateModel
-import com.example.seeweather.data.sources.weatherapi.model.ErrorModel
-import com.example.seeweather.data.sources.weatherapi.model.WeatherApiCurrentModel
-import com.example.seeweather.data.sources.weatherapi.model.WeatherApiDayModel
-import com.example.seeweather.data.sources.weatherapi.model.WeatherApiHourModel
+import com.example.seeweather.data.sources.DataSourceInterface
+import com.example.seeweather.data.sources.network.weatherapi.model.ErrorModel
+import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiCurrentModel
+import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiDayModel
+import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiHourModel
 import com.example.seeweather.domain.ResponseException
 import com.example.seeweather.domain.model.RequestModel
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ import org.json.JSONObject
 class WeatherApiSource(
 	private val okHttpClient: OkHttpClient,
 	private val cacheWeather: CacheWeather
-) : WeatherRepoEntity {
+) : DataSourceInterface {
 
 	private val defaultDispatcher = Dispatchers.IO
 	private val kJson = Json { ignoreUnknownKeys = true }
