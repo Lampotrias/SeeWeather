@@ -9,4 +9,5 @@
 	<string name="time_of_day">Time of day: </string>
 	<string name="pressure">"Pressure: "</string>
 	<string name="humidity">"Humidity: "</string>
+    <string name="current_location">Current Location</string>
 </resources>

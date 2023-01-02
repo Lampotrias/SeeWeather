@@ -23,8 +23,7 @@ import javax.inject.Inject
 
 class WeatherApiSource @Inject constructor(
 	private val serverSyncStatusDao: ServerSyncStatusDao
-) :
-	DataSourceInterface {
+) : DataSourceInterface {
 
 	private val okHttpClient = OkHttpClient()
 	private val defaultDispatcher = Dispatchers.IO
@@ -61,17 +60,20 @@ class WeatherApiSource @Inject constructor(
 						val hours = mutableListOf<WeatherApiHourModel>()
 						json.optJSONObject("forecast")?.optJSONArray("forecastday")?.let { jsDays ->
 							for (i in 0 until jsDays.length()) {
-								val dayInfo = jsDays.getJSONObject(i)
+								val rootDayInfo = jsDays.getJSONObject(i)
+								val dayInfo = rootDayInfo.getJSONObject("day")
+
 								days.add(
 									kJson.decodeFromString<WeatherApiDayModel>(dayInfo.toString())
 										.also {
-											dayInfo.optJSONObject("astro")?.let { astro ->
+											rootDayInfo.optJSONObject("astro")?.let { astro ->
 												it.sunrise = astro.optString("sunrise")
 												it.sunset = astro.optString("sunset")
 											}
+											it.date = rootDayInfo.getLong("date_epoch")
 										}
 								)
-								dayInfo.optJSONArray("hour")?.let { jsHours ->
+								rootDayInfo.optJSONArray("hour")?.let { jsHours ->
 									for (j in 0 until jsHours.length()) {
 										hours.add(
 											kJson.decodeFromString(
@@ -117,6 +119,7 @@ class WeatherApiSource @Inject constructor(
 									ex
 								}
 							}
+
 							else -> {
 								ResponseException(Int.MIN_VALUE, "unknown error")
 							}

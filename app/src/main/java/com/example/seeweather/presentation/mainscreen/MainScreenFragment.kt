@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.seeweather.databinding.MainScreenFragmentBinding
 import com.example.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
 class MainScreenFragment : Fragment() {
@@ -25,13 +26,26 @@ class MainScreenFragment : Fragment() {
 	): View {
 		_binding = MainScreenFragmentBinding.inflate(layoutInflater)
 
-		binding.weatherButton.setOnClickListener {
-			viewModel.sendRequest("Kemer")
+		binding.actionRefresh.setOnClickListener {
+			viewModel.sendRequest("Antalya")
 		}
 
 		launchAndRepeatWithViewLifecycle {
 			viewModel.uiState.collect { state ->
+
+				val sunDateFormatter = SimpleDateFormat("H:m")
+
 				if (state is State.SuccessResult) {
+					with(binding) {
+						selectedCity.text = state.result.currentWeatherModel.city
+						currentTemp.text = state.result.currentWeatherModel.temp.toString()
+						weatherDescription.text = state.result.currentWeatherModel.textStatus
+						weatherImage.setImageURI(state.result.currentWeatherModel.icon)
+						tempMax.text = state.result.days[0].tempMax.toString()
+						tempMin.text = state.result.days[0].tempMin.toString()
+						sunset.text = sunDateFormatter.format(state.result.days[0].sunset)
+						sunrise.text = sunDateFormatter.format(state.result.days[0].sunrise)
+					}
 					Log.e("asdasdas OK", state.result.toString())
 				} else if (state is State.ErrorResult) {
 					Log.e("asdasdas ER", state.e.toString())
