@@ -19,23 +19,11 @@ class WeatherApiDayModel {
 	@SerialName("mintemp_c")
 	var minTempC: Float = 0f
 
-	@SerialName("maxtemp_f")
-	var maxTempF: Float = 0f
-
-	@SerialName("mintemp_f")
-	var minTempF: Float = 0f
-
 	@SerialName("avgtemp_c")
 	var avgTempC: Float = 0f
 
-	@SerialName("avgtemp_f")
-	var avgTempF: Float = 0f
-
 	@SerialName("maxwind_kph")
 	var maxWindKph: Float = 0f
-
-	@SerialName("maxwind_mph")
-	var maxWindMph: Float = 0f
 
 	@SerialName("condition")
 	var condition: Condition = Condition()
@@ -48,11 +36,8 @@ class WeatherApiDayModel {
 			date,
 			maxTempC,
 			minTempC,
-			maxTempF,
-			minTempF,
 			condition.text,
 			condition.imageUri,
-			maxWindMph,
 			maxWindKph,
 			dateToTimestamp(sunrise),
 			dateToTimestamp(sunset)

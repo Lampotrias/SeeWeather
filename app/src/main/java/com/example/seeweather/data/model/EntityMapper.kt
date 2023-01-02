@@ -2,6 +2,7 @@ package com.example.seeweather.data.model
 
 import android.net.Uri
 import com.example.seeweather.domain.model.*
+import com.example.seeweather.utils.MeasureUtils
 
 object EntityMapper {
 	fun toDomainModel(
@@ -21,7 +22,7 @@ object EntityMapper {
 		requestModel: RequestModel,
 	): CurrentWeatherModel {
 		return CurrentWeatherModel(
-			if (requestModel.tempUnit == TempUnit.C) entity.tempC else entity.tempF,
+			if (requestModel.tempUnit == TempUnit.C) entity.tempC else MeasureUtils.cToF(entity.tempC),
 			entity.text,
 			requestModel.city,
 			Uri.parse(entity.icon)
@@ -35,10 +36,12 @@ object EntityMapper {
 		return DayWeatherModel(
 			entity.date,
 			entity.icon,
-			if (requestModel.tempUnit == TempUnit.C) entity.tempMaxC else entity.tempMaxF,
-			if (requestModel.tempUnit == TempUnit.C) entity.tempMinC else entity.tempMinF,
+			if (requestModel.tempUnit == TempUnit.C) entity.tempMaxC else MeasureUtils.cToF(entity.tempMaxC),
+			if (requestModel.tempUnit == TempUnit.C) entity.tempMinC else MeasureUtils.cToF(entity.tempMinC),
 			entity.textStatus,
-			if (requestModel.SpeedUnit == SpeedUnit.KPH) entity.windPowerKph else entity.windPowerMph,
+			if (requestModel.SpeedUnit == SpeedUnit.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
+				entity.windPowerKph
+			),
 			entity.sunrise,
 			entity.sunset
 		)
@@ -51,7 +54,7 @@ object EntityMapper {
 		return HourWeatherModel(
 			entity.icon,
 			entity.date,
-			if (requestModel.tempUnit == TempUnit.C) entity.tempC else entity.tempF
+			if (requestModel.tempUnit == TempUnit.C) entity.tempC else MeasureUtils.cToF(entity.tempC)
 		)
 	}
 }
