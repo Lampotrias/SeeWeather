@@ -10,10 +10,21 @@ object EntityMapper {
 		entity: GeneralEntityWeatherModel
 	): GeneralWeatherModel {
 
+		val currentSec = System.currentTimeMillis() / 1000
+		val rawHours = entity.hours.map { toHourDomainModel(it, requestModel) }
+
+		val startActualHour = rawHours.indexOfFirst { it.date > currentSec - 3600 }
+		val targetHours = if (startActualHour != -1) {
+			rawHours.subList(startActualHour, rawHours.size).take(24)
+		} else {
+			emptyList()
+		}
+
 		return GeneralWeatherModel(
 			toCurrentWeatherDomainModel(entity.currentWeatherModel, requestModel),
 			entity.days.map { toDayDomainModel(it, requestModel) },
-			entity.hours.map { toHourDomainModel(it, requestModel) }
+			rawHours,
+			targetHours
 		)
 	}
 

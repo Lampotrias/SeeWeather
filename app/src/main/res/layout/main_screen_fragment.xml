@@ -199,5 +199,16 @@
         app:layout_constraintTop_toTopOf="@+id/sunset"
         tools:text="18:45" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hours_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sunset"
+        tools:layout_height="65dp"
+        tools:listitem="@layout/hour_view_holder" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

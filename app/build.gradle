@@ -17,6 +17,10 @@ android {
 		viewBinding true
 	}
 
+	buildFeatures {
+		viewBinding true
+	}
+
 	defaultConfig {
 		applicationId "com.example.seeweather"
 		minSdk 21
