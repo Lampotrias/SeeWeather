@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.seeweather.databinding.MainScreenFragmentBinding
+import com.example.seeweather.presentation.daylist.DayListAdapter
 import com.example.seeweather.presentation.hourslist.HoursAdapter
 import com.example.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,7 @@ class MainScreenFragment : Fragment() {
 		get() = _binding!!
 
 	private val hoursAdapter = HoursAdapter()
+	private val daysAdapter = DayListAdapter()
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -37,6 +39,9 @@ class MainScreenFragment : Fragment() {
 
 		binding.hoursList.adapter = hoursAdapter
 		binding.hoursList.layoutManager = LinearLayoutManager(this@MainScreenFragment.requireContext(), RecyclerView.HORIZONTAL, false)
+
+		binding.daysList.adapter = daysAdapter
+		binding.daysList.layoutManager = LinearLayoutManager(this@MainScreenFragment.requireContext(), RecyclerView.HORIZONTAL, false)
 
 		launchAndRepeatWithViewLifecycle {
 			viewModel.uiState.collect { state ->
@@ -54,6 +59,7 @@ class MainScreenFragment : Fragment() {
 						sunset.text = sunDateFormatter.format(state.result.days[0].sunset)
 						sunrise.text = sunDateFormatter.format(state.result.days[0].sunrise)
 						hoursAdapter.setItems(state.result.actualizeHours)
+						daysAdapter.setItems(state.result.days)
 					}
 					Log.e("asdasdas OK", state.result.toString())
 				} else if (state is State.ErrorResult) {
