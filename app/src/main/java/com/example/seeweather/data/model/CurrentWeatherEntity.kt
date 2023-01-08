@@ -5,5 +5,9 @@ class CurrentWeatherEntity(
 	var date: Long = 0,
 	var tempC: Float = 0f,
 	var icon: String = "",
-	var text: String = ""
+	var text: String = "",
+	val windPowerKph: Float = 0f,
+	val windDir: String = "",
+	val pressure: Float = 0f,
+	val humidity: Int = 0,
 )

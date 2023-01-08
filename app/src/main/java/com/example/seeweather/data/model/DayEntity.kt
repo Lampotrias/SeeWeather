@@ -8,10 +8,7 @@ class DayEntity(
 	val tempMinC: Float = 0f,
 	val textStatus: String = "",
 	val icon: Uri? = null,
-//	val windDir: String = "",
 	val windPowerKph: Float = 0f,
-//	val pressure: Float = 0f,
-//	val humidity: Int = 0,
 	val sunrise: Long = 0L,
 	val sunset: Long = 0L,
 )

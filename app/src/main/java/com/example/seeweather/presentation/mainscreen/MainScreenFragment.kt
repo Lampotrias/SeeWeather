@@ -38,10 +38,18 @@ class MainScreenFragment : Fragment() {
 		}
 
 		binding.hoursList.adapter = hoursAdapter
-		binding.hoursList.layoutManager = LinearLayoutManager(this@MainScreenFragment.requireContext(), RecyclerView.HORIZONTAL, false)
+		binding.hoursList.layoutManager = LinearLayoutManager(
+			this@MainScreenFragment.requireContext(),
+			RecyclerView.HORIZONTAL,
+			false
+		)
 
 		binding.daysList.adapter = daysAdapter
-		binding.daysList.layoutManager = LinearLayoutManager(this@MainScreenFragment.requireContext(), RecyclerView.HORIZONTAL, false)
+		binding.daysList.layoutManager = LinearLayoutManager(
+			this@MainScreenFragment.requireContext(),
+			RecyclerView.HORIZONTAL,
+			false
+		)
 
 		launchAndRepeatWithViewLifecycle {
 			viewModel.uiState.collect { state ->
@@ -60,6 +68,10 @@ class MainScreenFragment : Fragment() {
 						sunrise.text = sunDateFormatter.format(state.result.days[0].sunrise)
 						hoursAdapter.setItems(state.result.actualizeHours)
 						daysAdapter.setItems(state.result.days)
+						windPowerValue.text = state.result.currentWeatherModel.windPower.toString()
+						windDirectionValue.text = state.result.currentWeatherModel.windDirection.name
+						pressureValue.text = state.result.currentWeatherModel.pressure.toInt().toString() + " hPa"
+						humidityValue.text = state.result.currentWeatherModel.humidity.toString() + " %"
 					}
 					Log.e("asdasdas OK", state.result.toString())
 				} else if (state is State.ErrorResult) {

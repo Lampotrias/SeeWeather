@@ -35,11 +35,15 @@ class WeatherApiCurrentModel {
 
 	fun toEntityModel(cityId: Int): CurrentWeatherEntity {
 		return CurrentWeatherEntity(
-			cityId,
-			lastUpdate,
-			tempC,
-			"https://${condition.icon}",
-			condition.text
+			cityId = cityId,
+			date = lastUpdate,
+			tempC = tempC,
+			icon = "https://${condition.icon}",
+			text = condition.text,
+			windPowerKph = windKph,
+			windDir = windDirection,
+			humidity = humidity,
+			pressure = pressureMb
 		)
 	}
 }

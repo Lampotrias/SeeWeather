@@ -1,6 +1,7 @@
 package com.example.seeweather.domain
 
 enum class WindDirection(val minDegree: Float, val maxDegree: Float) {
+	ERROR(0f, 0f),
 	N(348.75f, 11.25f),
 	NNE(11.25f, 33.75f),
 	NE(33.75f, 56.25f),
