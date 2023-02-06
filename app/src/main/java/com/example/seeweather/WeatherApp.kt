@@ -1,6 +1,7 @@
 package com.example.seeweather
 
 import android.app.Application
+import com.example.seeweather.utils.Settings
 import com.facebook.drawee.backends.pipeline.Fresco
 import dagger.hilt.android.HiltAndroidApp
 
@@ -10,5 +11,6 @@ class WeatherApp: Application() {
 		super.onCreate()
 
 		Fresco.initialize(this)
+		Settings.init(this)
 	}
 }

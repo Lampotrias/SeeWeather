@@ -4,6 +4,7 @@ import android.net.Uri
 import com.example.seeweather.domain.WindDirection
 import com.example.seeweather.domain.model.*
 import com.example.seeweather.utils.MeasureUtils
+import com.example.seeweather.utils.Settings
 
 object EntityMapper {
 	fun toDomainModel(
@@ -34,7 +35,7 @@ object EntityMapper {
 		requestModel: RequestModel,
 	): CurrentWeatherModel {
 		return CurrentWeatherModel(
-			temp = if (requestModel.tempUnit == TempUnit.C) entity.tempC else MeasureUtils.cToF(entity.tempC),
+			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(entity.tempC),
 			textStatus = entity.text,
 			city = requestModel.city,
 			icon = Uri.parse(entity.icon),
@@ -52,8 +53,8 @@ object EntityMapper {
 		return DayWeatherModel(
 			date = entity.date,
 			icon = entity.icon,
-			tempMax = if (requestModel.tempUnit == TempUnit.C) entity.tempMaxC else MeasureUtils.cToF(entity.tempMaxC),
-			tempMin = if (requestModel.tempUnit == TempUnit.C) entity.tempMinC else MeasureUtils.cToF(entity.tempMinC),
+			tempMax = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMaxC else MeasureUtils.cToF(entity.tempMaxC),
+			tempMin = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMinC else MeasureUtils.cToF(entity.tempMinC),
 			textStatus = entity.textStatus,
 			windPower = if (requestModel.SpeedUnit == SpeedUnit.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph
@@ -70,7 +71,7 @@ object EntityMapper {
 		return HourWeatherModel(
 			entity.icon,
 			entity.date,
-			if (requestModel.tempUnit == TempUnit.C) entity.tempC else MeasureUtils.cToF(entity.tempC)
+			if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(entity.tempC)
 		)
 	}
 }

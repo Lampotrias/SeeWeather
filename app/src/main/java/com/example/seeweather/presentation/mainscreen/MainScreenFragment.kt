@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.seeweather.R
 import com.example.seeweather.databinding.MainScreenFragmentBinding
 import com.example.seeweather.presentation.daylist.DayListAdapter
 import com.example.seeweather.presentation.hourslist.HoursAdapter
+import com.example.seeweather.presentation.settngs.SettingsFragment
 import com.example.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -35,6 +37,14 @@ class MainScreenFragment : Fragment() {
 
 		binding.actionRefresh.setOnClickListener {
 			viewModel.sendRequest("Antalya")
+		}
+
+		binding.actionSettings.setOnClickListener {
+			parentFragmentManager
+				.beginTransaction()
+				.add(R.id.nav_host_fragment, SettingsFragment())
+				.addToBackStack("settings")
+				.commit()
 		}
 
 		binding.hoursList.adapter = hoursAdapter

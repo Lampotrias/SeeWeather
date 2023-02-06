@@ -1,21 +1,29 @@
 <resources>
-	<string name="app_name">SeeWeather</string>
-	<string name="default_city">Kaliningrad</string>
-	<string name="submit_button_text">Submit</string>
-	<string name="temperature">Temperature: </string>
-	<string name="wind_direction">Wind direction: </string>
-	<string name="wind_power">Wind power: </string>
-	<string name="last_update">Last update: </string>
-	<string name="time_of_day">Time of day: </string>
-	<string name="pressure">"Pressure: "</string>
-	<string name="humidity">"Humidity: "</string>
+    <string name="app_name">SeeWeather</string>
+    <string name="default_city">Kaliningrad</string>
+    <string name="submit_button_text">Submit</string>
+    <string name="temperature">Temperature: </string>
+    <string name="wind_direction">Wind direction: </string>
+    <string name="wind_power">Wind power: </string>
+    <string name="last_update">Last update: </string>
+    <string name="time_of_day">Time of day: </string>
+    <string name="pressure">"Pressure: "</string>
+    <string name="humidity">"Humidity: "</string>
     <string name="current_location">Current Location</string>
     <string name="details">Details</string>
-	<string name="forecast">Forecast</string>
-	<string name="hourly_forecast">Hourly Forecast</string>
-	<string name="daily_forecast">Daily Forecast</string>
+    <string name="forecast">Forecast</string>
+    <string name="hourly_forecast">Hourly Forecast</string>
+    <string name="daily_forecast">Daily Forecast</string>
     <string name="wind_power_title">Wind power</string>
     <string name="wind_direction_title">Wind direction</string>
-	<string name="wind_pressure_title">Pressure</string>
-	<string name="wind_humidity_title">Humidity</string>
+    <string name="wind_pressure_title">Pressure</string>
+    <string name="wind_humidity_title">Humidity</string>
+
+    <string name="measure_units_category">Units of measure</string>
+    <string name="speed_mph">miles per hour</string>
+    <string name="speed_kph">kilometre per hour</string>
+    <string name="temp_f">Fahrenheit</string>
+    <string name="temp_c">Celsius</string>
+    <string name="pref_speed">Speed</string>
+    <string name="pref_temp">Temperature</string>
 </resources>
