@@ -3,6 +3,7 @@ package com.example.seeweather.data.sources.network.weatherapi.model
 import com.example.seeweather.data.model.CurrentWeatherEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.roundToInt
 
 @Serializable
 class WeatherApiCurrentModel {
@@ -37,10 +38,10 @@ class WeatherApiCurrentModel {
 		return CurrentWeatherEntity(
 			cityId = cityId,
 			date = lastUpdate,
-			tempC = tempC,
+			tempC = tempC.roundToInt(),
 			icon = "https://${condition.icon}",
 			text = condition.text,
-			windPowerKph = windKph,
+			windPowerKph = windKph.roundToInt(),
 			windDir = windDirection,
 			humidity = humidity,
 			pressure = pressureMb

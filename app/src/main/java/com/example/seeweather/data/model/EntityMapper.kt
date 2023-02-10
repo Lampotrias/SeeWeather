@@ -2,9 +2,14 @@ package com.example.seeweather.data.model
 
 import android.net.Uri
 import com.example.seeweather.domain.WindDirection
-import com.example.seeweather.domain.model.*
+import com.example.seeweather.domain.model.CurrentWeatherModel
+import com.example.seeweather.domain.model.DayWeatherModel
+import com.example.seeweather.domain.model.GeneralWeatherModel
+import com.example.seeweather.domain.model.HourWeatherModel
+import com.example.seeweather.domain.model.RequestModel
 import com.example.seeweather.utils.MeasureUtils
 import com.example.seeweather.utils.Settings
+import com.example.seeweather.utils.Utils
 
 object EntityMapper {
 	fun toDomainModel(
@@ -34,12 +39,13 @@ object EntityMapper {
 		entity: CurrentWeatherEntity,
 		requestModel: RequestModel,
 	): CurrentWeatherModel {
+		Utils.log("cur weather from: $entity}")
 		return CurrentWeatherModel(
 			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(entity.tempC),
 			textStatus = entity.text,
 			city = requestModel.city,
 			icon = Uri.parse(entity.icon),
-			windPower = entity.windPowerKph,
+			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(entity.windPowerKph),
 			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
 			pressure = entity.pressure,
 			humidity = entity.humidity
@@ -56,7 +62,7 @@ object EntityMapper {
 			tempMax = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMaxC else MeasureUtils.cToF(entity.tempMaxC),
 			tempMin = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMinC else MeasureUtils.cToF(entity.tempMinC),
 			textStatus = entity.textStatus,
-			windPower = if (requestModel.SpeedUnit == SpeedUnit.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
+			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph
 			),
 			sunrise = entity.sunrise,

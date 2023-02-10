@@ -1,6 +1,6 @@
 package com.example.seeweather.domain.model
 
-class GeneralWeatherModel(
+data class GeneralWeatherModel(
 	val currentWeatherModel: CurrentWeatherModel,
 	val days: List<DayWeatherModel>,
 	val hours: List<HourWeatherModel>,

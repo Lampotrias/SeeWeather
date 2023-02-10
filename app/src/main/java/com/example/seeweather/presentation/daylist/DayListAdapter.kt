@@ -11,8 +11,8 @@ import java.text.SimpleDateFormat
 
 data class DaysFormatted(
 	val date: String,
-	val tempMin: Float,
-	val tempMax: Float,
+	val tempMin: Int,
+	val tempMax: Int,
 	val icon: Uri? = null
 )
 

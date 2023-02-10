@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 
 data class HoursFormatted(
 	val date: String,
-	val temp: Float,
+	val temp: Int,
 	val icon: Uri? = null
 )
 

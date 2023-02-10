@@ -11,6 +11,7 @@ import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiDa
 import com.example.seeweather.data.sources.network.weatherapi.model.WeatherApiHourModel
 import com.example.seeweather.domain.ResponseException
 import com.example.seeweather.domain.model.RequestModel
+import com.example.seeweather.utils.Utils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
@@ -33,15 +34,19 @@ class WeatherApiSource @Inject constructor(
 		return withContext(defaultDispatcher) {
 			val url =
 				"http://api.weatherapi.com/v1/forecast.json?key=$KEY&q=${requestModel.city}&days=10"
+
+			Utils.log("start network request: $url")
 			val request = Request.Builder()
 				.url(url)
 				.build()
 
 			try {
 				val response = okHttpClient.newCall(request).execute()
+				Utils.log("we receive response: $url")
 				response.body?.let { responseBody ->
 					val responseData = responseBody.source().readUtf8()
 					if (response.isSuccessful) {
+						Utils.log("response SUCCESS, start parse")
 						val json = JSONObject(responseData)
 						val currentWeather: CurrentWeatherEntity = if (json.has("current")) {
 							try {
@@ -102,6 +107,7 @@ class WeatherApiSource @Inject constructor(
 						)
 
 					} else {
+						Utils.log("RESPONSE FAIL")
 						val error = when (response.code) {
 							400, 401, 403 -> {
 								try {
@@ -127,6 +133,7 @@ class WeatherApiSource @Inject constructor(
 						return@withContext Result.failure(error)
 					}
 				} ?: kotlin.run {
+					Utils.log("response error, empty response")
 					return@withContext Result.failure(
 						ResponseException(
 							Int.MIN_VALUE,

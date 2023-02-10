@@ -7,6 +7,5 @@ data class RequestModel(
 	val city: String,
 	val lang: String,
 	val tempUnit: Settings.Temp,
-	val SpeedUnit: SpeedUnit
+	val speedUnit: Settings.Speed
 )
-enum class SpeedUnit { KPH, MPH }

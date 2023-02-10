@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 @Serializable
 class WeatherApiDayModel {
@@ -34,11 +35,11 @@ class WeatherApiDayModel {
 	fun toEntity(): DayEntity {
 		return DayEntity(
 			date,
-			maxTempC,
-			minTempC,
+			maxTempC.roundToInt(),
+			minTempC.roundToInt(),
 			condition.text,
 			condition.imageUri,
-			maxWindKph,
+			maxWindKph.roundToInt(),
 			dateToTimestamp(sunrise),
 			dateToTimestamp(sunset)
 		)

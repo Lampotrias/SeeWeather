@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.seeweather.domain.WeatherRepo
 import com.example.seeweather.domain.model.GeneralWeatherModel
 import com.example.seeweather.domain.model.RequestModel
-import com.example.seeweather.domain.model.SpeedUnit
 import com.example.seeweather.utils.Settings
+import com.example.seeweather.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,9 +28,14 @@ class MainScreenViewModel @Inject constructor(
 	fun sendRequest(city: String) {
 		viewModelScope.launch {
 			val result = withContext(Dispatchers.IO) {
-				repository.getWeather(RequestModel(1, city, "ru", Settings.tempMeasure, SpeedUnit.KPH))
+				val requestModel = RequestModel(1, city, "ru", Settings.tempMeasure, Settings.speedMeasure)
+				Utils.log("start request: $requestModel")
+				repository.getWeather(requestModel)
+
 			}
+			Utils.log("after request")
 			result.fold({
+				Utils.log("cur weather to: $it}")
 				_uiState.value = State.SuccessResult(it)
 			}) {
 				_uiState.value = State.ErrorResult(it)

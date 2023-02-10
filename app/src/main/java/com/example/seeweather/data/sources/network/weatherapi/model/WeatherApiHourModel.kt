@@ -3,6 +3,7 @@ package com.example.seeweather.data.sources.network.weatherapi.model
 import com.example.seeweather.data.model.HourEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.roundToInt
 
 @Serializable
 class WeatherApiHourModel {
@@ -37,7 +38,7 @@ class WeatherApiHourModel {
 	fun toEntity(): HourEntity {
 		return HourEntity(
 			date,
-			tempC,
+			tempC.roundToInt(),
 			condition.imageUri
 		)
 	}

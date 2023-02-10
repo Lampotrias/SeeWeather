@@ -5,6 +5,6 @@ import android.net.Uri
 class HourWeatherModel(
 	val icon: Uri? = null,
 	val date: Long = 0,
-	val temp: Float = 0f,
+	val temp: Int = 0,
 	val chanceOfRain: Int = 0
 )
