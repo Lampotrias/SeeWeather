@@ -1,4 +1,4 @@
-package com.example.seeweather.data.sources.network.weatherapi.model
+package com.example.seeweather.data.weather.sources.network.weatherapi.model
 
 import android.net.Uri
 import kotlinx.serialization.Serializable

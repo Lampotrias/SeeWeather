@@ -1,6 +1,6 @@
 package com.example.seeweather.data.cache
 
-import com.example.seeweather.data.sources.database.dao.ServerSyncStatusDao
+import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import javax.inject.Inject
 
 class CacheWeatherImpl @Inject constructor(

@@ -1,6 +1,6 @@
-package com.example.seeweather.data.sources.network.weatherapi.model
+package com.example.seeweather.data.weather.sources.network.weatherapi.model
 
-import com.example.seeweather.data.model.HourEntity
+import com.example.seeweather.data.weather.model.HourEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.math.roundToInt

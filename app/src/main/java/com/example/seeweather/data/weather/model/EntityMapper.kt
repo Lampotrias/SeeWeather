@@ -1,4 +1,4 @@
-package com.example.seeweather.data.model
+package com.example.seeweather.data.weather.model
 
 import android.net.Uri
 import com.example.seeweather.domain.WindDirection

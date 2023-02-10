@@ -1,10 +1,10 @@
-package com.example.seeweather.data.sources.database.dao
+package com.example.seeweather.data.weather.sources.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.seeweather.data.sources.database.model.ServerSyncTable
+import com.example.seeweather.data.weather.sources.database.model.ServerSyncTable
 
 @Dao
 interface ServerSyncStatusDao {

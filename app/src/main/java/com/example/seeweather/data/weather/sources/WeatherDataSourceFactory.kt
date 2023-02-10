@@ -1,19 +1,19 @@
-package com.example.seeweather.data.sources
+package com.example.seeweather.data.weather.sources
 
 import android.util.Log
 import com.example.seeweather.data.cache.CacheWeather
-import com.example.seeweather.data.sources.database.dao.ServerSyncStatusDao
-import com.example.seeweather.data.sources.network.weatherapi.WeatherApiSource
+import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
+import com.example.seeweather.data.weather.sources.network.weatherapi.WeatherApiSourceWeather
 import com.example.seeweather.domain.model.RequestModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataSourceFactory @Inject constructor(
+class WeatherDataSourceFactory @Inject constructor(
 	private val cacheWeather: CacheWeather,
 	private val serverSyncStatusDao: ServerSyncStatusDao
 ) {
-	fun create(requestModel: RequestModel): DataSourceInterface {
+	fun create(requestModel: RequestModel): WeatherDataSourceInterface {
 		if (cacheWeather.isExpired(requestModel.serverId)) {
 			Log.e("Weather", "cache expired")
 		} else {
@@ -25,6 +25,6 @@ class DataSourceFactory @Inject constructor(
 		} else {
 			Log.e("Weather", "cache NOT exists")
 		}
-		return WeatherApiSource(serverSyncStatusDao)
+		return WeatherApiSourceWeather(serverSyncStatusDao)
 	}
 }

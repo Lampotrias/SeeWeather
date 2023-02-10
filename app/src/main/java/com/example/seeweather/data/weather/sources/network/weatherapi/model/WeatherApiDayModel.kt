@@ -1,7 +1,7 @@
-package com.example.seeweather.data.sources.network.weatherapi.model
+package com.example.seeweather.data.weather.sources.network.weatherapi.model
 
 import android.util.Log
-import com.example.seeweather.data.model.DayEntity
+import com.example.seeweather.data.weather.model.DayEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.text.ParseException

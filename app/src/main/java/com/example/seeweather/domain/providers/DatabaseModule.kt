@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.seeweather.data.sources.database.AppDatabase
-import com.example.seeweather.data.sources.database.dao.ServerSyncStatusDao
+import com.example.seeweather.data.weather.sources.database.AppDatabase
+import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

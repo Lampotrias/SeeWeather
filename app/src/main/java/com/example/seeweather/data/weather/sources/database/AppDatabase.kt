@@ -1,9 +1,9 @@
-package com.example.seeweather.data.sources.database
+package com.example.seeweather.data.weather.sources.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.seeweather.data.sources.database.dao.ServerSyncStatusDao
-import com.example.seeweather.data.sources.database.model.ServerSyncTable
+import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
+import com.example.seeweather.data.weather.sources.database.model.ServerSyncTable
 
 @Database(
 	entities = [

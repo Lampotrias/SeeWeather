@@ -1,4 +1,4 @@
-package com.example.seeweather.data.model
+package com.example.seeweather.data.weather.model
 
 data class CurrentWeatherEntity(
 	var cityId: Int = 0,

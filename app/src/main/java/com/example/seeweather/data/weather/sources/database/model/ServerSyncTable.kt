@@ -1,4 +1,4 @@
-package com.example.seeweather.data.sources.database.model
+package com.example.seeweather.data.weather.sources.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
