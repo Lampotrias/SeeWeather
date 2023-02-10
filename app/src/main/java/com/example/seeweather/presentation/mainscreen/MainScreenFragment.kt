@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.seeweather.R
 import com.example.seeweather.databinding.MainScreenFragmentBinding
-import com.example.seeweather.presentation.daylist.DayListAdapter
-import com.example.seeweather.presentation.hourslist.HoursAdapter
+import com.example.seeweather.presentation.mainscreen.daylist.DayListAdapter
+import com.example.seeweather.presentation.mainscreen.hourslist.HoursAdapter
 import com.example.seeweather.presentation.settngs.SettingsFragment
 import com.example.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint

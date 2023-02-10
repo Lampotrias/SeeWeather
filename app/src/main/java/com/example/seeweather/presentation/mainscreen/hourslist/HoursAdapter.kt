@@ -1,4 +1,4 @@
-package com.example.seeweather.presentation.hourslist
+package com.example.seeweather.presentation.mainscreen.hourslist
 
 import android.annotation.SuppressLint
 import android.net.Uri
