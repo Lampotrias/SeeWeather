@@ -1,8 +1,8 @@
 package com.example.seeweather.data.weather.sources.network.weatherapi
 
+import com.example.seeweather.data.weather.WeatherDataSourceInterface
 import com.example.seeweather.data.weather.model.CurrentWeatherEntity
 import com.example.seeweather.data.weather.model.GeneralEntityWeatherModel
-import com.example.seeweather.data.weather.sources.WeatherDataSourceInterface
 import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import com.example.seeweather.data.weather.sources.database.model.ServerSyncTable
 import com.example.seeweather.data.weather.sources.network.weatherapi.model.ErrorModel
