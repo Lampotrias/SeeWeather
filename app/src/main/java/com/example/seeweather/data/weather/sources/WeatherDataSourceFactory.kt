@@ -2,7 +2,7 @@ package com.example.seeweather.data.weather.sources
 
 import android.util.Log
 import com.example.seeweather.data.cache.CacheWeather
-import com.example.seeweather.data.weather.WeatherDataSourceInterface
+import com.example.seeweather.data.weather.WeatherDataSource
 import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import com.example.seeweather.data.weather.sources.network.weatherapi.WeatherApiSourceWeather
 import com.example.seeweather.domain.model.RequestModel
@@ -14,7 +14,7 @@ class WeatherDataSourceFactory @Inject constructor(
 	private val cacheWeather: CacheWeather,
 	private val serverSyncStatusDao: ServerSyncStatusDao
 ) {
-	fun create(requestModel: RequestModel): WeatherDataSourceInterface {
+	fun create(requestModel: RequestModel): WeatherDataSource {
 		if (cacheWeather.isExpired(requestModel.serverId)) {
 			Log.e("Weather", "cache expired")
 		} else {
