@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.seeweather.R
 import com.example.seeweather.databinding.MainScreenFragmentBinding
+import com.example.seeweather.presentation.cityscreen.CityFragment
 import com.example.seeweather.presentation.mainscreen.daylist.DayListAdapter
 import com.example.seeweather.presentation.mainscreen.hourslist.HoursAdapter
 import com.example.seeweather.presentation.settngs.SettingsFragment
@@ -44,6 +45,14 @@ class MainScreenFragment : Fragment() {
 				.beginTransaction()
 				.add(R.id.nav_host_fragment, SettingsFragment())
 				.addToBackStack("settings")
+				.commit()
+		}
+
+		binding.actionMap.setOnClickListener {
+			parentFragmentManager
+				.beginTransaction()
+				.add(R.id.nav_host_fragment, CityFragment())
+				.addToBackStack("city")
 				.commit()
 		}
 

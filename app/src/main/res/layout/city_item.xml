@@ -3,29 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context=".presentation.cityscreen.CityFragment">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/search_field"
+    <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:inputType="text"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+        tools:text="Name" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cities_list"
+    <TextView
+        android:id="@+id/full_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_field"
-        tools:listitem="@layout/city_item" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:text="Full name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
-package com.example.seeweather.presentation.mainscreen
+package com.example.seeweather.presentation.di
 
-import com.example.seeweather.data.city.LocationRepo
+import com.example.seeweather.data.city.LocationRepository
 import com.example.seeweather.data.weather.WeatherRepositoryImpl
 import com.example.seeweather.domain.ILocationRepo
-import com.example.seeweather.domain.WeatherRepo
+import com.example.seeweather.domain.WeatherRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 abstract class RepoModule {
 	@Binds
-	abstract fun bindRepositoryWeather(impl: WeatherRepositoryImpl): WeatherRepo
+	abstract fun bindRepositoryWeather(impl: WeatherRepositoryImpl): WeatherRepository
 	@Binds
-	abstract fun bindRepositoryLocation(impl: LocationRepo): ILocationRepo
+	abstract fun bindRepositoryLocation(impl: LocationRepository): ILocationRepo
 }
