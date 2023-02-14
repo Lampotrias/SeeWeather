@@ -1,9 +1,9 @@
 package com.example.seeweather.data.weather.sources.network.weatherapi.model
 
 import android.net.Uri
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.JsonClass
 
-@Serializable
+@JsonClass(generateAdapter = true)
 class Condition {
 	var icon: String = ""
 	var text: String = ""

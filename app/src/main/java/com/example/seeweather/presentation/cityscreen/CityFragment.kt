@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.seeweather.databinding.CityFragmentBinding
+import com.example.seeweather.domain.model.LocationModel
 import com.example.seeweather.presentation.cityscreen.list.CityAdapter
+import com.example.seeweather.presentation.cityscreen.list.CityListener
 import com.example.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +24,12 @@ class CityFragment : Fragment() {
 	private val binding: CityFragmentBinding
 		get() = _binding!!
 
-	private val citiesAdapter = CityAdapter()
+	private val citiesAdapter = CityAdapter(object : CityListener {
+		override fun onSelect(city: LocationModel) {
+			viewModel.pickCity(city)
+			parentFragmentManager.popBackStack()
+		}
+	})
 
 	override fun onCreateView(
 		inflater: LayoutInflater,

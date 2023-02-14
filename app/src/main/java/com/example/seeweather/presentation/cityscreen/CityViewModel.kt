@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.seeweather.data.city.LocationRepository
 import com.example.seeweather.domain.model.LocationModel
-import com.example.seeweather.presentation.mainscreen.State
+import com.example.seeweather.utils.Settings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,6 +35,10 @@ class CityViewModel @Inject constructor(
 				}
 			}
 		}
+	}
+
+	fun pickCity(city: LocationModel) {
+		Settings.lastSelectedCity = city
 	}
 
 	sealed class State {

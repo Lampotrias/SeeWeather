@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.seeweather.databinding.CityItemBinding
 import com.example.seeweather.domain.model.LocationModel
 
-class CityAdapter : RecyclerView.Adapter<CityViewHolder>() {
+class CityAdapter(private val listener: CityListener) : RecyclerView.Adapter<CityViewHolder>() {
 	private val cities = mutableListOf<LocationModel>()
 
 	fun setCities(cities: List<LocationModel>) {
@@ -20,7 +20,8 @@ class CityAdapter : RecyclerView.Adapter<CityViewHolder>() {
 				LayoutInflater.from(parent.context),
 				parent,
 				false
-			)
+			),
+			listener
 		)
 	}
 

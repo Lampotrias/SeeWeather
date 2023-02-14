@@ -2,31 +2,32 @@ package com.example.seeweather.data.weather.sources.network.weatherapi.model
 
 import android.util.Log
 import com.example.seeweather.data.weather.model.DayEntity
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 import kotlin.math.roundToInt
 
-@Serializable
+
+@JsonClass(generateAdapter = true)
 class WeatherApiDayModel {
-	@SerialName("date_epoch")
+	@Json(name = "date_epoch")
 	var date: Long = 0L
 
-	@SerialName("maxtemp_c")
+	@Json(name = "maxtemp_c")
 	var maxTempC: Float = 0f
 
-	@SerialName("mintemp_c")
+	@Json(name = "mintemp_c")
 	var minTempC: Float = 0f
 
-	@SerialName("avgtemp_c")
+	@Json(name = "avgtemp_c")
 	var avgTempC: Float = 0f
 
-	@SerialName("maxwind_kph")
+	@Json(name = "maxwind_kph")
 	var maxWindKph: Float = 0f
 
-	@SerialName("condition")
+	@Json(name = "condition")
 	var condition: Condition = Condition()
 
 	var sunrise: String = ""

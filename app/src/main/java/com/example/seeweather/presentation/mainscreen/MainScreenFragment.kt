@@ -77,7 +77,7 @@ class MainScreenFragment : Fragment() {
 
 				if (state is State.SuccessResult) {
 					with(binding) {
-						selectedCity.text = state.result.currentWeatherModel.city
+						selectedCity.text = state.city
 						currentTemp.text = state.result.currentWeatherModel.temp.toString()
 						weatherDescription.text = state.result.currentWeatherModel.textStatus
 						weatherImage.setImageURI(state.result.currentWeatherModel.icon)
