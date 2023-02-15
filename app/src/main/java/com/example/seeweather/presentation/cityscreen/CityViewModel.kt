@@ -2,7 +2,7 @@ package com.example.seeweather.presentation.cityscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.seeweather.data.city.LocationRepository
+import com.example.seeweather.data.remotelocations.LocationRepository
 import com.example.seeweather.domain.model.LocationModel
 import com.example.seeweather.utils.Settings
 import dagger.hilt.android.lifecycle.HiltViewModel

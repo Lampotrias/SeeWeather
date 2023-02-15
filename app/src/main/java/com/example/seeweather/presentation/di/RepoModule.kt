@@ -1,6 +1,6 @@
 package com.example.seeweather.presentation.di
 
-import com.example.seeweather.data.city.LocationRepository
+import com.example.seeweather.data.remotelocations.LocationRepository
 import com.example.seeweather.data.weather.WeatherRepositoryImpl
 import com.example.seeweather.domain.ILocationRepo
 import com.example.seeweather.domain.WeatherRepository

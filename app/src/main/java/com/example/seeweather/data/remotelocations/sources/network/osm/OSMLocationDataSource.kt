@@ -1,7 +1,7 @@
-package com.example.seeweather.data.city.sources.network.osm
+package com.example.seeweather.data.remotelocations.sources.network.osm
 
-import com.example.seeweather.data.city.model.LocationEntity
-import com.example.seeweather.data.city.sources.LocationDataSource
+import com.example.seeweather.data.remotelocations.model.LocationEntity
+import com.example.seeweather.data.remotelocations.sources.LocationDataSource
 import com.example.seeweather.utils.Utils
 import okhttp3.OkHttpClient
 import okhttp3.Request

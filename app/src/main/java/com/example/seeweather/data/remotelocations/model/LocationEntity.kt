@@ -1,4 +1,4 @@
-package com.example.seeweather.data.city.model
+package com.example.seeweather.data.remotelocations.model
 
 import com.example.seeweather.domain.model.LocationModel
 

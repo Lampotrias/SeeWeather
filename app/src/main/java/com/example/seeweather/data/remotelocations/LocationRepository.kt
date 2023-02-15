@@ -1,6 +1,6 @@
-package com.example.seeweather.data.city
+package com.example.seeweather.data.remotelocations
 
-import com.example.seeweather.data.city.sources.LocationDataSourceFactory
+import com.example.seeweather.data.remotelocations.sources.LocationDataSourceFactory
 import com.example.seeweather.domain.ILocationRepo
 import com.example.seeweather.domain.model.LocationModel
 import javax.inject.Inject
