@@ -1,4 +1,4 @@
-package com.example.seeweather.domain.providers
+package com.example.seeweather.presentation.di
 
 import dagger.Module
 import dagger.hilt.InstallIn

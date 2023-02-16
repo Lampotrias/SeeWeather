@@ -1,4 +1,4 @@
-package com.example.seeweather.domain.providers
+package com.example.seeweather.presentation.di
 
 import com.example.seeweather.data.cache.CacheWeather
 import com.example.seeweather.data.cache.CacheWeatherImpl

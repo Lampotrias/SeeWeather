@@ -2,7 +2,9 @@ package com.example.seeweather.presentation.cityscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.seeweather.data.remotelocations.LocationRepository
+import com.example.seeweather.domain.ICityStoredRepository
+import com.example.seeweather.domain.ILocationRepo
+import com.example.seeweather.domain.model.CityModel
 import com.example.seeweather.domain.model.LocationModel
 import com.example.seeweather.utils.Settings
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityViewModel @Inject constructor(
-	private val locationRepository: LocationRepository
+	private val locationRepository: ILocationRepo,
+	private val storedCityRepository: ICityStoredRepository
 ) : ViewModel() {
 
 	private val _uiState: MutableStateFlow<State> = MutableStateFlow(State.INITIAL)
@@ -39,6 +42,15 @@ class CityViewModel @Inject constructor(
 
 	fun pickCity(city: LocationModel) {
 		Settings.lastSelectedCity = city
+		viewModelScope.launch {
+			storedCityRepository.addCity(
+				CityModel(
+					name = city.name,
+					latitude = city.latitude,
+					longitude = city.longitude,
+				)
+			)
+		}
 	}
 
 	sealed class State {
@@ -46,5 +58,4 @@ class CityViewModel @Inject constructor(
 		class SuccessResult(val result: List<LocationModel>) : State()
 		class ErrorResult(val e: Throwable) : State()
 	}
-
 }

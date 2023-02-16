@@ -1,9 +1,10 @@
-package com.example.seeweather.domain.providers
+package com.example.seeweather.presentation.di
 
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.seeweather.data.city.database.CityStoredDao
 import com.example.seeweather.data.weather.sources.database.AppDatabase
 import com.example.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import dagger.Module
@@ -31,6 +32,11 @@ class DatabaseModule {
 			}
 		})
 			.build()
+	}
+
+	@Provides
+	fun provideChannelDao(appDatabase: AppDatabase): CityStoredDao {
+		return appDatabase.cityStoredDao()
 	}
 
 	@Provides
