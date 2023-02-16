@@ -1,4 +1,4 @@
-package com.example.seeweather.presentation.cityscreen
+package com.example.seeweather.presentation.citysearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.example.seeweather.presentation.cityscreen.list
+package com.example.seeweather.presentation.citysearch.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

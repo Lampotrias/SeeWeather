@@ -1,4 +1,4 @@
-package com.example.seeweather.presentation.cityscreen
+package com.example.seeweather.presentation.citysearch
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.seeweather.databinding.CityFragmentBinding
 import com.example.seeweather.domain.model.LocationModel
-import com.example.seeweather.presentation.cityscreen.list.CityAdapter
-import com.example.seeweather.presentation.cityscreen.list.CityListener
+import com.example.seeweather.presentation.citysearch.list.CityAdapter
+import com.example.seeweather.presentation.citysearch.list.CityListener
 import com.example.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 

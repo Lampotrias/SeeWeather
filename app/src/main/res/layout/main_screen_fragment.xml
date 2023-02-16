@@ -56,8 +56,21 @@
             android:contentDescription="@null"
             android:src="@drawable/baseline_map_24"
             app:layout_constraintBottom_toBottomOf="@+id/selected_city"
+            app:layout_constraintEnd_toStartOf="@+id/action_city_list"
+            app:layout_constraintTop_toTopOf="@+id/selected_city" />
+
+        <ImageView
+            android:id="@+id/action_city_list"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/baseline_list_24"
+            app:layout_constraintBottom_toBottomOf="@+id/selected_city"
             app:layout_constraintEnd_toStartOf="@+id/action_settings"
             app:layout_constraintTop_toTopOf="@+id/selected_city" />
+
 
         <ImageView
             android:id="@+id/action_refresh"
