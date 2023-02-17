@@ -6,7 +6,6 @@ import com.example.seeweather.domain.ICityStoredRepository
 import com.example.seeweather.domain.ILocationRepo
 import com.example.seeweather.domain.model.CityModel
 import com.example.seeweather.domain.model.LocationModel
-import com.example.seeweather.utils.Settings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,13 +40,13 @@ class CityViewModel @Inject constructor(
 	}
 
 	fun pickCity(city: LocationModel) {
-		Settings.lastSelectedCity = city
 		viewModelScope.launch {
 			storedCityRepository.addCity(
 				CityModel(
 					name = city.name,
 					latitude = city.latitude,
 					longitude = city.longitude,
+					isLast = true
 				)
 			)
 		}

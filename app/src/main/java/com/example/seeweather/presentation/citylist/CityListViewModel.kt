@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.seeweather.domain.ICityStoredRepository
 import com.example.seeweather.domain.model.CityModel
+import com.example.seeweather.utils.OneShotEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,8 +17,8 @@ class CityListViewModel @Inject constructor(
 	private val storedCityRepository: ICityStoredRepository
 ) : ViewModel() {
 
-	private val _uiState: MutableStateFlow<List<CityModel>> = MutableStateFlow(listOf())
-	val uiState: StateFlow<List<CityModel>> = _uiState
+	private val _uiState: MutableStateFlow<CityListUIState> = MutableStateFlow(CityListUIState())
+	val uiState: StateFlow<CityListUIState> = _uiState
 
 	init {
 		viewModelScope.launch {
@@ -31,7 +33,24 @@ class CityListViewModel @Inject constructor(
 		}
 	}
 
+	fun selectCity(cityModel: CityModel) {
+		_uiState.update {
+			it.copy(
+				selectCity = OneShotEvent(cityModel)
+			)
+		}
+	}
+
 	private suspend fun updateList() {
-		_uiState.value = storedCityRepository.getCities()
+		_uiState.update {
+			it.copy(
+				cities = storedCityRepository.getCities()
+			)
+		}
 	}
 }
+
+data class CityListUIState(
+	val cities: List<CityModel> = listOf(),
+	val selectCity: OneShotEvent<CityModel>? = null
+)

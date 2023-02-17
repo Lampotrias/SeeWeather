@@ -7,7 +7,8 @@ import com.example.seeweather.databinding.CityListItemBinding
 import com.example.seeweather.domain.model.CityModel
 
 class CityListAdapter(
-	private val onRemove: (CityModel) -> Unit
+	private val onRemove: (CityModel) -> Unit,
+	private val onSelect: (CityModel) -> Unit
 ) : RecyclerView.Adapter<CityListAdapter.ViewHolder>() {
 
 	private val items = mutableListOf<CityModel>()
@@ -26,7 +27,7 @@ class CityListAdapter(
 				parent,
 				false
 			),
-			onRemove
+			onRemove, onSelect
 		)
 	}
 
@@ -39,12 +40,16 @@ class CityListAdapter(
 
 	class ViewHolder(
 		private val binding: CityListItemBinding,
-		private val onRemove: (CityModel) -> Unit
+		private val onRemove: (CityModel) -> Unit,
+		private val onSelect: (CityModel) -> Unit
 	) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(cityModel: CityModel) {
 			binding.name.text = cityModel.name
 			binding.actionDelete.setOnClickListener {
 				onRemove(cityModel)
+			}
+			binding.actionSelect.setOnClickListener {
+				onSelect(cityModel)
 			}
 		}
 	}

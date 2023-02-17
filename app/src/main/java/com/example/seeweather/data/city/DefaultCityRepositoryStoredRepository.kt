@@ -19,11 +19,24 @@ class DefaultCityRepositoryStoredRepository @Inject constructor(
 
 	override suspend fun addCity(cityModel: CityModel) {
 		withContext(defaultDispatcher) {
-			val city = if (getCities().isEmpty()) {
-				cityModel.copy(isLast = true)
-			} else cityModel
+			if (cityModel.isLast) {
+				cityStoredDao.resetLast()
+			}
 
-			cityStoredDao.addCity(city.toEntity())
+			val newId = cityStoredDao.addCity(cityModel.toEntity())
+			setLastIfNeeded(newId)
+		}
+	}
+
+	private suspend fun setLastIfNeeded(cityId: Long) {
+		if (cityStoredDao.getCities().size == 1) {
+			setLastCity(cityId)
+		}
+	}
+
+	override suspend fun setLastCity(id: Long) {
+		withContext(defaultDispatcher) {
+			cityStoredDao.setLastCitySafe(id)
 		}
 	}
 
@@ -33,9 +46,9 @@ class DefaultCityRepositoryStoredRepository @Inject constructor(
 		}
 	}
 
-	override suspend fun getLastCity(): CityModel {
+	override suspend fun getLastCity(): CityModel? {
 		return withContext(defaultDispatcher) {
-			cityStoredDao.getLastCity().let {
+			cityStoredDao.getLastCity()?.let {
 				CityModel.fromEntity(it)
 			}
 		}

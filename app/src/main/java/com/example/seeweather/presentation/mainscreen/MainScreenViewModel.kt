@@ -3,7 +3,9 @@ package com.example.seeweather.presentation.mainscreen
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.seeweather.domain.ICityStoredRepository
 import com.example.seeweather.domain.WeatherRepository
+import com.example.seeweather.domain.model.CityModel
 import com.example.seeweather.domain.model.GeneralWeatherModel
 import com.example.seeweather.domain.model.RequestModel
 import com.example.seeweather.utils.Settings
@@ -19,24 +21,30 @@ import javax.inject.Inject
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
 	private val savedStateHandle: SavedStateHandle,
-	private val weatherRepository: WeatherRepository
+	private val weatherRepository: WeatherRepository,
+	private val cityRepositoryStoredRepository: ICityStoredRepository
 ) : ViewModel() {
 
 	private val _uiState: MutableStateFlow<State> = MutableStateFlow(State.INITIAL)
 	val uiState: StateFlow<State> = _uiState
 
-	fun sendRequest(city: String) {
+	fun loadLastCity() {
+		viewModelScope.launch {
+			cityRepositoryStoredRepository.getLastCity()?.let { city ->
+				sendRequest(city)
+			}
+		}
+	}
+
+	fun sendRequest(city: CityModel) {
 		Utils.log("start request0: $city")
 		viewModelScope.launch {
 			Utils.log("start request1: $city")
-			val lastSelectedCity = Settings.lastSelectedCity
-			val c = lastSelectedCity?.let {
-				"${it.latitude},${it.longitude}"
-			} ?: city
+
 			val result = withContext(Dispatchers.IO) {
 				val requestModel = RequestModel(
 					1,
-					c,
+					getCoordinatesString(city),
 					"ru",
 					Settings.tempMeasure,
 					Settings.speedMeasure
@@ -48,15 +56,15 @@ class MainScreenViewModel @Inject constructor(
 			Utils.log("after request")
 			result.fold({
 				Utils.log("cur weather to: $it}")
-				_uiState.value = State.SuccessResult(lastSelectedCity?.name ?: "unknown", it)
+				_uiState.value = State.SuccessResult(city.name, it)
 			}) {
 				_uiState.value = State.ErrorResult(it)
 			}
 		}
 	}
 
-	override fun onCleared() {
-		super.onCleared()
+	private fun getCoordinatesString(city: CityModel): String {
+		return "${city.latitude},${city.longitude}"
 	}
 }
 

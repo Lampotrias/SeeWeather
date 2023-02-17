@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.example.seeweather.R
-import com.example.seeweather.domain.model.LocationModel
-import com.squareup.moshi.Moshi
 
 @SuppressLint("StaticFieldLeak")
 object Settings {
@@ -13,23 +11,6 @@ object Settings {
 	const val PREF_TEMP_KEY = "pref_temp"
 
 	private var context: Context? = null
-	private val adapter = Moshi.Builder().build().adapter(LocationModel::class.java)
-
-	var lastSelectedCity: LocationModel?
-		get() {
-			val pref =
-				context?.getSharedPreferences("qq", Context.MODE_PRIVATE)?.getString("last_city", "")
-			return if (!pref.isNullOrBlank()) {
-				adapter.fromJson(pref)
-			} else {
-				null
-			}
-
-		}
-		set(value) {
-			val pref = context?.getSharedPreferences("qq", Context.MODE_PRIVATE)
-			pref?.edit()?.putString("last_city", adapter.toJson(value))?.apply()
-		}
 
 	val speedMeasure: Speed
 		get() {

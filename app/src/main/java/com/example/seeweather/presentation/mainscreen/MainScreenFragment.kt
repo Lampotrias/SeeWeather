@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.seeweather.R
 import com.example.seeweather.databinding.MainScreenFragmentBinding
+import com.example.seeweather.domain.model.CityModel
 import com.example.seeweather.presentation.citylist.CityListFragment
 import com.example.seeweather.presentation.citysearch.CityFragment
 import com.example.seeweather.presentation.mainscreen.daylist.DayListAdapter
@@ -30,6 +32,17 @@ class MainScreenFragment : Fragment() {
 	private val hoursAdapter = HoursAdapter()
 	private val daysAdapter = DayListAdapter()
 
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+
+		setFragmentResultListener(RESULT_KEY_FROM_CITY_LIST) {requestKey, bundle ->
+			if (requestKey == RESULT_KEY_FROM_CITY_LIST) {
+				val city = bundle.getParcelable<CityModel>(BUNDLE_KEY_CITY) ?: return@setFragmentResultListener
+				viewModel.sendRequest(city)
+			}
+		}
+	}
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -38,7 +51,7 @@ class MainScreenFragment : Fragment() {
 		_binding = MainScreenFragmentBinding.inflate(layoutInflater)
 
 		binding.actionRefresh.setOnClickListener {
-			viewModel.sendRequest("Antalya")
+			viewModel.loadLastCity()
 		}
 
 		binding.actionSettings.setOnClickListener {
@@ -115,6 +128,12 @@ class MainScreenFragment : Fragment() {
 		super.onDestroyView()
 
 		_binding = null
+	}
+
+	companion object {
+		const val RESULT_KEY_FROM_CITY_LIST = "RESULT_KEY_FROM_CITY_LIST"
+		const val REQUEST_KEY_RELOAD_WITH_CITY = "REQUEST_KEY_RELOAD_WITH_CITY"
+		const val BUNDLE_KEY_CITY = "BUNDLE_KEY_CITY"
 	}
 }
 
