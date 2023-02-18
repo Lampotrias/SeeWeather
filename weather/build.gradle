@@ -3,6 +3,8 @@ plugins {
 	id 'org.jetbrains.kotlin.android'
 	id "org.jetbrains.kotlin.kapt"
 	id 'dagger.hilt.android.plugin'
+	id 'com.google.gms.google-services'
+	id 'com.google.firebase.appdistribution'
 }
 
 kapt {
@@ -39,6 +41,10 @@ android {
 		release {
 			minifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			firebaseAppDistribution {
+              artifactType="APK"
+              testers="bitrixman@gmail.com"
+          }
 		}
 	}
 	compileOptions {
@@ -77,12 +83,14 @@ dependencies {
 
 	implementation("androidx.fragment:fragment-ktx:1.5.5")
 
+	implementation platform('com.google.firebase:firebase-bom:31.2.2')
+	implementation 'com.google.firebase:firebase-analytics-ktx'
 	// Navigation
 	implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 	implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
 	// Coroutines
-	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3'
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
 	// Lifecycle
 	implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "172567874042",
+    "project_id": "seeweather-17285",
+    "storage_bucket": "seeweather-17285.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172567874042:android:4deea9c796e046719abc43",
+        "android_client_info": {
+          "package_name": "com.lampotrias.seeweather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172567874042-g9bslalp6tda5knnoksq48i2ain6oimf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp2esnY33ZVnnpBFhi554eN0-wUH2miUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172567874042-g9bslalp6tda5knnoksq48i2ain6oimf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
