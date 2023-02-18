@@ -80,7 +80,7 @@ class WeatherApiSourceWeather @Inject constructor(
 								rootDayInfo.optJSONArray("hour")?.let { jsHours ->
 									for (j in 0 until jsHours.length()) {
 										val hourAdapter = moshi.adapter(WeatherApiHourModel::class.java)
-										hourAdapter.fromJson(dayInfo.toString())?.also { hourModel ->
+										hourAdapter.fromJson(jsHours.getJSONObject(j).toString())?.also { hourModel ->
 											hours.add(hourModel)
 										}
 									}
