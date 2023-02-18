@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.databinding.HourViewHolderBinding
+import com.lampotrias.seeweather.domain.WindDirection
 import com.lampotrias.seeweather.domain.model.HourWeatherModel
 import java.text.SimpleDateFormat
 
 data class HoursFormatted(
 	val date: String,
 	val temp: Int,
-	val icon: Uri? = null
+	val icon: Uri? = null,
+	val windPower: Int = 0,
+	val windDirection: WindDirection,
+	val windDegree: Int
 )
 
 class HoursAdapter : RecyclerView.Adapter<HourViewHolder>() {
@@ -25,7 +29,10 @@ class HoursAdapter : RecyclerView.Adapter<HourViewHolder>() {
 			HoursFormatted(
 				date = formatter.format(it.date * 1000),
 				temp = it.temp,
-				icon = it.icon
+				icon = it.icon,
+				windPower = it.windPower,
+				windDirection = it.windDirection,
+				windDegree = it.windDegree
 			)
 		}
 		notifyDataSetChanged()
@@ -53,5 +60,7 @@ class HourViewHolder(private val binding: HourViewHolderBinding) :
 		binding.time.text = hourEntity.date
 		binding.temp.text = hourEntity.temp.toString()
 		binding.hourImage.setImageURI(hourEntity.icon)
+		binding.windPower.text = hourEntity.windPower.toString()
+		binding.windDirectionIcon.rotation = hourEntity.windDegree.toFloat()
 	}
 }

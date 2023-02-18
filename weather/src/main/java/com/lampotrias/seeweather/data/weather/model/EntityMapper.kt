@@ -41,11 +41,15 @@ object EntityMapper {
 	): CurrentWeatherModel {
 		Utils.log("cur weather from: $entity}")
 		return CurrentWeatherModel(
-			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(entity.tempC),
+			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(
+				entity.tempC
+			),
 			textStatus = entity.text,
 			city = requestModel.city,
 			icon = Uri.parse(entity.icon),
-			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(entity.windPowerKph),
+			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
+				entity.windPowerKph
+			),
 			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
 			pressure = entity.pressure,
 			humidity = entity.humidity
@@ -59,8 +63,12 @@ object EntityMapper {
 		return DayWeatherModel(
 			date = entity.date,
 			icon = entity.icon,
-			tempMax = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMaxC else MeasureUtils.cToF(entity.tempMaxC),
-			tempMin = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMinC else MeasureUtils.cToF(entity.tempMinC),
+			tempMax = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMaxC else MeasureUtils.cToF(
+				entity.tempMaxC
+			),
+			tempMin = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMinC else MeasureUtils.cToF(
+				entity.tempMinC
+			),
 			textStatus = entity.textStatus,
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph
@@ -75,9 +83,21 @@ object EntityMapper {
 		requestModel: RequestModel,
 	): HourWeatherModel {
 		return HourWeatherModel(
-			entity.icon,
-			entity.date,
-			if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(entity.tempC)
+			icon = entity.icon,
+			date = entity.date,
+			temp = if (requestModel.tempUnit == Settings.Temp.C) {
+				entity.tempC
+			} else {
+				MeasureUtils.cToF(entity.tempC)
+			},
+			chanceOfRain = 0,
+			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) {
+				entity.windPowerKph
+			} else {
+				MeasureUtils.kmphToMph(entity.windPowerKph)
+			},
+			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
+			windDegree = entity.windDegree
 		)
 	}
 }

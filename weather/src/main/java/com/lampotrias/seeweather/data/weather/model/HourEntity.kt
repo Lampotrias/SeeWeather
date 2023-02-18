@@ -6,4 +6,7 @@ class HourEntity(
 	val date: Long = 0L,
 	val tempC: Int = 0,
 	val icon: Uri? = null,
+	val windPowerKph: Int = 0,
+	val windDir: String = "",
+	val windDegree: Int
 )

@@ -36,9 +36,12 @@ class WeatherApiHourModel {
 
 	fun toEntity(): HourEntity {
 		return HourEntity(
-			date,
-			tempC.roundToInt(),
-			condition.imageUri
+			date = date,
+			tempC = tempC.roundToInt(),
+			icon = condition.imageUri,
+			windPowerKph = windKph.toInt(),
+			windDir = windDirection,
+			windDegree = windDegree
 		)
 	}
 }
