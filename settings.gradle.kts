@@ -13,4 +13,4 @@ dependencyResolutionManagement {
 	}
 }
 rootProject.name = "SeeWeather"
-include ':weather'
+include (":weather")
