@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 plugins {
 	id 'com.android.application'
 	id 'org.jetbrains.kotlin.android'
@@ -11,6 +13,16 @@ kapt {
  correctErrorTypes true
 }
 
+def getAppCurrentVersionName = {
+	def json = new JsonSlurper().parseText(new File(projectDir, 'app_version.json').text)
+	return json.build.versionName
+}
+
+def getAppCurrentVersionCode = {
+	def json = new JsonSlurper().parseText(new File(projectDir, 'app_version.json').text)
+	return json.build.versionCode
+}
+
 android {
 	compileSdk 33
 
@@ -22,8 +34,8 @@ android {
 		applicationId "com.lampotrias.seeweather"
 		minSdk 21
 		targetSdk 33
-		versionCode 1
-		versionName "1.0"
+		versionCode getAppCurrentVersionCode()
+		versionName getAppCurrentVersionName()
 
 		javaCompileOptions {
 			annotationProcessorOptions {
