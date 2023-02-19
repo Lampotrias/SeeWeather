@@ -1,0 +1,4 @@
+keystore=../seeweather.jks
+keystore.password=abelixus
+keyAlias=com.lampotrias.seeweather
+keyPassword=abelixus
