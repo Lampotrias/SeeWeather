@@ -1,22 +1,24 @@
 package com.lampotrias.seeweather.presentation.settngs
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.material.elevation.SurfaceColors
 import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.utils.Settings
 import com.lampotrias.seeweather.utils.Settings.PREF_SPEED_KEY
 import com.lampotrias.seeweather.utils.Settings.PREF_TEMP_KEY
+
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		view.setBackgroundColor(Color.WHITE)
+		val color = SurfaceColors.SURFACE_0.getColor(requireContext())
+		view.setBackgroundColor(color)
 	}
 
 	override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

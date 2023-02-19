@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?attr/colorSurface"
     android:layout_height="match_parent">
 
     <TextView
@@ -14,6 +15,7 @@
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:singleLine="true"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/action_select"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +32,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:textSize="15sp"
+        android:textColor="?attr/colorOnSurface"
         app:layout_constraintEnd_toStartOf="@+id/action_select"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
@@ -40,7 +43,7 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:text="S"
+        android:text="@string/select_city_button"
         app:layout_constraintBottom_toBottomOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />

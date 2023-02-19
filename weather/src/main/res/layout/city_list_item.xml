@@ -6,6 +6,7 @@
     android:layout_height="50dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="5dp"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <TextView
@@ -16,6 +17,7 @@
         app:layout_constraintEnd_toStartOf="@+id/action_delete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="?attr/colorOnSurface"
         tools:text="Kemer" />
 
     <ImageButton
@@ -26,7 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/action_select"
         app:layout_constraintStart_toEndOf="@id/name"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null" />
 
     <ImageButton
         android:id="@+id/action_select"
@@ -37,5 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/action_delete"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null" />
 </androidx.constraintlayout.widget.ConstraintLayout>
