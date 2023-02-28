@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lampotrias.seeweather.databinding.CityFragmentBinding
 import com.lampotrias.seeweather.domain.model.LocationModel
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CityFragment : Fragment() {
 
-	private val viewModel: CityViewModel by viewModels()
+	private val viewModel: CityViewModel by activityViewModels()
 	private var _binding: CityFragmentBinding? = null
 	private val binding: CityFragmentBinding
 		get() = _binding!!

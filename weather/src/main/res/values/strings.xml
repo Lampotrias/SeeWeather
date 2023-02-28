@@ -28,4 +28,7 @@
     <string name="pref_temp">Temperature</string>
     <string name="city_search_hint">Enter city</string>
     <string name="select_city_button">S</string>
+    <string name="default_bottom_tab_text">Погода</string>
+    <string name="location_bottom_tab_text">Локации</string>
+    <string name="preference_bottom_tab_text">Настройки</string>
 </resources>

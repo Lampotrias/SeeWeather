@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/current_weather"
+        android:enabled="true"
+        android:icon="@drawable/baseline_map_24"
+        android:title="@string/default_bottom_tab_text"/>
+    <item
+        android:id="@+id/add_location"
+        android:enabled="true"
+        android:icon="@drawable/baseline_cloud_24"
+        android:title="Добавить"/>
+    <item
+        android:id="@+id/location_list"
+        android:enabled="true"
+        android:icon="@drawable/arrow_icon"
+        android:title="@string/location_bottom_tab_text"/>
+    <item
+        android:id="@+id/settings"
+        android:enabled="true"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/preference_bottom_tab_text"/>
+</menu>

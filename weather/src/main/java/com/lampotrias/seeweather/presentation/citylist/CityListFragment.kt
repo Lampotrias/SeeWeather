@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lampotrias.seeweather.databinding.CityListFragmentBinding
 import com.lampotrias.seeweather.presentation.mainscreen.MainScreenFragment
@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CityListFragment : Fragment() {
 
-	private val viewModel: CityListViewModel by viewModels()
+	private val viewModel: CityListViewModel by activityViewModels()
 	private var _binding: CityListFragmentBinding? = null
 	private val binding: CityListFragmentBinding
 		get() = _binding!!

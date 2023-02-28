@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.R
@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
 class MainScreenFragment : Fragment() {
-	private val viewModel: MainScreenViewModel by viewModels()
+	private val viewModel: MainScreenViewModel by activityViewModels()
 	private var _binding: MainScreenFragmentBinding? = null
 	private val binding: MainScreenFragmentBinding
 		get() = _binding!!
