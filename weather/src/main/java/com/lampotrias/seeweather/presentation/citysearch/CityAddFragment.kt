@@ -9,7 +9,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lampotrias.seeweather.databinding.CityFragmentBinding
+import com.lampotrias.seeweather.databinding.CityAddFragmentBinding
 import com.lampotrias.seeweather.domain.model.LocationModel
 import com.lampotrias.seeweather.presentation.citysearch.list.CityAdapter
 import com.lampotrias.seeweather.presentation.citysearch.list.CityListener
@@ -17,11 +17,11 @@ import com.lampotrias.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CityFragment : Fragment() {
+class CityAddFragment : Fragment() {
 
 	private val viewModel: CityViewModel by activityViewModels()
-	private var _binding: CityFragmentBinding? = null
-	private val binding: CityFragmentBinding
+	private var _binding: CityAddFragmentBinding? = null
+	private val binding: CityAddFragmentBinding
 		get() = _binding!!
 
 	private val citiesAdapter = CityAdapter(object : CityListener {
@@ -36,7 +36,7 @@ class CityFragment : Fragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		_binding = CityFragmentBinding.inflate(layoutInflater)
+		_binding = CityAddFragmentBinding.inflate(layoutInflater)
 		binding.citiesList.layoutManager = LinearLayoutManager(requireContext())
 		binding.citiesList.adapter = citiesAdapter
 
