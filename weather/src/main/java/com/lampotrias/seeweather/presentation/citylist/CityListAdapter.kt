@@ -45,12 +45,16 @@ class CityListAdapter(
 	) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(cityModel: CityModel) {
 			binding.name.text = cityModel.name
-			binding.actionDelete.setOnClickListener {
-				onRemove(cityModel)
-			}
-			binding.actionSelect.setOnClickListener {
-				onSelect(cityModel)
-			}
+			binding.temp.text = "67C"
+			binding.weatherText.text = "Hazy sunshine"
+			binding.time.text = "25 февраля 18:33"
+
+//			binding.actionDelete.setOnClickListener {
+//				onRemove(cityModel)
+//			}
+//			binding.actionSelect.setOnClickListener {
+//				onSelect(cityModel)
+//			}
 		}
 	}
 
