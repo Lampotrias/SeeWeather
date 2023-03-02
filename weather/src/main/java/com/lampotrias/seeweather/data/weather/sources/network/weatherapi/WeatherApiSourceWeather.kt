@@ -2,7 +2,7 @@ package com.lampotrias.seeweather.data.weather.sources.network.weatherapi
 
 import com.lampotrias.seeweather.data.weather.WeatherDataSource
 import com.lampotrias.seeweather.data.weather.model.CurrentWeatherEntity
-import com.lampotrias.seeweather.data.weather.model.GeneralEntityWeatherModel
+import com.lampotrias.seeweather.data.weather.model.GeneralWeatherEntity
 import com.lampotrias.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import com.lampotrias.seeweather.data.weather.sources.database.model.ServerSyncTable
 import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.ErrorModel
@@ -28,7 +28,7 @@ class WeatherApiSourceWeather @Inject constructor(
 	private val okHttpClient = OkHttpClient()
 	private val defaultDispatcher = Dispatchers.IO
 
-	override suspend fun getDataWeather(requestModel: RequestModel): Result<GeneralEntityWeatherModel> {
+	override suspend fun getDataWeather(requestModel: RequestModel): Result<GeneralWeatherEntity> {
 		return withContext(defaultDispatcher) {
 			val url =
 				"http://api.weatherapi.com/v1/forecast.json?key=$KEY&q=${requestModel.city}&days=10"
@@ -97,7 +97,7 @@ class WeatherApiSourceWeather @Inject constructor(
 						)
 
 						return@withContext Result.success(
-							GeneralEntityWeatherModel(
+							GeneralWeatherEntity(
 								currentWeather,
 								days.map { it.toEntity() },
 								hours.map { it.toEntity() }

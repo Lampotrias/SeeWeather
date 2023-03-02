@@ -2,11 +2,7 @@ package com.lampotrias.seeweather.data.weather.model
 
 import android.net.Uri
 import com.lampotrias.seeweather.domain.WindDirection
-import com.lampotrias.seeweather.domain.model.CurrentWeatherModel
-import com.lampotrias.seeweather.domain.model.DayWeatherModel
-import com.lampotrias.seeweather.domain.model.GeneralWeatherModel
-import com.lampotrias.seeweather.domain.model.HourWeatherModel
-import com.lampotrias.seeweather.domain.model.RequestModel
+import com.lampotrias.seeweather.domain.model.*
 import com.lampotrias.seeweather.utils.MeasureUtils
 import com.lampotrias.seeweather.utils.Settings
 import com.lampotrias.seeweather.utils.Utils
@@ -14,7 +10,7 @@ import com.lampotrias.seeweather.utils.Utils
 object EntityMapper {
 	fun toDomainModel(
 		requestModel: RequestModel,
-		entity: GeneralEntityWeatherModel
+		entity: GeneralWeatherEntity
 	): GeneralWeatherModel {
 
 		val currentSec = System.currentTimeMillis() / 1000
