@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.lampotrias.seeweather.domain.ICityStoredRepository
 import com.lampotrias.seeweather.domain.WeatherRepository
 import com.lampotrias.seeweather.domain.model.CityModel
-import com.lampotrias.seeweather.domain.model.GeneralWeatherModel
+import com.lampotrias.seeweather.domain.model.WeatherForecastModel
 import com.lampotrias.seeweather.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor(
 	private val savedStateHandle: SavedStateHandle,
 	private val weatherRepository: WeatherRepository,
-	private val cityRepositoryStoredRepository: ICityStoredRepository
+	private val cityStoredRepository: ICityStoredRepository
 ) : ViewModel() {
 
 	private val _uiState: MutableStateFlow<State> = MutableStateFlow(State.INITIAL)
@@ -28,7 +28,7 @@ class MainScreenViewModel @Inject constructor(
 
 	fun loadLastCity() {
 		viewModelScope.launch {
-			cityRepositoryStoredRepository.getLastCity()?.let { city ->
+			cityStoredRepository.getLastCity()?.let { city ->
 				sendRequest(city)
 			}
 		}
@@ -38,7 +38,7 @@ class MainScreenViewModel @Inject constructor(
 		Utils.log("start request0: $cityId")
 		viewModelScope.launch {
 			Utils.log("start request1: $cityId")
-			cityRepositoryStoredRepository.getCityById(cityId)?.let {
+			cityStoredRepository.getCityById(cityId)?.let {
 				sendRequest(it)
 			}
 		}
@@ -52,7 +52,7 @@ class MainScreenViewModel @Inject constructor(
 			val result = withContext(Dispatchers.IO) {
 				val requestModel = Utils.makeRequestModel(city)
 				Utils.log("start request1: $requestModel")
-				weatherRepository.getWeather(requestModel)
+				weatherRepository.getWeatherForecast(requestModel)
 			}
 			Utils.log("after request")
 			result.fold({
@@ -67,6 +67,6 @@ class MainScreenViewModel @Inject constructor(
 
 sealed class State {
 	object INITIAL : State()
-	class SuccessResult(val city: String, val result: GeneralWeatherModel) : State()
+	class SuccessResult(val city: String, val result: WeatherForecastModel) : State()
 	class ErrorResult(val e: Throwable) : State()
 }

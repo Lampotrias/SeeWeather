@@ -21,7 +21,7 @@ object WeatherRepoModelMapper {
 	fun toGeneralDomainModel(
 		requestModel: RequestModel,
 		entity: GeneralWeatherEntity
-	): GeneralWeatherModel {
+	): WeatherForecastModel {
 
 		val currentSec = System.currentTimeMillis() / 1000
 		val rawHours = entity.hours.map { toHourDomainModel(it, requestModel) }
@@ -33,7 +33,7 @@ object WeatherRepoModelMapper {
 			emptyList()
 		}
 
-		return GeneralWeatherModel(
+		return WeatherForecastModel(
 			toCurrentWeatherDomainModel(requestModel, entity.currentWeatherModel),
 			entity.days.map { toDayDomainModel(it, requestModel) },
 			rawHours,
