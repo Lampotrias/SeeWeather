@@ -4,11 +4,8 @@ import android.net.Uri
 import com.lampotrias.seeweather.domain.WindDirection
 
 data class CurrentWeatherModel(
-//	val lastUpdateLocal: Long = 0L,
-//	val lastUpdateRemote: Long = 0L,
 	val temp: Int = 0,
 	val textStatus: String = "",
-	val city: String = "",
 	val icon: Uri? = null,
 	val windPower: Int = 0,
 	val windDirection: WindDirection,

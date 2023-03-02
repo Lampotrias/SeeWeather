@@ -7,8 +7,6 @@ import com.lampotrias.seeweather.domain.ICityStoredRepository
 import com.lampotrias.seeweather.domain.WeatherRepository
 import com.lampotrias.seeweather.domain.model.CityModel
 import com.lampotrias.seeweather.domain.model.GeneralWeatherModel
-import com.lampotrias.seeweather.domain.model.RequestModel
-import com.lampotrias.seeweather.utils.Settings
 import com.lampotrias.seeweather.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -36,22 +34,25 @@ class MainScreenViewModel @Inject constructor(
 		}
 	}
 
+	fun sendRequest(cityId: Int) {
+		Utils.log("start request0: $cityId")
+		viewModelScope.launch {
+			Utils.log("start request1: $cityId")
+			cityRepositoryStoredRepository.getCityById(cityId)?.let {
+				sendRequest(it)
+			}
+		}
+	}
+
 	fun sendRequest(city: CityModel) {
 		Utils.log("start request0: $city")
 		viewModelScope.launch {
 			Utils.log("start request1: $city")
 
 			val result = withContext(Dispatchers.IO) {
-				val requestModel = RequestModel(
-					1,
-					getCoordinatesString(city),
-					"ru",
-					Settings.tempMeasure,
-					Settings.speedMeasure
-				)
+				val requestModel = Utils.makeRequestModel(city)
 				Utils.log("start request1: $requestModel")
 				weatherRepository.getWeather(requestModel)
-
 			}
 			Utils.log("after request")
 			result.fold({
@@ -61,10 +62,6 @@ class MainScreenViewModel @Inject constructor(
 				_uiState.value = State.ErrorResult(it)
 			}
 		}
-	}
-
-	private fun getCoordinatesString(city: CityModel): String {
-		return "${city.latitude},${city.longitude}"
 	}
 }
 

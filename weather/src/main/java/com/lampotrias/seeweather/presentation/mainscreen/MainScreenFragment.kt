@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.databinding.MainScreenFragmentBinding
-import com.lampotrias.seeweather.domain.model.CityModel
 import com.lampotrias.seeweather.presentation.citylist.CityListFragment
 import com.lampotrias.seeweather.presentation.citysearch.CityAddFragment
 import com.lampotrias.seeweather.presentation.mainscreen.daylist.DayListAdapter
@@ -37,8 +36,10 @@ class MainScreenFragment : Fragment() {
 
 		setFragmentResultListener(RESULT_KEY_FROM_CITY_LIST) {requestKey, bundle ->
 			if (requestKey == RESULT_KEY_FROM_CITY_LIST) {
-				val city = bundle.getParcelable<CityModel>(BUNDLE_KEY_CITY) ?: return@setFragmentResultListener
-				viewModel.sendRequest(city)
+				val city = bundle.getInt(BUNDLE_KEY_CITY_ID)
+				if (city > 0) {
+					viewModel.sendRequest(city)
+				}
 			}
 		}
 	}
@@ -133,7 +134,7 @@ class MainScreenFragment : Fragment() {
 	companion object {
 		const val RESULT_KEY_FROM_CITY_LIST = "RESULT_KEY_FROM_CITY_LIST"
 		const val REQUEST_KEY_RELOAD_WITH_CITY = "REQUEST_KEY_RELOAD_WITH_CITY"
-		const val BUNDLE_KEY_CITY = "BUNDLE_KEY_CITY"
+		const val BUNDLE_KEY_CITY_ID = "BUNDLE_KEY_CITY_ID"
 	}
 }
 

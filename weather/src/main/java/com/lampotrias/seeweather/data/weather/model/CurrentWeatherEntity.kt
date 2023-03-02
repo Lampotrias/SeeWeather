@@ -4,6 +4,7 @@ data class CurrentWeatherEntity(
 	var cityId: Int = 0,
 	var date: Long = 0,
 	var tempC: Int = 0,
+	val localTime: Long = 0L,
 	var icon: String = "",
 	var text: String = "",
 	val windPowerKph: Int = 0,

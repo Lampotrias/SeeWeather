@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.databinding.CityListItemBinding
-import com.lampotrias.seeweather.domain.model.CityModel
+import java.text.SimpleDateFormat
 
 class CityListAdapter(
-	private val onRemove: (CityModel) -> Unit,
-	private val onSelect: (CityModel) -> Unit
+	private val onRemove: (CityAdapterModel) -> Unit,
+	private val onSelect: (CityAdapterModel) -> Unit
 ) : RecyclerView.Adapter<CityListAdapter.ViewHolder>() {
 
-	private val items = mutableListOf<CityModel>()
+	private val items = mutableListOf<CityAdapterModel>()
 
-	fun setItems(items: List<CityModel>) {
+	fun setItems(items: List<CityAdapterModel>) {
 		this.items.clear()
 		this.items.addAll(items)
 		notifyDataSetChanged()
@@ -27,34 +27,32 @@ class CityListAdapter(
 				parent,
 				false
 			),
-			onRemove, onSelect
+			onRemove
 		)
 	}
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = items[position]
+
 		holder.bind(item)
+		holder.itemView.setOnClickListener {
+			onSelect(item)
+		}
 	}
 
 	override fun getItemCount(): Int = items.size
 
 	class ViewHolder(
 		private val binding: CityListItemBinding,
-		private val onRemove: (CityModel) -> Unit,
-		private val onSelect: (CityModel) -> Unit
+		private val onRemove: (CityAdapterModel) -> Unit
 	) : RecyclerView.ViewHolder(binding.root) {
-		fun bind(cityModel: CityModel) {
-			binding.name.text = cityModel.name
-			binding.temp.text = "67C"
-			binding.weatherText.text = "Hazy sunshine"
-			binding.time.text = "25 февраля 18:33"
+		private val dateFormat = SimpleDateFormat.getDateTimeInstance()
 
-//			binding.actionDelete.setOnClickListener {
-//				onRemove(cityModel)
-//			}
-//			binding.actionSelect.setOnClickListener {
-//				onSelect(cityModel)
-//			}
+		fun bind(cityModel: CityAdapterModel) {
+			binding.name.text = cityModel.name
+			binding.temp.text = cityModel.temp.toString()
+			binding.weatherText.text = cityModel.textStatus
+			binding.time.text = dateFormat.format(cityModel.time * 1000)
 		}
 	}
 

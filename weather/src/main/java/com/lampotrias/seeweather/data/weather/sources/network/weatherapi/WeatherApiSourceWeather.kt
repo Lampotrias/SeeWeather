@@ -1,14 +1,13 @@
 package com.lampotrias.seeweather.data.weather.sources.network.weatherapi
 
 import com.lampotrias.seeweather.data.weather.WeatherDataSource
+import com.lampotrias.seeweather.data.weather.model.CurrentShortWeatherEntity
 import com.lampotrias.seeweather.data.weather.model.CurrentWeatherEntity
 import com.lampotrias.seeweather.data.weather.model.GeneralWeatherEntity
+import com.lampotrias.seeweather.data.weather.model.WeatherLocationEntity
 import com.lampotrias.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import com.lampotrias.seeweather.data.weather.sources.database.model.ServerSyncTable
-import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.ErrorModel
-import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.WeatherApiCurrentModel
-import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.WeatherApiDayModel
-import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.WeatherApiHourModel
+import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.*
 import com.lampotrias.seeweather.domain.ResponseException
 import com.lampotrias.seeweather.domain.model.RequestModel
 import com.lampotrias.seeweather.utils.Utils
@@ -144,6 +143,106 @@ class WeatherApiSourceWeather @Inject constructor(
 					)
 				}
 
+			} catch (ex: Exception) {
+				return@withContext Result.failure(ex)
+			}
+		}
+	}
+
+	override suspend fun getShortWeatherData(requestModel: RequestModel): Result<CurrentShortWeatherEntity> {
+		return withContext(defaultDispatcher) {
+
+			val url = "http://api.weatherapi.com/v1/current.json?key=$KEY&q=${requestModel.city}"
+			Utils.log("start network request: $url")
+
+			val request = Request.Builder()
+				.url(url)
+				.build()
+
+			try {
+				val moshi: Moshi = Moshi.Builder().build()
+				val response = okHttpClient.newCall(request).execute()
+				Utils.log("we receive response: $url")
+
+				response.body?.let { responseBody ->
+					val responseData = responseBody.source().readUtf8()
+					if (response.isSuccessful) {
+						Utils.log("response SUCCESS, start parse")
+						val json = JSONObject(responseData)
+
+						val locationWeather: WeatherLocationEntity = if (json.has("location")) {
+							try {
+								val jsonAdapter = moshi.adapter(WeatherApiLocationModel::class.java)
+								val model = jsonAdapter.fromJson(json.getString("location"))
+									?: throw JSONException("1")
+								model.toEntityModel()
+							} catch (ex: JSONException) {
+								ex.printStackTrace()
+								return@withContext Result.failure(ex)
+							}
+						} else {
+							WeatherLocationEntity()
+						}
+
+						val currentWeather: CurrentWeatherEntity = if (json.has("current")) {
+							try {
+								val jsonAdapter = moshi.adapter(WeatherApiCurrentModel::class.java)
+								val model = jsonAdapter.fromJson(json.getString("current"))
+									?: throw JSONException("1")
+								model.toEntityModel(1)
+							} catch (ex: JSONException) {
+								ex.printStackTrace()
+								return@withContext Result.failure(ex)
+							}
+						} else {
+							CurrentWeatherEntity()
+						}
+
+						return@withContext Result.success(
+							CurrentShortWeatherEntity(
+								currentWeather,
+								locationWeather,
+							)
+						)
+					} else {
+					Utils.log("RESPONSE FAIL")
+					val error = when (response.code) {
+						400, 401, 403 -> {
+							try {
+								val json = JSONObject(responseData)
+								if (json.has("error")) {
+									val errorAdapter = moshi.adapter(ErrorModel::class.java)
+									val obj = errorAdapter.fromJson(json.getString("error"))
+									if (obj != null) {
+										ResponseException(obj.code, obj.message)
+									} else {
+										ResponseException(Int.MIN_VALUE, "unknown error")
+									}
+								} else {
+									ResponseException(Int.MIN_VALUE, "unknown error")
+								}
+
+							} catch (ex: JSONException) {
+								ex.printStackTrace()
+								ex
+							}
+						}
+
+						else -> {
+							ResponseException(Int.MIN_VALUE, "unknown error")
+						}
+					}
+					return@withContext Result.failure(error)
+				}
+				} ?: run {
+					Utils.log("response error, empty response")
+					return@withContext Result.failure(
+						ResponseException(
+							Int.MIN_VALUE,
+							"empty response"
+						)
+					)
+				}
 			} catch (ex: Exception) {
 				return@withContext Result.failure(ex)
 			}

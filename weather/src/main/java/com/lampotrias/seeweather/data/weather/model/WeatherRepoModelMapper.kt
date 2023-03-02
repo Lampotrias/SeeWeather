@@ -7,8 +7,18 @@ import com.lampotrias.seeweather.utils.MeasureUtils
 import com.lampotrias.seeweather.utils.Settings
 import com.lampotrias.seeweather.utils.Utils
 
-object EntityMapper {
-	fun toDomainModel(
+object WeatherRepoModelMapper {
+	fun toShortDomainModel(
+		requestModel: RequestModel,
+		entity: CurrentShortWeatherEntity
+	): CurrentShortWeatherModel {
+		return CurrentShortWeatherModel(
+			toCurrentWeatherDomainModel(requestModel, entity.currentWeatherEntity),
+			toWeatherLocationDomainModel(entity.weatherLocationEntity)
+		)
+	}
+
+	fun toGeneralDomainModel(
 		requestModel: RequestModel,
 		entity: GeneralWeatherEntity
 	): GeneralWeatherModel {
@@ -24,16 +34,26 @@ object EntityMapper {
 		}
 
 		return GeneralWeatherModel(
-			toCurrentWeatherDomainModel(entity.currentWeatherModel, requestModel),
+			toCurrentWeatherDomainModel(requestModel, entity.currentWeatherModel),
 			entity.days.map { toDayDomainModel(it, requestModel) },
 			rawHours,
 			targetHours
 		)
 	}
 
+	private fun toWeatherLocationDomainModel(
+		entity: WeatherLocationEntity,
+	): WeatherLocationModel {
+		return WeatherLocationModel(
+			name = entity.name,
+			region = entity.region,
+			country = entity.country,
+			localtime = entity.localtime
+		)
+	}
 	private fun toCurrentWeatherDomainModel(
-		entity: CurrentWeatherEntity,
 		requestModel: RequestModel,
+		entity: CurrentWeatherEntity,
 	): CurrentWeatherModel {
 		Utils.log("cur weather from: $entity}")
 		return CurrentWeatherModel(
@@ -41,7 +61,6 @@ object EntityMapper {
 				entity.tempC
 			),
 			textStatus = entity.text,
-			city = requestModel.city,
 			icon = Uri.parse(entity.icon),
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph

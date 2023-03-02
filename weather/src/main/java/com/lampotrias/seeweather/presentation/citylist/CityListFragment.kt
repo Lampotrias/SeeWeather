@@ -47,7 +47,7 @@ class CityListFragment : Fragment() {
 				state.selectCity?.getContentIfNotHandled()?.let { selectedCity ->
 					setFragmentResult(
 						MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, bundleOf(
-						MainScreenFragment.BUNDLE_KEY_CITY to selectedCity
+						MainScreenFragment.BUNDLE_KEY_CITY_ID to selectedCity.id
 					))
 					parentFragmentManager.popBackStack()
 				}
