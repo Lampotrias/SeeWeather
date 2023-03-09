@@ -17,6 +17,7 @@ import com.lampotrias.seeweather.presentation.citysearch.CityAddFragment
 import com.lampotrias.seeweather.presentation.mainscreen.daylist.DayListAdapter
 import com.lampotrias.seeweather.presentation.mainscreen.hourslist.HoursAdapter
 import com.lampotrias.seeweather.presentation.settngs.SettingsFragment
+import com.lampotrias.seeweather.utils.Utils
 import com.lampotrias.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -103,7 +104,14 @@ class MainScreenFragment : Fragment() {
 						selectedCity.text = state.city
 						currentTemp.text = state.result.currentWeatherModel.temp.toString()
 						weatherDescription.text = state.result.currentWeatherModel.textStatus
-						weatherImage.setImageURI(state.result.currentWeatherModel.icon)
+
+						Utils.applyWeatherConditionIcon(
+							weatherImage,
+							state.result.currentWeatherModel.isDay,
+							state.result.currentWeatherModel.weatherConditions,
+							state.result.currentWeatherModel.weatherIcon
+						)
+
 						tempMax.text = state.result.days[0].tempMax.toString()
 						tempMin.text = state.result.days[0].tempMin.toString()
 						sunset.text = sunDateFormatter.format(state.result.days[0].sunset)

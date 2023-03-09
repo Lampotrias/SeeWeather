@@ -40,13 +40,13 @@
             tools:text="22 january, 22:22" />
 
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/weather_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@null"
-            android:src="@drawable/ic_w_snowy"
+            tools:src="@drawable/ic_w_snowy"
             app:layout_constraintBottom_toBottomOf="@+id/temp"
             app:layout_constraintEnd_toStartOf="@id/temp"
             app:layout_constraintTop_toTopOf="@+id/temp" />

@@ -1,6 +1,7 @@
 package com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model
 
 import com.lampotrias.seeweather.data.weather.model.CurrentWeatherEntity
+import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlin.math.roundToInt
@@ -34,16 +35,17 @@ class WeatherApiCurrentModel {
 	@Json(name = "wind_kph")
 	var windKph: Float = 0f
 
-	fun toEntityModel(cityId: Int): CurrentWeatherEntity {
+	fun toEntityModel(weatherConditions: WeatherConditions?): CurrentWeatherEntity {
 		return CurrentWeatherEntity(
-			cityId = cityId,
 			date = lastUpdate,
 			tempC = tempC.roundToInt(),
-			icon = "https://${condition.icon}",
+			iconUri = "https://${condition.icon}",
+			weatherConditions = weatherConditions,
 			text = condition.text,
 			windPowerKph = windKph.roundToInt(),
 			windDir = windDirection,
 			humidity = humidity,
+			isDay = isDay > 0,
 			pressure = pressureMb
 		)
 	}

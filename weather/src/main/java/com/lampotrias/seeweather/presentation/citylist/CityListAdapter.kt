@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.databinding.CityListItemBinding
+import com.lampotrias.seeweather.utils.Utils
 import java.text.SimpleDateFormat
 
 class CityListAdapter(
@@ -53,6 +54,13 @@ class CityListAdapter(
 			binding.temp.text = cityModel.temp.toString()
 			binding.weatherText.text = cityModel.textStatus
 			binding.time.text = dateFormat.format(cityModel.time * 1000)
+
+			Utils.applyWeatherConditionIcon(
+				binding.weatherImage,
+				cityModel.isDay,
+				cityModel.weatherConditions,
+				cityModel.weatherIcon
+			)
 		}
 	}
 

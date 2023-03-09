@@ -60,8 +60,10 @@ object WeatherRepoModelMapper {
 			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(
 				entity.tempC
 			),
+			isDay = entity.isDay,
+			weatherConditions = entity.weatherConditions,
 			textStatus = entity.text,
-			icon = Uri.parse(entity.icon),
+			weatherIcon = Uri.parse(entity.iconUri),
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph
 			),
@@ -100,6 +102,8 @@ object WeatherRepoModelMapper {
 		return HourWeatherModel(
 			icon = entity.icon,
 			date = entity.date,
+			isDay = entity.isDay,
+			weatherConditions = entity.weatherConditions,
 			temp = if (requestModel.tempUnit == Settings.Temp.C) {
 				entity.tempC
 			} else {

@@ -1,10 +1,7 @@
 package com.lampotrias.seeweather.data.weather.sources.network.weatherapi
 
 import com.lampotrias.seeweather.data.weather.WeatherDataSource
-import com.lampotrias.seeweather.data.weather.model.CurrentShortWeatherEntity
-import com.lampotrias.seeweather.data.weather.model.CurrentWeatherEntity
-import com.lampotrias.seeweather.data.weather.model.GeneralWeatherEntity
-import com.lampotrias.seeweather.data.weather.model.WeatherLocationEntity
+import com.lampotrias.seeweather.data.weather.model.*
 import com.lampotrias.seeweather.data.weather.sources.database.dao.ServerSyncStatusDao
 import com.lampotrias.seeweather.data.weather.sources.database.model.ServerSyncTable
 import com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model.*
@@ -21,7 +18,7 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 class WeatherApiSourceWeather @Inject constructor(
-	private val serverSyncStatusDao: ServerSyncStatusDao
+	private val serverSyncStatusDao: ServerSyncStatusDao,
 ) : WeatherDataSource {
 
 	private val okHttpClient = OkHttpClient()
@@ -50,13 +47,14 @@ class WeatherApiSourceWeather @Inject constructor(
 							try {
 								val jsonAdapter = moshi.adapter(WeatherApiCurrentModel::class.java)
 								val model = jsonAdapter.fromJson(json.getString("current")) ?: throw JSONException("1")
-								model.toEntityModel(1)
+								val weatherConditions = getIcon(model.condition.code)
+								model.toEntityModel(weatherConditions)
 							} catch (ex: JSONException) {
 								ex.printStackTrace()
 								return@withContext Result.failure(ex)
 							}
 						} else {
-							CurrentWeatherEntity()
+							throw ResponseException(Int.MIN_VALUE, "key `current` not found")
 						}
 
 						val days = mutableListOf<WeatherApiDayModel>()
@@ -99,7 +97,7 @@ class WeatherApiSourceWeather @Inject constructor(
 							GeneralWeatherEntity(
 								currentWeather,
 								days.map { it.toEntity() },
-								hours.map { it.toEntity() }
+								hours.map { it.toEntity(getIcon(it.condition.code)) }
 							)
 						)
 
@@ -189,13 +187,14 @@ class WeatherApiSourceWeather @Inject constructor(
 								val jsonAdapter = moshi.adapter(WeatherApiCurrentModel::class.java)
 								val model = jsonAdapter.fromJson(json.getString("current"))
 									?: throw JSONException("1")
-								model.toEntityModel(1)
+								val weatherConditions = getIcon(model.condition.code)
+								model.toEntityModel(weatherConditions)
 							} catch (ex: JSONException) {
 								ex.printStackTrace()
 								return@withContext Result.failure(ex)
 							}
 						} else {
-							CurrentWeatherEntity()
+							throw ResponseException(Int.MIN_VALUE, "key `current` not found")
 						}
 
 						return@withContext Result.success(
@@ -246,6 +245,62 @@ class WeatherApiSourceWeather @Inject constructor(
 			} catch (ex: Exception) {
 				return@withContext Result.failure(ex)
 			}
+		}
+	}
+
+	override suspend fun getIcon(conditions: Any?): WeatherConditions? {
+
+		// TODO Логировать исключения по несуществующим кодам
+		return when (conditions?.toString()){
+			"1000" -> WeatherConditions.SunnyClear
+			"1003" -> WeatherConditions.PartlyCloudy
+			"1006" -> WeatherConditions.Cloudy
+			"1009" -> WeatherConditions.Overcast
+			"1030" -> WeatherConditions.Mist
+			"1063" -> WeatherConditions.PatchyRainPossible
+			"1066" -> WeatherConditions.PatchySnowPossible
+			"1069" -> WeatherConditions.PatchySleetPossible
+			"1072" -> WeatherConditions.PatchyFreezingDrizzlePossible
+			"1087" -> WeatherConditions.ThunderyOutbreaksPossible
+			"1114" -> WeatherConditions.BlowingSnow
+			"1117" -> WeatherConditions.Blizzard
+			"1135" -> WeatherConditions.Fog
+			"1147" -> WeatherConditions.FreezingFog
+			"1150" -> WeatherConditions.PatchyLightDrizzle
+			"1153" -> WeatherConditions.LightDrizzle
+			"1168" -> WeatherConditions.FreezingDrizzle
+			"1171" -> WeatherConditions.HeavyFreezingDrizzle
+			"1180" -> WeatherConditions.PatchyLightRain
+			"1183" -> WeatherConditions.LightRain
+			"1186" -> WeatherConditions.ModerateRainAtTimes
+			"1189" -> WeatherConditions.ModerateRain
+			"1192" -> WeatherConditions.HeavyRainAtTimes
+			"1195" -> WeatherConditions.HeavyRain
+			"1198" -> WeatherConditions.LightFreezingRain
+			"1201" -> WeatherConditions.ModerateOrHeavyFreezingRain
+			"1204" -> WeatherConditions.LightSleet
+			"1207" -> WeatherConditions.ModerateOrHeavySleet
+			"1210" -> WeatherConditions.PatchyLightSnow
+			"1213" -> WeatherConditions.LightSnow
+			"1216" -> WeatherConditions.PatchyModerateSnow
+			"1219" -> WeatherConditions.ModerateSnow
+			"1222" -> WeatherConditions.PatchyHeavySnow
+			"1225" -> WeatherConditions.HeavySnow
+			"1237" -> WeatherConditions.IcePellets
+			"1240" -> WeatherConditions.LightRainShower
+			"1243" -> WeatherConditions.ModerateOrHeavyRainShower
+			"1246" -> WeatherConditions.TorrentialRainShower
+			"1249" -> WeatherConditions.LightSleetShowers
+			"1252" -> WeatherConditions.ModerateOrHeavySleetShowers
+			"1255" -> WeatherConditions.LightSnowShowers
+			"1258" -> WeatherConditions.ModerateOrHeavySnowShowers
+			"1261" -> WeatherConditions.LightShowersOfIcePellets
+			"1264" -> WeatherConditions.ModerateOrHeavyShowersOfIcePellets
+			"1273" -> WeatherConditions.PatchyLightRainWithThunder
+			"1276" -> WeatherConditions.ModerateOrHeavyRainWithThunder
+			"1279" -> WeatherConditions.PatchyLightSnowWithThunder
+			"1282" -> WeatherConditions.ModerateOrHeavySnowWithThunder
+			else -> null
 		}
 	}
 

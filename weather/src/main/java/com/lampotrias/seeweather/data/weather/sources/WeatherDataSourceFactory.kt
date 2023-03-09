@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Singleton
 class WeatherDataSourceFactory @Inject constructor(
 	private val cacheWeather: CacheWeather,
-	private val serverSyncStatusDao: ServerSyncStatusDao
+	private val serverSyncStatusDao: ServerSyncStatusDao,
 ) {
 	fun create(requestModel: RequestModel): WeatherDataSource {
 		if (cacheWeather.isExpired(requestModel.serverId)) {

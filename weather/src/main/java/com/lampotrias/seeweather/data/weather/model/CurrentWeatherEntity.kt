@@ -1,12 +1,13 @@
 package com.lampotrias.seeweather.data.weather.model
 
 data class CurrentWeatherEntity(
-	var cityId: Int = 0,
-	var date: Long = 0,
-	var tempC: Int = 0,
+	val date: Long = 0,
+	val tempC: Int = 0,
 	val localTime: Long = 0L,
-	var icon: String = "",
-	var text: String = "",
+	var iconUri: String = "",
+	val isDay: Boolean,
+	val weatherConditions: WeatherConditions? = null,
+	val text: String = "",
 	val windPowerKph: Int = 0,
 	val windDir: String = "",
 	val pressure: Float = 0f,
