@@ -87,7 +87,6 @@ class WeatherApiSourceWeather @Inject constructor(
 
 						serverSyncStatusDao.updateStatus(
 							ServerSyncTable(
-								requestModel.serverId,
 								json.getJSONObject("location").getLong("localtime_epoch"),
 								currentWeather.date
 							)

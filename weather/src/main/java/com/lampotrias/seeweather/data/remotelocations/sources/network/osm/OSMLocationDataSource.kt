@@ -32,15 +32,15 @@ class OSMLocationDataSource @Inject constructor() : LocationDataSource {
 						val name = props.optString("name")
 						val label = props.optString("label")
 						val geometry = json.getJSONObject("geometry").optJSONArray("coordinates")
-						val latitude = geometry?.getDouble(0) ?: 0.0
-						val longitude = geometry?.getDouble(1) ?: 0.0
+						val latitude = geometry?.getDouble(1) ?: 0.0
+						val longitude = geometry?.getDouble(0) ?: 0.0
 						locations.add(
 							LocationEntity(
-								id,
-								name,
-								label,
-								latitude.toFloat(),
-								longitude.toFloat()
+								id = id,
+								name = name,
+								fullName = label,
+								latitude = latitude.toFloat(),
+								longitude = longitude.toFloat()
 							)
 						)
 					}

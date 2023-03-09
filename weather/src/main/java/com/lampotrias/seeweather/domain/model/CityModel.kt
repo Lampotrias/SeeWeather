@@ -25,12 +25,12 @@ data class CityModel(
 
 	fun toEntity(): CityEntity {
 		return CityEntity(
-			id,
-			sort,
-			name,
-			latitude,
-			longitude,
-			isLast
+			id = id,
+			sort = sort,
+			name = name,
+			latitude = latitude,
+			longitude = longitude,
+			isLast = isLast
 		)
 	}
 

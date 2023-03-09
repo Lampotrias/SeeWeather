@@ -18,7 +18,6 @@ object Utils {
 
 	fun makeRequestModel(city: CityModel): RequestModel {
 		return RequestModel(
-			1,
 			getCoordinatesString(city),
 			"ru",
 			Settings.tempMeasure,

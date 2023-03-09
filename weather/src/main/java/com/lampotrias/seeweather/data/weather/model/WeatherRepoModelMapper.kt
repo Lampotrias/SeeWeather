@@ -48,7 +48,8 @@ object WeatherRepoModelMapper {
 			name = entity.name,
 			region = entity.region,
 			country = entity.country,
-			localtime = entity.localtime
+			localtime = entity.localtime,
+			timeZone = entity.timeZone
 		)
 	}
 	private fun toCurrentWeatherDomainModel(

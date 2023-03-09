@@ -68,7 +68,8 @@ class CityListViewModel @Inject constructor(
 							sort = cityModel.sort,
 							isDay = it.currentWeatherModel.isDay,
 							weatherConditions = it.currentWeatherModel.weatherConditions,
-							weatherIcon = it.currentWeatherModel.weatherIcon
+							weatherIcon = it.currentWeatherModel.weatherIcon,
+							timeZone = it.weatherLocationModel.timeZone
 						)
 					}
 				}

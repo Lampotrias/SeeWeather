@@ -50,6 +50,9 @@ class CityListAdapter(
 		private val dateFormat = SimpleDateFormat.getDateTimeInstance()
 
 		fun bind(cityModel: CityAdapterModel) {
+			cityModel.timeZone?.let {
+				dateFormat.timeZone = it
+			}
 			binding.name.text = cityModel.name
 			binding.temp.text = cityModel.temp.toString()
 			binding.weatherText.text = cityModel.textStatus

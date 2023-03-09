@@ -15,11 +15,11 @@ class WeatherDataSourceFactory @Inject constructor(
 	private val serverSyncStatusDao: ServerSyncStatusDao,
 ) {
 	fun create(requestModel: RequestModel): WeatherDataSource {
-		if (cacheWeather.isExpired(requestModel.serverId)) {
-			Log.e("Weather", "cache expired")
-		} else {
-			Log.e("Weather", "cache NOT expired")
-		}
+//		if (cacheWeather.isExpired(requestModel.serverId)) {
+//			Log.e("Weather", "cache expired")
+//		} else {
+//			Log.e("Weather", "cache NOT expired")
+//		}
 
 		if (cacheWeather.isExists()) {
 			Log.e("Weather", "cache exists")
