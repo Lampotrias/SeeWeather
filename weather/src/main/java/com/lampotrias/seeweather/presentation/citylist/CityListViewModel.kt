@@ -36,6 +36,10 @@ class CityListViewModel @Inject constructor(
 	}
 
 	fun selectCity(cityModel: CityAdapterModel) {
+		viewModelScope.launch {
+			storedCityRepository.setLastCity(cityModel.id)
+		}
+
 		_uiState.update {
 			it.copy(
 				selectCity = OneShotEvent(cityModel)
