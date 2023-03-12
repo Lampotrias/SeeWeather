@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lampotrias.seeweather.databinding.CityListFragmentBinding
 import com.lampotrias.seeweather.presentation.mainscreen.MainScreenFragment
@@ -45,11 +44,10 @@ class CityListFragment : Fragment() {
 				adapter.setItems(state.cities)
 
 				state.selectCity?.getContentIfNotHandled()?.let { selectedCity ->
-					setFragmentResult(
+					activity?.supportFragmentManager?.setFragmentResult(
 						MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, bundleOf(
 						MainScreenFragment.BUNDLE_KEY_CITY_ID to selectedCity.id
 					))
-					parentFragmentManager.popBackStack()
 				}
 			}
 		}

@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lampotrias.seeweather.databinding.ActivityMainBinding
+import com.lampotrias.seeweather.presentation.mainscreen.MainScreenFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +46,16 @@ class WeatherActivity : AppCompatActivity() {
 				}
 			}
 		}
+
+		supportFragmentManager.setFragmentResultListener(MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, this) { requestKey, bundle ->
+			if (requestKey == MainScreenFragment.RESULT_KEY_FROM_CITY_LIST) {
+				val city = bundle.getInt(MainScreenFragment.BUNDLE_KEY_CITY_ID)
+				if (city > 0) {
+					binding.bottomNavigation.selectedItemId = R.id.current_weather
+				}
+			}
+		}
+
 	}
 
 	override fun onBackPressed() {

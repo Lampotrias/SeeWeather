@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.R
@@ -34,15 +33,6 @@ class MainScreenFragment : Fragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-
-		setFragmentResultListener(RESULT_KEY_FROM_CITY_LIST) {requestKey, bundle ->
-			if (requestKey == RESULT_KEY_FROM_CITY_LIST) {
-				val city = bundle.getInt(BUNDLE_KEY_CITY_ID)
-				if (city > 0) {
-					viewModel.sendRequest(city)
-				}
-			}
-		}
 	}
 
 	override fun onCreateView(
