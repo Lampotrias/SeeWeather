@@ -7,11 +7,13 @@ import com.lampotrias.seeweather.domain.ICityStoredRepository
 import com.lampotrias.seeweather.domain.WeatherRepository
 import com.lampotrias.seeweather.domain.model.CityModel
 import com.lampotrias.seeweather.domain.model.WeatherForecastModel
+import com.lampotrias.seeweather.utils.OneShotEvent
 import com.lampotrias.seeweather.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -23,10 +25,13 @@ class MainScreenViewModel @Inject constructor(
 	private val cityStoredRepository: ICityStoredRepository
 ) : ViewModel() {
 
-	private val _uiState: MutableStateFlow<State> = MutableStateFlow(State.INITIAL)
-	val uiState: StateFlow<State> = _uiState
+	private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(MainUiState())
+	val uiState: StateFlow<MainUiState> = _uiState
 
 	fun loadLastCity() {
+		_uiState.update {
+			it.copy(isLoading = true)
+		}
 		viewModelScope.launch {
 			cityStoredRepository.getLastCity()?.let { city ->
 				sendRequest(city)
@@ -55,15 +60,32 @@ class MainScreenViewModel @Inject constructor(
 				weatherRepository.getWeatherForecast(requestModel)
 			}
 			Utils.log("after request")
-			result.fold({
-				Utils.log("cur weather to: $it}")
-				_uiState.value = State.SuccessResult(city.name, it)
-			}) {
-				_uiState.value = State.ErrorResult(it)
+			result.fold({ res ->
+				Utils.log("cur weather to: $res}")
+				_uiState.update {
+					it.copy(
+						isLoading = false,
+						weatherForecastModel = res
+					)
+				}
+			}) { throwable ->
+				_uiState.update {
+					it.copy(
+						isLoading = false,
+						error = OneShotEvent(throwable)
+					)
+				}
 			}
 		}
 	}
 }
+
+data class MainUiState(
+	val isLoading: Boolean = false,
+	val city: String = "",
+	val weatherForecastModel: WeatherForecastModel? = null,
+	val error: OneShotEvent<Throwable>? = null
+)
 
 sealed class State {
 	object INITIAL : State()

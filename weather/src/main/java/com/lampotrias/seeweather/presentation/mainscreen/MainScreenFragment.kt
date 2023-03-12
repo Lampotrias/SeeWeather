@@ -64,6 +64,10 @@ class MainScreenFragment : Fragment() {
 				.commit()
 		}
 
+		binding.swipeRefresh.setOnRefreshListener {
+			viewModel.loadLastCity()
+		}
+
 		binding.actionMap.setOnClickListener {
 			parentFragmentManager
 				.beginTransaction()
@@ -94,38 +98,43 @@ class MainScreenFragment : Fragment() {
 			false
 		)
 
+		val sunDateFormatter = SimpleDateFormat("HH:mm")
+
 		launchAndRepeatWithViewLifecycle {
 			viewModel.uiState.collect { state ->
 
-				val sunDateFormatter = SimpleDateFormat("HH:mm")
+				binding.swipeRefresh.isRefreshing =
+					state.isLoading && !binding.swipeRefresh.isRefreshing
 
-				if (state is State.SuccessResult) {
+				state.error?.getContentIfNotHandled()?.let { error ->
+					Log.e("asdasdas ER", error.toString())
+				}
+
+				state.weatherForecastModel?.let { weather ->
 					with(binding) {
 						selectedCity.text = state.city
-						currentTemp.text = state.result.currentWeatherModel.temp.toString()
-						weatherDescription.text = state.result.currentWeatherModel.textStatus
+						currentTemp.text = weather.currentWeatherModel.temp.toString()
+						weatherDescription.text = weather.currentWeatherModel.textStatus
 
 						Utils.applyWeatherConditionIcon(
 							weatherImage,
-							state.result.currentWeatherModel.isDay,
-							state.result.currentWeatherModel.weatherConditions,
-							state.result.currentWeatherModel.weatherIcon
+							weather.currentWeatherModel.isDay,
+							weather.currentWeatherModel.weatherConditions,
+							weather.currentWeatherModel.weatherIcon
 						)
 
-						tempMax.text = state.result.days[0].tempMax.toString()
-						tempMin.text = state.result.days[0].tempMin.toString()
-						sunset.text = sunDateFormatter.format(state.result.days[0].sunset)
-						sunrise.text = sunDateFormatter.format(state.result.days[0].sunrise)
-						hoursAdapter.setItems(state.result.actualizeHours)
-						daysAdapter.setItems(state.result.days)
-						windPowerValue.text = state.result.currentWeatherModel.windPower.toString()
-						windDirectionValue.text = state.result.currentWeatherModel.windDirection.name
-						pressureValue.text = state.result.currentWeatherModel.pressure.toInt().toString() + " hPa"
-						humidityValue.text = state.result.currentWeatherModel.humidity.toString() + " %"
+						tempMax.text = weather.days[0].tempMax.toString()
+						tempMin.text = weather.days[0].tempMin.toString()
+						sunset.text = sunDateFormatter.format(weather.days[0].sunset)
+						sunrise.text = sunDateFormatter.format(weather.days[0].sunrise)
+						hoursAdapter.setItems(weather.actualizeHours)
+						daysAdapter.setItems(weather.days)
+						windPowerValue.text = weather.currentWeatherModel.windPower.toString()
+						windDirectionValue.text = weather.currentWeatherModel.windDirection.name
+						pressureValue.text = weather.currentWeatherModel.pressure.toInt().toString() + " hPa"
+						humidityValue.text = weather.currentWeatherModel.humidity.toString() + " %"
 					}
-					Log.e("asdasdas OK", state.result.toString())
-				} else if (state is State.ErrorResult) {
-					Log.e("asdasdas ER", state.e.toString())
+					Log.e("asdasdas OK", weather.toString())
 				}
 			}
 		}
