@@ -31,4 +31,6 @@
     <string name="default_bottom_tab_text">Погода</string>
     <string name="location_bottom_tab_text">Локации</string>
     <string name="preference_bottom_tab_text">Настройки</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>

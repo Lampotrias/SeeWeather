@@ -1,8 +1,11 @@
 package com.lampotrias.seeweather.presentation.citylist
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.databinding.CityListItemBinding
 import com.lampotrias.seeweather.utils.Utils
 import java.text.SimpleDateFormat
@@ -14,6 +17,7 @@ class CityListAdapter(
 
 	private val items = mutableListOf<CityAdapterModel>()
 
+	@SuppressLint("NotifyDataSetChanged")
 	fun setItems(items: List<CityAdapterModel>) {
 		this.items.clear()
 		this.items.addAll(items)
@@ -27,8 +31,7 @@ class CityListAdapter(
 				LayoutInflater.from(parent.context),
 				parent,
 				false
-			),
-			onRemove
+			)
 		)
 	}
 
@@ -39,13 +42,26 @@ class CityListAdapter(
 		holder.itemView.setOnClickListener {
 			onSelect(item)
 		}
+
+		holder.itemView.setOnLongClickListener {
+			val deleteDialogBuilder = AlertDialog.Builder(it.context)
+				.setTitle("Do you want delete city?")
+				.setPositiveButton(R.string.ok) { _, _ ->
+					onRemove(item)
+				}
+				.setNegativeButton(R.string.cancel) { _, _ ->
+
+				}
+			deleteDialogBuilder.create().show()
+
+			return@setOnLongClickListener true
+		}
 	}
 
 	override fun getItemCount(): Int = items.size
 
 	class ViewHolder(
-		private val binding: CityListItemBinding,
-		private val onRemove: (CityAdapterModel) -> Unit
+		private val binding: CityListItemBinding
 	) : RecyclerView.ViewHolder(binding.root) {
 		private val dateFormat = SimpleDateFormat.getDateTimeInstance()
 
