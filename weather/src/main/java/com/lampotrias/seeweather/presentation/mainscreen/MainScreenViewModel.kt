@@ -65,6 +65,7 @@ class MainScreenViewModel @Inject constructor(
 				_uiState.update {
 					it.copy(
 						isLoading = false,
+						city = city.name,
 						weatherForecastModel = res
 					)
 				}
