@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CityViewModel @Inject constructor(
+class CityAddModel @Inject constructor(
 	private val locationRepository: ILocationRepo,
 	private val storedCityRepository: ICityStoredRepository
 ) : ViewModel() {

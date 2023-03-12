@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CityAddFragment : Fragment() {
 
-	private val viewModel: CityViewModel by activityViewModels()
+	private val viewModel: CityAddModel by activityViewModels()
 	private var _binding: CityAddFragmentBinding? = null
 	private val binding: CityAddFragmentBinding
 		get() = _binding!!
@@ -43,13 +43,13 @@ class CityAddFragment : Fragment() {
 		launchAndRepeatWithViewLifecycle {
 			viewModel.uiState.collect { state ->
 				when(state) {
-					CityViewModel.State.INITIAL -> {
+					CityAddModel.State.INITIAL -> {
 
 					}
-					is CityViewModel.State.ErrorResult -> {
+					is CityAddModel.State.ErrorResult -> {
 						Toast.makeText(requireContext(), "Error: ${state.e.message}", Toast.LENGTH_SHORT).show()
 					}
-					is CityViewModel.State.SuccessResult -> {
+					is CityAddModel.State.SuccessResult -> {
 						citiesAdapter.setCities(state.result)
 					}
 				}
