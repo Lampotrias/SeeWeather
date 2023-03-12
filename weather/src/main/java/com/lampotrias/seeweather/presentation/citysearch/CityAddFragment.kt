@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,6 +14,7 @@ import com.lampotrias.seeweather.databinding.CityAddFragmentBinding
 import com.lampotrias.seeweather.domain.model.LocationModel
 import com.lampotrias.seeweather.presentation.citysearch.list.CityAdapter
 import com.lampotrias.seeweather.presentation.citysearch.list.CityListener
+import com.lampotrias.seeweather.presentation.mainscreen.MainScreenFragment
 import com.lampotrias.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +29,12 @@ class CityAddFragment : Fragment() {
 	private val citiesAdapter = CityAdapter(object : CityListener {
 		override fun onSelect(city: LocationModel) {
 			viewModel.pickCity(city)
-			parentFragmentManager.popBackStack()
+
+			activity?.supportFragmentManager?.setFragmentResult(
+				MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, bundleOf(
+
+				)
+			)
 		}
 	})
 

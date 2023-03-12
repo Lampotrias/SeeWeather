@@ -49,10 +49,10 @@ class WeatherActivity : AppCompatActivity() {
 
 		supportFragmentManager.setFragmentResultListener(MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, this) { requestKey, bundle ->
 			if (requestKey == MainScreenFragment.RESULT_KEY_FROM_CITY_LIST) {
-				val city = bundle.getInt(MainScreenFragment.BUNDLE_KEY_CITY_ID)
-				if (city > 0) {
+//				val city = bundle.getInt(MainScreenFragment.BUNDLE_KEY_CITY_ID)
+//				if (city > 0) {
 					binding.bottomNavigation.selectedItemId = R.id.current_weather
-				}
+//				}
 			}
 		}
 
