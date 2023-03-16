@@ -30,7 +30,7 @@ class OSMLocationDataSource @Inject constructor() : LocationDataSource {
 						val props = json.getJSONObject("properties").getJSONObject("geocoding")
 						val id = props.optInt("place_id")
 						val name = props.optString("name")
-						val label = props.optString("label")
+						val label = props.optString("label").replace("$name, ", "")
 						val geometry = json.getJSONObject("geometry").optJSONArray("coordinates")
 						val latitude = geometry?.getDouble(1) ?: 0.0
 						val longitude = geometry?.getDouble(0) ?: 0.0
