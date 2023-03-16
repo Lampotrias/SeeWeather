@@ -31,9 +31,7 @@ class CitySearchFragment : Fragment() {
 			viewModel.pickCity(city)
 
 			activity?.supportFragmentManager?.setFragmentResult(
-				MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, bundleOf(
-
-				)
+				MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, bundleOf()
 			)
 		}
 	})

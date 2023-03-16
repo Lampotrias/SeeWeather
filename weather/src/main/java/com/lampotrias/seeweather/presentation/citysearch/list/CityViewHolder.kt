@@ -12,7 +12,7 @@ class CityViewHolder(
 		binding.name.text = city.name
 		binding.fullTitle.text = city.fullName
 
-		binding.actionSelect.setOnClickListener {
+		binding.root.setOnClickListener {
 			listener.onSelect(city)
 		}
 	}
