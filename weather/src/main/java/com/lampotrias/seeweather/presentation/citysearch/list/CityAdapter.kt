@@ -3,7 +3,7 @@ package com.lampotrias.seeweather.presentation.citysearch.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lampotrias.seeweather.databinding.CityItemBinding
+import com.lampotrias.seeweather.databinding.CitySearchItemBinding
 import com.lampotrias.seeweather.domain.model.LocationModel
 
 class CityAdapter(private val listener: CityListener) : RecyclerView.Adapter<CityViewHolder>() {
@@ -16,7 +16,7 @@ class CityAdapter(private val listener: CityListener) : RecyclerView.Adapter<Cit
 	}
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
 		return CityViewHolder(
-			CityItemBinding.inflate(
+			CitySearchItemBinding.inflate(
 				LayoutInflater.from(parent.context),
 				parent,
 				false

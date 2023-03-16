@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.databinding.MainScreenFragmentBinding
 import com.lampotrias.seeweather.presentation.citylist.CityListFragment
-import com.lampotrias.seeweather.presentation.citysearch.CityAddFragment
+import com.lampotrias.seeweather.presentation.citysearch.CitySearchFragment
 import com.lampotrias.seeweather.presentation.mainscreen.daylist.DayListAdapter
 import com.lampotrias.seeweather.presentation.mainscreen.hourslist.HoursAdapter
 import com.lampotrias.seeweather.presentation.settngs.SettingsFragment
@@ -61,7 +61,7 @@ class MainScreenFragment : Fragment() {
 		binding.actionMap.setOnClickListener {
 			parentFragmentManager
 				.beginTransaction()
-				.add(R.id.nav_host_fragment, CityAddFragment())
+				.add(R.id.nav_host_fragment, CitySearchFragment())
 				.addToBackStack("citysearch")
 				.commit()
 		}
