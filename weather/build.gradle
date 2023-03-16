@@ -7,6 +7,7 @@ plugins {
 	id 'dagger.hilt.android.plugin'
 	id 'com.google.gms.google-services'
 	id 'com.google.firebase.appdistribution'
+	id 'com.google.firebase.crashlytics'
 }
 
 kapt {
@@ -111,8 +112,10 @@ dependencies {
 
 	implementation("androidx.fragment:fragment-ktx:1.5.5")
 
-	implementation platform('com.google.firebase:firebase-bom:31.2.2')
+	implementation platform('com.google.firebase:firebase-bom:31.2.3')
 	implementation 'com.google.firebase:firebase-analytics-ktx'
+	implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
 	// Navigation
 	implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 	implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
