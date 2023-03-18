@@ -26,7 +26,7 @@
     <string name="temp_c">Celsius</string>
     <string name="pref_speed">Speed</string>
     <string name="pref_temp">Temperature</string>
-    <string name="city_search_hint">Enter city</string>
+    <string name="city_search_hint">Enter the name of city</string>
     <string name="select_city_button">S</string>
     <string name="default_bottom_tab_text">Погода</string>
     <string name="location_bottom_tab_text">Локации</string>

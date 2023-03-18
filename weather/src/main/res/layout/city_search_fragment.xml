@@ -8,12 +8,16 @@
     tools:context=".presentation.citysearch.CitySearchFragment">
 
     <EditText
+        android:layout_marginHorizontal="10dp"
         android:id="@+id/search_field"
         android:hint="@string/city_search_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
+        android:paddingStart="7dp"
         android:inputType="text"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="5dp"
         android:textColor="?attr/colorOnSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
