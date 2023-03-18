@@ -22,13 +22,13 @@ data class DaysFormatted(
 
 class DayListAdapter : RecyclerView.Adapter<DayViewHolder>() {
 	private var items: List<DaysFormatted> = emptyList()
-	private val formatter = SimpleDateFormat("HH:mm")
+	private val formatter = SimpleDateFormat("dd MMM")
 
 	@SuppressLint("NotifyDataSetChanged")
 	fun setItems(newItems: List<DayWeatherModel>) {
 		items = newItems.map {
 			DaysFormatted(
-				date = formatter.format(it.date),
+				date = formatter.format(it.date * 1000),
 				tempMax = it.tempMax,
 				tempMin = it.tempMin,
 				icon = it.icon,
