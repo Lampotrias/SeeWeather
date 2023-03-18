@@ -47,7 +47,7 @@ class WeatherApiSourceWeather @Inject constructor(
 							try {
 								val jsonAdapter = moshi.adapter(WeatherApiCurrentModel::class.java)
 								val model = jsonAdapter.fromJson(json.getString("current")) ?: throw JSONException("1")
-								val weatherConditions = getIcon(model.condition.code)
+								val weatherConditions = getWeatherConditions(model.condition.code)
 								model.toEntityModel(weatherConditions)
 							} catch (ex: JSONException) {
 								ex.printStackTrace()
@@ -95,8 +95,8 @@ class WeatherApiSourceWeather @Inject constructor(
 						return@withContext Result.success(
 							GeneralWeatherEntity(
 								currentWeather,
-								days.map { it.toEntity() },
-								hours.map { it.toEntity(getIcon(it.condition.code)) }
+								days.map { it.toEntity(getWeatherConditions(it.condition.code)) },
+								hours.map { it.toEntity(getWeatherConditions(it.condition.code)) }
 							)
 						)
 
@@ -186,7 +186,7 @@ class WeatherApiSourceWeather @Inject constructor(
 								val jsonAdapter = moshi.adapter(WeatherApiCurrentModel::class.java)
 								val model = jsonAdapter.fromJson(json.getString("current"))
 									?: throw JSONException("1")
-								val weatherConditions = getIcon(model.condition.code)
+								val weatherConditions = getWeatherConditions(model.condition.code)
 								model.toEntityModel(weatherConditions)
 							} catch (ex: JSONException) {
 								ex.printStackTrace()
@@ -247,7 +247,7 @@ class WeatherApiSourceWeather @Inject constructor(
 		}
 	}
 
-	override suspend fun getIcon(conditions: Any?): WeatherConditions? {
+	override suspend fun getWeatherConditions(conditions: Any?): WeatherConditions? {
 
 		// TODO Логировать исключения по несуществующим кодам
 		return when (conditions?.toString()){

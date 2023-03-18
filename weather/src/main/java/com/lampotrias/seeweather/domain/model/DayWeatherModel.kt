@@ -1,6 +1,7 @@
 package com.lampotrias.seeweather.domain.model
 
 import android.net.Uri
+import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 
 class DayWeatherModel(
 	val date: Long = 0L,
@@ -11,4 +12,5 @@ class DayWeatherModel(
 	val windPower: Int = 0,
 	val sunrise: Long = 0L,
 	val sunset: Long = 0L,
+	val weatherConditions: WeatherConditions? = null
 )

@@ -11,4 +11,5 @@ class DayEntity(
 	val windPowerKph: Int = 0,
 	val sunrise: Long = 0L,
 	val sunset: Long = 0L,
+	val weatherConditions: WeatherConditions? = null
 )

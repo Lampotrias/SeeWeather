@@ -8,5 +8,5 @@ import com.lampotrias.seeweather.domain.model.RequestModel
 interface WeatherDataSource {
 	suspend fun getDataWeather(requestModel: RequestModel): Result<GeneralWeatherEntity>
 	suspend fun getShortWeatherData(requestModel: RequestModel): Result<CurrentShortWeatherEntity>
-	suspend fun getIcon(conditions: Any?): WeatherConditions? = null
+	suspend fun getWeatherConditions(conditions: Any?): WeatherConditions? = null
 }

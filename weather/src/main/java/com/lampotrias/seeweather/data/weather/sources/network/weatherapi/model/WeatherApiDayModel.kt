@@ -2,11 +2,12 @@ package com.lampotrias.seeweather.data.weather.sources.network.weatherapi.model
 
 import android.util.Log
 import com.lampotrias.seeweather.data.weather.model.DayEntity
+import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 import kotlin.math.roundToInt
 
 
@@ -33,16 +34,17 @@ class WeatherApiDayModel {
 	var sunrise: String = ""
 	var sunset: String = ""
 
-	fun toEntity(): DayEntity {
+	fun toEntity(weatherConditions: WeatherConditions?): DayEntity {
 		return DayEntity(
-			date,
-			maxTempC.roundToInt(),
-			minTempC.roundToInt(),
-			condition.text,
-			condition.imageUri,
-			maxWindKph.roundToInt(),
-			dateToTimestamp(sunrise),
-			dateToTimestamp(sunset)
+			date = date,
+			tempMaxC = maxTempC.roundToInt(),
+			tempMinC = minTempC.roundToInt(),
+			textStatus = condition.text,
+			icon = condition.imageUri,
+			windPowerKph = maxWindKph.roundToInt(),
+			sunrise = dateToTimestamp(sunrise),
+			sunset = dateToTimestamp(sunset),
+			weatherConditions = weatherConditions
 		)
 	}
 

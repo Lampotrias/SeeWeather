@@ -5,15 +5,18 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.lampotrias.seeweather.databinding.DayViewHolderBinding
 import com.lampotrias.seeweather.domain.model.DayWeatherModel
+import com.lampotrias.seeweather.utils.Utils
 import java.text.SimpleDateFormat
 
 data class DaysFormatted(
 	val date: String,
 	val tempMin: Int,
 	val tempMax: Int,
-	val icon: Uri? = null
+	val icon: Uri? = null,
+	val weatherConditions: WeatherConditions? = null
 )
 
 
@@ -28,7 +31,8 @@ class DayListAdapter : RecyclerView.Adapter<DayViewHolder>() {
 				date = formatter.format(it.date),
 				tempMax = it.tempMax,
 				tempMin = it.tempMin,
-				icon = it.icon
+				icon = it.icon,
+				weatherConditions = it.weatherConditions,
 			)
 		}
 		notifyDataSetChanged()
@@ -53,9 +57,16 @@ class DayViewHolder(private val binding: DayViewHolderBinding) :
 	RecyclerView.ViewHolder(binding.root) {
 
 	fun bind(daysFormatted: DaysFormatted) {
-		binding.day.text = daysFormatted.date
-		binding.tempMax.text = daysFormatted.tempMax.toString()
-		binding.tempMin.text = daysFormatted.tempMin.toString()
-		binding.dayImage.setImageURI(daysFormatted.icon)
+		with (daysFormatted) {
+			binding.day.text = date
+			binding.tempMax.text = tempMax.toString()
+			binding.tempMin.text = tempMin.toString()
+			Utils.applyWeatherConditionIcon(
+				binding.dayImage,
+				isDay = true,
+				weatherConditions,
+				icon
+			)
+		}
 	}
 }

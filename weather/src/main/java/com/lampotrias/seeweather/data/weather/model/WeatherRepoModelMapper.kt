@@ -92,7 +92,8 @@ object WeatherRepoModelMapper {
 				entity.windPowerKph
 			),
 			sunrise = entity.sunrise,
-			sunset = entity.sunset
+			sunset = entity.sunset,
+			weatherConditions = entity.weatherConditions
 		)
 	}
 
