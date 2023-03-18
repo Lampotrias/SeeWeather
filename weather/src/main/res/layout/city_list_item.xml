@@ -47,6 +47,7 @@
             android:layout_marginEnd="10dp"
             android:contentDescription="@null"
             tools:src="@drawable/ic_w_snowy"
+            android:tint="?attr/colorAccent"
             app:layout_constraintBottom_toBottomOf="@+id/temp"
             app:layout_constraintEnd_toStartOf="@id/temp"
             app:layout_constraintTop_toTopOf="@+id/temp" />

@@ -16,13 +16,14 @@
         android:autofillHints=""
         android:paddingStart="7dp"
         android:inputType="text"
+        android:fontFamily="@font/roboto_regular"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="5dp"
         android:textColor="?attr/colorOnSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,RtlSymmetry" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cities_search_list"
