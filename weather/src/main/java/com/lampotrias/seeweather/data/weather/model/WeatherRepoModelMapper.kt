@@ -3,7 +3,7 @@ package com.lampotrias.seeweather.data.weather.model
 import android.net.Uri
 import com.lampotrias.seeweather.domain.WindDirection
 import com.lampotrias.seeweather.domain.model.*
-import com.lampotrias.seeweather.utils.MeasureUtils
+import com.lampotrias.seeweather.utils.MeasureConvertor
 import com.lampotrias.seeweather.utils.Settings
 import com.lampotrias.seeweather.utils.Utils
 import kotlin.math.roundToInt
@@ -59,21 +59,21 @@ object WeatherRepoModelMapper {
 	): CurrentWeatherModel {
 		Utils.log("cur weather from: $entity}")
 		return CurrentWeatherModel(
-			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureUtils.cToF(
+			temp = if (requestModel.tempUnit == Settings.Temp.C) entity.tempC else MeasureConvertor.cToF(
 				entity.tempC
 			),
 			isDay = entity.isDay,
 			weatherConditions = entity.weatherConditions,
 			textStatus = entity.text,
 			weatherIcon = Uri.parse(entity.iconUri),
-			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
+			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureConvertor.kmphToMph(
 				entity.windPowerKph
 			).roundToInt(),
 			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
 			pressure = entity.pressure,
 			humidity = entity.humidity,
 			precipitation = entity.precipitation,
-			windGust = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windGust else MeasureUtils.kmphToMph(
+			windGust = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windGust else MeasureConvertor.kmphToMph(
 				entity.windGust
 			),
 			uv = entity.uv,
@@ -90,14 +90,14 @@ object WeatherRepoModelMapper {
 		return DayWeatherModel(
 			date = entity.date,
 			icon = entity.icon,
-			tempMax = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMaxC else MeasureUtils.cToF(
+			tempMax = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMaxC else MeasureConvertor.cToF(
 				entity.tempMaxC
 			),
-			tempMin = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMinC else MeasureUtils.cToF(
+			tempMin = if (requestModel.tempUnit == Settings.Temp.C) entity.tempMinC else MeasureConvertor.cToF(
 				entity.tempMinC
 			),
 			textStatus = entity.textStatus,
-			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
+			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureConvertor.kmphToMph(
 				entity.windPowerKph
 			).roundToInt(),
 			sunrise = entity.sunrise,
@@ -118,13 +118,13 @@ object WeatherRepoModelMapper {
 			temp = if (requestModel.tempUnit == Settings.Temp.C) {
 				entity.tempC
 			} else {
-				MeasureUtils.cToF(entity.tempC)
+				MeasureConvertor.cToF(entity.tempC)
 			},
 			chanceOfRain = 0,
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) {
 				entity.windPowerKph
 			} else {
-				MeasureUtils.kmphToMph(entity.windPowerKph).roundToInt()
+				MeasureConvertor.kmphToMph(entity.windPowerKph).roundToInt()
 			},
 			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
 			windDegree = entity.windDegree

@@ -2,7 +2,7 @@ package com.lampotrias.seeweather.utils
 
 import kotlin.math.roundToInt
 
-object MeasureUtils {
+object MeasureConvertor {
 	fun cToF(celsius: Number): Int {
 		return ((9 / 5 * celsius.toFloat()) + 32).roundToInt()
 	}
