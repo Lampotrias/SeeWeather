@@ -70,7 +70,7 @@ class CityListAdapter(
 				dateFormat.timeZone = it
 			}
 			binding.name.text = cityModel.name
-			binding.temp.text = cityModel.temp.toString()
+			binding.temp.text = cityModel.temp?.value?.toString() ?: "--"
 			binding.weatherText.text = cityModel.textStatus
 			binding.time.text = dateFormat.format(cityModel.time * 1000)
 

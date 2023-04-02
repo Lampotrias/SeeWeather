@@ -9,12 +9,13 @@ import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.lampotrias.seeweather.databinding.DayViewHolderBinding
 import com.lampotrias.seeweather.domain.model.DayWeatherModel
 import com.lampotrias.seeweather.utils.Utils
+import com.lampotrias.seeweather.utils.types.Temperature
 import java.text.SimpleDateFormat
 
 data class DaysFormatted(
 	val date: String,
-	val tempMin: Int,
-	val tempMax: Int,
+	val tempMin: Temperature,
+	val tempMax: Temperature,
 	val icon: Uri? = null,
 	val weatherConditions: WeatherConditions? = null
 )
@@ -59,8 +60,8 @@ class DayViewHolder(private val binding: DayViewHolderBinding) :
 	fun bind(daysFormatted: DaysFormatted) {
 		with (daysFormatted) {
 			binding.day.text = date
-			binding.tempMax.text = tempMax.toString()
-			binding.tempMin.text = tempMin.toString()
+			binding.tempMax.text = tempMax.value.toString()
+			binding.tempMin.text = tempMin.value.toString()
 			Utils.applyWeatherConditionIcon(
 				binding.dayImage,
 				isDay = true,

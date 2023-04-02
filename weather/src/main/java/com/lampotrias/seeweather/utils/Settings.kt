@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.lampotrias.seeweather.R
+import com.lampotrias.seeweather.utils.types.units.SpeedUnit
+import com.lampotrias.seeweather.utils.types.units.TempUnit
 
 @SuppressLint("StaticFieldLeak")
 object Settings {
@@ -12,26 +14,26 @@ object Settings {
 
 	private var context: Context? = null
 
-	val speedMeasure: Speed
+	val speedMeasure: SpeedUnit
 		get() {
 			return context?.let { context ->
-				Speed.values().firstOrNull {
+				SpeedUnit.values().firstOrNull {
 					PreferenceManager.getDefaultSharedPreferences(context).getString(
-						PREF_SPEED_KEY, Speed.KPH.value
+						PREF_SPEED_KEY, SpeedUnit.KPH.value
 					) == it.name.lowercase()
-				} ?: Speed.KPH
-			} ?: Speed.KPH
+				} ?: SpeedUnit.KPH
+			} ?: SpeedUnit.KPH
 		}
 
-	val tempMeasure: Temp
+	val tempMeasure: TempUnit
 		get() {
 			return context?.let { context ->
-				Temp.values().firstOrNull {
+				TempUnit.values().firstOrNull {
 					PreferenceManager.getDefaultSharedPreferences(context).getString(
-						PREF_TEMP_KEY, Temp.C.value
+						PREF_TEMP_KEY, TempUnit.C.value
 					) == it.name.lowercase()
-				} ?: Temp.C
-			} ?: Temp.C
+				} ?: TempUnit.C
+			} ?: TempUnit.C
 		}
 
 	fun init(context: Context) {
@@ -42,12 +44,12 @@ object Settings {
 			var isModify = false
 
 			if (!contains(PREF_SPEED_KEY)) {
-				editor.putString(PREF_SPEED_KEY, Speed.KPH.value)
+				editor.putString(PREF_SPEED_KEY, SpeedUnit.KPH.value)
 				isModify = true
 			}
 
 			if (!contains(PREF_TEMP_KEY)) {
-				editor.putString(PREF_TEMP_KEY, Temp.C.value)
+				editor.putString(PREF_TEMP_KEY, TempUnit.C.value)
 				isModify = true
 			}
 
@@ -58,40 +60,34 @@ object Settings {
 	}
 
 	fun getSpeedPref(): Map<String, String> {
-		return Speed.values().associate {
+		return SpeedUnit.values().associate {
 			when (it) {
-				Speed.MPH -> {
+				SpeedUnit.MPH -> {
 					Pair(it.value, context?.getString(R.string.speed_mph) ?: "")
 				}
 
-				Speed.KPH -> {
+				SpeedUnit.KPH -> {
 					Pair(it.value, context?.getString(R.string.speed_kph) ?: "")
+				}
+				SpeedUnit.MSEC -> {
+					Pair(it.value, context?.getString(R.string.speed_msec) ?: "")
 				}
 			}
 		}
 	}
 
 	fun getTempPref(): Map<String, String> {
-		return Temp.values().associate {
+		return TempUnit.values().associate {
 			when (it) {
-				Temp.F -> {
+				TempUnit.F -> {
 					Pair(it.value, context?.getString(R.string.temp_f) ?: "")
 				}
 
-				Temp.C -> {
+				TempUnit.C -> {
 					Pair(it.value, context?.getString(R.string.temp_c) ?: "")
 				}
 			}
 		}
 	}
 
-	enum class Speed(val value: String) {
-		MPH("mph"),
-		KPH("kph")
-	}
-
-	enum class Temp(val value: String) {
-		C("c"),
-		F("f")
-	}
 }

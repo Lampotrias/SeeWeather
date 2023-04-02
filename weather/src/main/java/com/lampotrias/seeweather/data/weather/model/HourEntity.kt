@@ -4,11 +4,11 @@ import android.net.Uri
 
 class HourEntity(
 	val date: Long = 0L,
-	val tempC: Int = 0,
+	val tempC: Float = 0f,
 	val icon: Uri? = null,
 	val isDay: Boolean,
 	val weatherConditions: WeatherConditions? = null,
-	val windPowerKph: Int = 0,
+	val windPowerKph: Float = 0f,
 	val windDir: String = "",
 	val windDegree: Int
 )

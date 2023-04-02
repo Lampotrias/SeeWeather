@@ -4,7 +4,6 @@ import com.lampotrias.seeweather.data.weather.model.HourEntity
 import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlin.math.roundToInt
 
 @JsonClass(generateAdapter = true)
 class WeatherApiHourModel {
@@ -38,10 +37,10 @@ class WeatherApiHourModel {
 	fun toEntity(weatherConditions: WeatherConditions?): HourEntity {
 		return HourEntity(
 			date = date,
-			tempC = tempC.roundToInt(),
+			tempC = tempC,
 			icon = condition.imageUri,
 			weatherConditions = weatherConditions,
-			windPowerKph = windKph.toInt(),
+			windPowerKph = windKph,
 			windDir = windDirection,
 			windDegree = windDegree,
 			isDay = isDay > 0

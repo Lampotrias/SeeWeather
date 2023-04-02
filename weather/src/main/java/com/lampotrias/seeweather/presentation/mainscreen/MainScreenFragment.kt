@@ -103,7 +103,7 @@ class MainScreenFragment : Fragment() {
 				state.weatherForecastModel?.let { weather ->
 					with(binding) {
 						selectedCity.text = state.city
-						currentTemp.text = weather.currentWeatherModel.temp.toString()
+						currentTemp.text = weather.currentWeatherModel.temp.value.toString()
 						weatherDescription.text = weather.currentWeatherModel.textStatus
 
 						Utils.applyWeatherConditionIcon(
@@ -113,22 +113,22 @@ class MainScreenFragment : Fragment() {
 							weather.currentWeatherModel.weatherIcon
 						)
 
-						tempMax.text = weather.days[0].tempMax.toString()
-						tempMin.text = weather.days[0].tempMin.toString()
+						tempMax.text = weather.days[0].tempMax.value.toString()
+						tempMin.text = weather.days[0].tempMin.value.toString()
 						sunset.text = sunDateFormatter.format(weather.days[0].sunset)
 						sunrise.text = sunDateFormatter.format(weather.days[0].sunrise)
 						hoursAdapter.setItems(weather.actualizeHours)
 						daysAdapter.setItems(weather.days)
 
-						currentWeatherView.wind.text = weather.currentWeatherModel.windPower.toString()
+						currentWeatherView.wind.text = weather.currentWeatherModel.wind.speed.value.toString()
 						currentWeatherView.pressure.text = weather.currentWeatherModel.pressure.toInt().toString() + " hPa"
 						currentWeatherView.humidity.text = weather.currentWeatherModel.humidity.toString() + " %"
-						currentWeatherView.feelsLike.text = weather.currentWeatherModel.feelsLike.toString()
+						currentWeatherView.feelsLike.text = weather.currentWeatherModel.feelsLike.value.toString()
 						currentWeatherView.precipitation.text = weather.currentWeatherModel.precipitation.toString()
 						currentWeatherView.cloudCover.text = weather.currentWeatherModel.cloud.toString()
 						currentWeatherView.uvIndex.text = weather.currentWeatherModel.uv.toString()
 						currentWeatherView.visibility.text = weather.currentWeatherModel.visibility.toString()
-						currentWeatherView.windGust.text = weather.currentWeatherModel.windGust.toString()
+						currentWeatherView.windGust.text = weather.currentWeatherModel.windGust.value.toString()
 
 					}
 					Log.e("asdasdas OK", weather.toString())

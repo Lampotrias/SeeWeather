@@ -40,4 +40,5 @@
     <string name="uv_index">UV index</string>
     <string name="visibility">Visibility</string>
     <string name="wind_gust">Wind gust</string>
+    <string name="speed_msec">m/s</string>
 </resources>

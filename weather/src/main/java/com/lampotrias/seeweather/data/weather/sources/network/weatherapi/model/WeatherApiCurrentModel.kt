@@ -4,7 +4,6 @@ import com.lampotrias.seeweather.data.weather.model.CurrentWeatherEntity
 import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlin.math.roundToInt
 
 @JsonClass(generateAdapter = true)
 class WeatherApiCurrentModel {
@@ -30,10 +29,10 @@ class WeatherApiCurrentModel {
 	var pressureMb: Float = 0f
 
 	@Json(name = "precip_mm")
-	var precipitation: Float = 0f
+	var precipitationМм: Float = 0f
 
 	@Json(name = "humidity")
-	var humidity: Int = 0
+	var humidityPercent: Int = 0
 
 	@Json(name = "wind_kph")
 	var windPowerKph: Float = 0f
@@ -45,32 +44,32 @@ class WeatherApiCurrentModel {
 	var uv: Float = 0f
 
 	@Json(name = "vis_km")
-	var visibility: Float = 0f
+	var visibilityKm: Float = 0f
 
 	@Json(name = "feelslike_c")
-	var feelsLike: Float = 0f
+	var feelsLikeC: Float = 0f
 
 	@Json(name = "cloud")
-	var cloud: Int = 0
+	var cloudPercent: Int = 0
 
 	fun toEntityModel(weatherConditions: WeatherConditions?): CurrentWeatherEntity {
 		return CurrentWeatherEntity(
 			date = lastUpdate,
-			tempC = tempC.roundToInt(),
+			tempC = tempC,
 			iconUri = "https://${condition.icon}",
 			weatherConditions = weatherConditions,
 			text = condition.text,
-			windPowerKph = windPowerKph.roundToInt(),
+			windPowerKph = windPowerKph,
 			windDir = windDirection,
-			humidity = humidity,
+			humidity = humidityPercent,
 			isDay = isDay > 0,
 			pressure = pressureMb,
-			precipitation = precipitation,
+			precipitation = precipitationМм,
 			windGust = windGustKph,
 			uv = uv,
-			visibility = visibility,
-			feelsLike = feelsLike,
-			cloud = cloud
+			visibility = visibilityKm,
+			feelsLike = feelsLikeC,
+			cloud = cloudPercent
 		)
 	}
 }

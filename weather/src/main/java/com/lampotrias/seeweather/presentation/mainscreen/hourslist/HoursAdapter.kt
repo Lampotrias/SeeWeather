@@ -7,20 +7,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.lampotrias.seeweather.databinding.HourViewHolderBinding
-import com.lampotrias.seeweather.domain.WindDirection
 import com.lampotrias.seeweather.domain.model.HourWeatherModel
 import com.lampotrias.seeweather.utils.Utils
+import com.lampotrias.seeweather.utils.types.Temperature
+import com.lampotrias.seeweather.utils.types.units.Wind
 import java.text.SimpleDateFormat
 
 data class HoursFormatted(
 	val date: String,
-	val temp: Int,
+	val temp: Temperature,
 	val icon: Uri? = null,
 	val isDay: Boolean,
 	val weatherConditions: WeatherConditions? = null,
-	val windPower: Int = 0,
-	val windDirection: WindDirection,
-	val windDegree: Int
+	val wind: Wind,
 )
 
 class HoursAdapter : RecyclerView.Adapter<HourViewHolder>() {
@@ -35,9 +34,7 @@ class HoursAdapter : RecyclerView.Adapter<HourViewHolder>() {
 				temp = it.temp,
 				icon = it.icon,
 				weatherConditions = it.weatherConditions,
-				windPower = it.windPower,
-				windDirection = it.windDirection,
-				windDegree = it.windDegree,
+				wind = it.wind,
 				isDay = it.isDay
 			)
 		}
@@ -64,7 +61,7 @@ class HourViewHolder(private val binding: HourViewHolderBinding) :
 
 	fun bind(hourEntity: HoursFormatted) {
 		binding.time.text = hourEntity.date
-		binding.temp.text = hourEntity.temp.toString()
+		binding.temp.text = hourEntity.temp.value.toString()
 
 		Utils.applyWeatherConditionIcon(
 			binding.hourImage,
@@ -73,7 +70,7 @@ class HourViewHolder(private val binding: HourViewHolderBinding) :
 			hourEntity.icon
 		)
 
-		binding.windPower.text = hourEntity.windPower.toString()
-		binding.windDirectionIcon.rotation = hourEntity.windDegree.toFloat()
+		binding.windPower.text = hourEntity.wind.speed.value.toString()
+		binding.windDirectionIcon.rotation = 0f
 	}
 }

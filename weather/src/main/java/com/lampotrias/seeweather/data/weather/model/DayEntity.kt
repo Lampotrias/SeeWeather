@@ -4,11 +4,11 @@ import android.net.Uri
 
 class DayEntity(
 	val date: Long = 0L,
-	val tempMaxC: Int = 0,
-	val tempMinC: Int = 0,
+	val tempMaxC: Float = 0f,
+	val tempMinC: Float = 0f,
 	val textStatus: String = "",
 	val icon: Uri? = null,
-	val windPowerKph: Int = 0,
+	val windPowerKph: Float = 0f,
 	val sunrise: Long = 0L,
 	val sunset: Long = 0L,
 	val weatherConditions: WeatherConditions? = null

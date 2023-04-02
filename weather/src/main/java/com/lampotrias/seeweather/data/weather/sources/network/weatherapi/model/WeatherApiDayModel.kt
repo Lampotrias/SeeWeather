@@ -8,7 +8,6 @@ import com.squareup.moshi.JsonClass
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.roundToInt
 
 
 @JsonClass(generateAdapter = true)
@@ -37,11 +36,11 @@ class WeatherApiDayModel {
 	fun toEntity(weatherConditions: WeatherConditions?): DayEntity {
 		return DayEntity(
 			date = date,
-			tempMaxC = maxTempC.roundToInt(),
-			tempMinC = minTempC.roundToInt(),
+			tempMaxC = maxTempC,
+			tempMinC = minTempC,
 			textStatus = condition.text,
 			icon = condition.imageUri,
-			windPowerKph = maxWindKph.roundToInt(),
+			windPowerKph = maxWindKph,
 			sunrise = dateToTimestamp(sunrise),
 			sunset = dateToTimestamp(sunset),
 			weatherConditions = weatherConditions
