@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/feels_like"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/precipitation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/feels_like"
+            android:src="@drawable/ic_mild" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/feels_like"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/feels_like_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="35" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/precipitation"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/cloud_cover"
+        app:layout_constraintStart_toEndOf="@+id/feels_like"
+        app:layout_constraintTop_toTopOf="@+id/feels_like">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/precipitation"
+            android:src="@drawable/ic_w_drops" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/precipitation"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/precipitation_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cloud_cover"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/precipitation"
+        app:layout_constraintTop_toTopOf="@+id/precipitation">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/cloud_cover"
+            android:src="@drawable/ic_w_cloud"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/cloud_cover"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/cloud_cover_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="100" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wind"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/pressure"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feels_like">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/wind"
+            android:src="@drawable/ic_w_wind"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/wind"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/wind_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="9" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pressure"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/humidity"
+        app:layout_constraintStart_toEndOf="@+id/wind"
+        app:layout_constraintTop_toTopOf="@+id/wind">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/precipitation"
+            android:src="@drawable/ic_w_drops" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/pressure"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/pressure_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="1012" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/humidity"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pressure"
+        app:layout_constraintTop_toTopOf="@+id/pressure">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/cloud_cover"
+            android:src="@drawable/ic_w_cloud"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/humidity"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/humidity_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="54" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/uv_index"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/visibility"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wind">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/precipitation"
+            android:src="@drawable/ic_w_sunny"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/uv_index"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/uv_index_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="7/11" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/visibility"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/wind_gust"
+        app:layout_constraintStart_toEndOf="@+id/uv_index"
+        app:layout_constraintTop_toTopOf="@+id/uv_index">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/cloud_cover"
+            android:src="@drawable/ic_w_horizont"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/visibility"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/visibility_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="54" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wind_gust"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/visibility"
+        app:layout_constraintTop_toTopOf="@+id/visibility">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/wind_gust"
+            android:src="@drawable/ic_w_tornado"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:text="@string/wind_gust"
+            android:textAlignment="center"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/wind_gust_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto_thin"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="29sp"
+            tools:text="25" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

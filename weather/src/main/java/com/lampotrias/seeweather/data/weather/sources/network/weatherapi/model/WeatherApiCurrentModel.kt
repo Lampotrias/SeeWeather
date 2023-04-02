@@ -29,11 +29,29 @@ class WeatherApiCurrentModel {
 	@Json(name = "pressure_mb")
 	var pressureMb: Float = 0f
 
+	@Json(name = "precip_mm")
+	var precipitation: Float = 0f
+
 	@Json(name = "humidity")
 	var humidity: Int = 0
 
 	@Json(name = "wind_kph")
-	var windKph: Float = 0f
+	var windPowerKph: Float = 0f
+
+	@Json(name = "gust_kph")
+	var windGustKph: Float = 0f
+
+	@Json(name = "uv")
+	var uv: Float = 0f
+
+	@Json(name = "vis_km")
+	var visibility: Float = 0f
+
+	@Json(name = "feelslike_c")
+	var feelsLike: Float = 0f
+
+	@Json(name = "cloud")
+	var cloud: Int = 0
 
 	fun toEntityModel(weatherConditions: WeatherConditions?): CurrentWeatherEntity {
 		return CurrentWeatherEntity(
@@ -42,11 +60,17 @@ class WeatherApiCurrentModel {
 			iconUri = "https://${condition.icon}",
 			weatherConditions = weatherConditions,
 			text = condition.text,
-			windPowerKph = windKph.roundToInt(),
+			windPowerKph = windPowerKph.roundToInt(),
 			windDir = windDirection,
 			humidity = humidity,
 			isDay = isDay > 0,
-			pressure = pressureMb
+			pressure = pressureMb,
+			precipitation = precipitation,
+			windGust = windGustKph,
+			uv = uv,
+			visibility = visibility,
+			feelsLike = feelsLike,
+			cloud = cloud
 		)
 	}
 }

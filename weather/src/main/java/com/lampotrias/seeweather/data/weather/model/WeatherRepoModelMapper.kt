@@ -6,6 +6,7 @@ import com.lampotrias.seeweather.domain.model.*
 import com.lampotrias.seeweather.utils.MeasureUtils
 import com.lampotrias.seeweather.utils.Settings
 import com.lampotrias.seeweather.utils.Utils
+import kotlin.math.roundToInt
 
 object WeatherRepoModelMapper {
 	fun toShortDomainModel(
@@ -67,10 +68,18 @@ object WeatherRepoModelMapper {
 			weatherIcon = Uri.parse(entity.iconUri),
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph
-			),
+			).roundToInt(),
 			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
 			pressure = entity.pressure,
-			humidity = entity.humidity
+			humidity = entity.humidity,
+			precipitation = entity.precipitation,
+			windGust = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windGust else MeasureUtils.kmphToMph(
+				entity.windGust
+			),
+			uv = entity.uv,
+			visibility = entity.visibility,
+			feelsLike = entity.feelsLike,
+			cloud = entity.cloud
 		)
 	}
 
@@ -90,7 +99,7 @@ object WeatherRepoModelMapper {
 			textStatus = entity.textStatus,
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) entity.windPowerKph else MeasureUtils.kmphToMph(
 				entity.windPowerKph
-			),
+			).roundToInt(),
 			sunrise = entity.sunrise,
 			sunset = entity.sunset,
 			weatherConditions = entity.weatherConditions
@@ -115,7 +124,7 @@ object WeatherRepoModelMapper {
 			windPower = if (requestModel.speedUnit == Settings.Speed.KPH) {
 				entity.windPowerKph
 			} else {
-				MeasureUtils.kmphToMph(entity.windPowerKph)
+				MeasureUtils.kmphToMph(entity.windPowerKph).roundToInt()
 			},
 			windDirection = WindDirection.valueOfOrDefault(entity.windDir, WindDirection.ERROR),
 			windDegree = entity.windDegree

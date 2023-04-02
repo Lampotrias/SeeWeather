@@ -7,8 +7,8 @@
     <string name="wind_power">Wind power: </string>
     <string name="last_update">Last update: </string>
     <string name="time_of_day">Time of day: </string>
-    <string name="pressure">"Pressure: "</string>
-    <string name="humidity">"Humidity: "</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
     <string name="current_location">Current Location</string>
     <string name="details">Details</string>
     <string name="forecast">Forecast</string>
@@ -33,4 +33,11 @@
     <string name="preference_bottom_tab_text">Настройки</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="feels_like">Feels like</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="cloud_cover">Cloud cover</string>
+    <string name="wind">Wind</string>
+    <string name="uv_index">UV index</string>
+    <string name="visibility">Visibility</string>
+    <string name="wind_gust">Wind gust</string>
 </resources>

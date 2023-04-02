@@ -14,4 +14,10 @@ data class CurrentWeatherModel(
 	val windDirection: WindDirection,
 	val pressure: Float = 0f,
 	val humidity: Int = 0,
+	val precipitation: Float = 0f,
+	val windGust: Float = 0f,
+	val uv: Float = 0f,
+	val visibility: Float = 0f,
+	val feelsLike: Float = 0f,
+	val cloud: Int = 0,
 )

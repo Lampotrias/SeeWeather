@@ -119,10 +119,17 @@ class MainScreenFragment : Fragment() {
 						sunrise.text = sunDateFormatter.format(weather.days[0].sunrise)
 						hoursAdapter.setItems(weather.actualizeHours)
 						daysAdapter.setItems(weather.days)
-						windPowerValue.text = weather.currentWeatherModel.windPower.toString()
-						windDirectionValue.text = weather.currentWeatherModel.windDirection.name
-						pressureValue.text = weather.currentWeatherModel.pressure.toInt().toString() + " hPa"
-						humidityValue.text = weather.currentWeatherModel.humidity.toString() + " %"
+
+						currentWeatherView.wind.text = weather.currentWeatherModel.windPower.toString()
+						currentWeatherView.pressure.text = weather.currentWeatherModel.pressure.toInt().toString() + " hPa"
+						currentWeatherView.humidity.text = weather.currentWeatherModel.humidity.toString() + " %"
+						currentWeatherView.feelsLike.text = weather.currentWeatherModel.feelsLike.toString()
+						currentWeatherView.precipitation.text = weather.currentWeatherModel.precipitation.toString()
+						currentWeatherView.cloudCover.text = weather.currentWeatherModel.cloud.toString()
+						currentWeatherView.uvIndex.text = weather.currentWeatherModel.uv.toString()
+						currentWeatherView.visibility.text = weather.currentWeatherModel.visibility.toString()
+						currentWeatherView.windGust.text = weather.currentWeatherModel.windGust.toString()
+
 					}
 					Log.e("asdasdas OK", weather.toString())
 				}
@@ -140,7 +147,6 @@ class MainScreenFragment : Fragment() {
 
 	companion object {
 		const val RESULT_KEY_FROM_CITY_LIST = "RESULT_KEY_FROM_CITY_LIST"
-		const val REQUEST_KEY_RELOAD_WITH_CITY = "REQUEST_KEY_RELOAD_WITH_CITY"
 		const val BUNDLE_KEY_CITY_ID = "BUNDLE_KEY_CITY_ID"
 	}
 }
