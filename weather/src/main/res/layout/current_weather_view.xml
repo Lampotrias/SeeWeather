@@ -83,7 +83,7 @@
         <ImageView
             style="@style/currentWeatherItemImage"
             android:contentDescription="@string/wind"
-            android:src="@drawable/ic_w_wind"
+            android:src="@drawable/ic_w_hazzy"
             app:tint="?attr/colorAccent" />
 
         <TextView
@@ -106,7 +106,7 @@
         <ImageView
             style="@style/currentWeatherItemImage"
             android:contentDescription="@string/precipitation"
-            android:src="@drawable/ic_w_drops" />
+            android:src="@drawable/ic_pressure" />
 
         <TextView
             style="@style/currentWeatherItemCaption"
@@ -128,7 +128,7 @@
         <ImageView
             style="@style/currentWeatherItemImage"
             android:contentDescription="@string/cloud_cover"
-            android:src="@drawable/ic_w_cloud"
+            android:src="@drawable/ic_humidity"
             app:tint="?attr/colorAccent" />
 
         <TextView
@@ -199,7 +199,7 @@
         <ImageView
             style="@style/currentWeatherItemImage"
             android:contentDescription="@string/wind_gust"
-            android:src="@drawable/ic_w_tornado"
+            android:src="@drawable/ic_w_wind"
             app:tint="?attr/colorAccent" />
 
         <TextView

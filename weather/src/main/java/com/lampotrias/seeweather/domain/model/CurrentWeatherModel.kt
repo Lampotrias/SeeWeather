@@ -2,9 +2,10 @@ package com.lampotrias.seeweather.domain.model
 
 import android.net.Uri
 import com.lampotrias.seeweather.data.weather.model.WeatherConditions
+import com.lampotrias.seeweather.utils.types.Distance
 import com.lampotrias.seeweather.utils.types.Speed
 import com.lampotrias.seeweather.utils.types.Temperature
-import com.lampotrias.seeweather.utils.types.units.Wind
+import com.lampotrias.seeweather.utils.types.Wind
 
 data class CurrentWeatherModel(
 	val temp: Temperature,
@@ -18,7 +19,7 @@ data class CurrentWeatherModel(
 	val precipitation: Float = 0f,
 	val windGust: Speed,
 	val uv: Float = 0f,
-	val visibility: Float = 0f,
+	val visibility: Distance,
 	val feelsLike: Temperature,
 	val cloud: Int = 0,
 )

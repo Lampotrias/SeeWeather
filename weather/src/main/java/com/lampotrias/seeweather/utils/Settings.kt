@@ -63,7 +63,7 @@ object Settings {
 		return SpeedUnit.values().associate {
 			when (it) {
 				SpeedUnit.MPH -> {
-					Pair(it.value, context?.getString(R.string.speed_mph) ?: "")
+					Pair(it.value, context?.getString(R.string.speed_mph_title) ?: "")
 				}
 
 				SpeedUnit.KPH -> {

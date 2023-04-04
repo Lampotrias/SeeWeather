@@ -10,7 +10,7 @@ import com.lampotrias.seeweather.databinding.HourViewHolderBinding
 import com.lampotrias.seeweather.domain.model.HourWeatherModel
 import com.lampotrias.seeweather.utils.Utils
 import com.lampotrias.seeweather.utils.types.Temperature
-import com.lampotrias.seeweather.utils.types.units.Wind
+import com.lampotrias.seeweather.utils.types.Wind
 import java.text.SimpleDateFormat
 
 data class HoursFormatted(

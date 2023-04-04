@@ -120,15 +120,15 @@ class MainScreenFragment : Fragment() {
 						hoursAdapter.setItems(weather.actualizeHours)
 						daysAdapter.setItems(weather.days)
 
-						currentWeatherView.wind.text = weather.currentWeatherModel.wind.speed.value.toString()
-						currentWeatherView.pressure.text = weather.currentWeatherModel.pressure.toInt().toString() + " hPa"
-						currentWeatherView.humidity.text = weather.currentWeatherModel.humidity.toString() + " %"
-						currentWeatherView.feelsLike.text = weather.currentWeatherModel.feelsLike.value.toString()
-						currentWeatherView.precipitation.text = weather.currentWeatherModel.precipitation.toString()
-						currentWeatherView.cloudCover.text = weather.currentWeatherModel.cloud.toString()
-						currentWeatherView.uvIndex.text = weather.currentWeatherModel.uv.toString()
-						currentWeatherView.visibility.text = weather.currentWeatherModel.visibility.toString()
-						currentWeatherView.windGust.text = weather.currentWeatherModel.windGust.value.toString()
+						currentWeatherView.setFeelsLike(weather.currentWeatherModel.feelsLike)
+						currentWeatherView.setPrecipitation(weather.currentWeatherModel.precipitation)
+						currentWeatherView.setWind(weather.currentWeatherModel.wind)
+						currentWeatherView.setPressure(weather.currentWeatherModel.pressure)
+						currentWeatherView.setHumidity(weather.currentWeatherModel.humidity)
+						currentWeatherView.setCloudCover(weather.currentWeatherModel.cloud)
+						currentWeatherView.setUvIndex(weather.currentWeatherModel.uv)
+						currentWeatherView.setVisibilityDistance(weather.currentWeatherModel.visibility)
+						currentWeatherView.setWindGust(weather.currentWeatherModel.windGust)
 
 					}
 					Log.e("asdasdas OK", weather.toString())

@@ -3,7 +3,7 @@ package com.lampotrias.seeweather.domain.model
 import android.net.Uri
 import com.lampotrias.seeweather.data.weather.model.WeatherConditions
 import com.lampotrias.seeweather.utils.types.Temperature
-import com.lampotrias.seeweather.utils.types.units.Wind
+import com.lampotrias.seeweather.utils.types.Wind
 
 class HourWeatherModel(
 	val icon: Uri? = null,

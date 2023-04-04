@@ -20,7 +20,7 @@
     <string name="wind_humidity_title">Humidity</string>
 
     <string name="measure_units_category">Units of measure</string>
-    <string name="speed_mph">miles per hour</string>
+    <string name="speed_mph_title">miles per hour</string>
     <string name="speed_kph">kilometre per hour</string>
     <string name="temp_f">Fahrenheit</string>
     <string name="temp_c">Celsius</string>
@@ -41,4 +41,9 @@
     <string name="visibility">Visibility</string>
     <string name="wind_gust">Wind gust</string>
     <string name="speed_msec">m/s</string>
+    <string name="speed_kmh">km/h</string>
+    <string name="speed_mph">mph</string>
+    <string name="distance_miles">mi</string>
+    <string name="distance_km">km</string>
+    <string name="distance_meter">m</string>
 </resources>

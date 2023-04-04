@@ -29,7 +29,7 @@ class WeatherApiCurrentModel {
 	var pressureMb: Float = 0f
 
 	@Json(name = "precip_mm")
-	var precipitationМм: Float = 0f
+	var precipitationMm: Float = 0f
 
 	@Json(name = "humidity")
 	var humidityPercent: Int = 0
@@ -64,7 +64,7 @@ class WeatherApiCurrentModel {
 			humidity = humidityPercent,
 			isDay = isDay > 0,
 			pressure = pressureMb,
-			precipitation = precipitationМм,
+			precipitation = precipitationMm,
 			windGust = windGustKph,
 			uv = uv,
 			visibility = visibilityKm,

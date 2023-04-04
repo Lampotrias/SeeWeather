@@ -5,11 +5,13 @@ import com.lampotrias.seeweather.domain.WindDirection
 import com.lampotrias.seeweather.domain.model.*
 import com.lampotrias.seeweather.utils.MeasureConvertor
 import com.lampotrias.seeweather.utils.Utils
+import com.lampotrias.seeweather.utils.types.Distance
 import com.lampotrias.seeweather.utils.types.Speed
 import com.lampotrias.seeweather.utils.types.Temperature
+import com.lampotrias.seeweather.utils.types.Wind
+import com.lampotrias.seeweather.utils.types.units.DistanceUnit
 import com.lampotrias.seeweather.utils.types.units.SpeedUnit
 import com.lampotrias.seeweather.utils.types.units.TempUnit
-import com.lampotrias.seeweather.utils.types.units.Wind
 
 object WeatherRepoModelMapper {
 	fun toShortDomainModel(
@@ -94,7 +96,10 @@ object WeatherRepoModelMapper {
 				}, requestModel.speedUnit
 			),
 			uv = entity.uv,
-			visibility = entity.visibility,
+			visibility = Distance(
+				value = entity.visibility,
+				distanceUnit = DistanceUnit.Kilometres
+			),
 			feelsLike = Temperature(
 				when(requestModel.tempUnit) {
 					TempUnit.C -> entity.feelsLike
