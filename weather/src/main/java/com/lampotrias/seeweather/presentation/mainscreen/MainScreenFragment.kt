@@ -9,13 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.databinding.MainScreenFragmentBinding
-import com.lampotrias.seeweather.presentation.citylist.CityListFragment
-import com.lampotrias.seeweather.presentation.citysearch.CitySearchFragment
 import com.lampotrias.seeweather.presentation.mainscreen.daylist.DayListAdapter
 import com.lampotrias.seeweather.presentation.mainscreen.hourslist.HoursAdapter
-import com.lampotrias.seeweather.presentation.settngs.SettingsFragment
 import com.lampotrias.seeweather.utils.Utils
 import com.lampotrias.seeweather.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,10 +27,6 @@ class MainScreenFragment : Fragment() {
 	private val hoursAdapter = HoursAdapter()
 	private val daysAdapter = DayListAdapter()
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-	}
-
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -42,36 +34,8 @@ class MainScreenFragment : Fragment() {
 	): View {
 		_binding = MainScreenFragmentBinding.inflate(layoutInflater)
 
-		binding.actionRefresh.setOnClickListener {
-			viewModel.loadLastCity()
-		}
-
-		binding.actionSettings.setOnClickListener {
-			parentFragmentManager
-				.beginTransaction()
-				.add(R.id.nav_host_fragment, SettingsFragment())
-				.addToBackStack("settings")
-				.commit()
-		}
-
 		binding.swipeRefresh.setOnRefreshListener {
 			viewModel.loadLastCity()
-		}
-
-		binding.actionMap.setOnClickListener {
-			parentFragmentManager
-				.beginTransaction()
-				.add(R.id.nav_host_fragment, CitySearchFragment())
-				.addToBackStack("citysearch")
-				.commit()
-		}
-
-		binding.actionCityList.setOnClickListener {
-			parentFragmentManager
-				.beginTransaction()
-				.add(R.id.nav_host_fragment, CityListFragment())
-				.addToBackStack("citylist")
-				.commit()
 		}
 
 		binding.hoursList.adapter = hoursAdapter
