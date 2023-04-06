@@ -36,6 +36,8 @@ class CitySearchViewModel @Inject constructor(
 						})
 				}
 			}
+		} else {
+			clearSearchResult()
 		}
 	}
 
@@ -50,6 +52,11 @@ class CitySearchViewModel @Inject constructor(
 				)
 			)
 		}
+		clearSearchResult()
+	}
+
+	private fun clearSearchResult() {
+		_uiState.value = State.SuccessResult(emptyList())
 	}
 
 	sealed class State {
