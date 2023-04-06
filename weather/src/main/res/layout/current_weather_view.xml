@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/feels_like"
@@ -90,10 +90,51 @@
             style="@style/currentWeatherItemCaption"
             android:text="@string/wind" />
 
-        <TextView
-            android:id="@+id/wind_text"
-            style="@style/currentWeatherItemValue"
-            tools:text="9" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/wind_direction_icon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="@string/wind"
+                    android:src="@drawable/ic_wind_direction"
+                    app:tint="?attr/colorAccent" />
+
+                <TextView
+                    android:id="@+id/wind_direction_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    tools:ignore="SmallSp"
+                    tools:text="SE" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/wind_text"
+                style="@style/currentWeatherItemValue"
+                android:textAlignment="textStart"
+                tools:ignore="RtlSymmetry"
+                tools:text="9" />
+
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

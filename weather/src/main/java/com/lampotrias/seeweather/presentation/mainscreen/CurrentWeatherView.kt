@@ -7,6 +7,7 @@ import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.utils.Chars
@@ -33,6 +34,8 @@ class CurrentWeatherView @JvmOverloads constructor(
 	private lateinit var uvIndexView: TextView
 	private lateinit var visibilityView: TextView
 	private lateinit var windGustView: TextView
+	private lateinit var windDirectionIconView: ImageView
+	private lateinit var windDirectionTextView: TextView
 
 	init {
 		LayoutInflater.from(context).inflate(R.layout.current_weather_view, this, true)
@@ -51,6 +54,8 @@ class CurrentWeatherView @JvmOverloads constructor(
 		uvIndexView = findViewById(R.id.uv_index_text)
 		visibilityView = findViewById(R.id.visibility_text)
 		windGustView = findViewById(R.id.wind_gust_text)
+		windDirectionIconView = findViewById(R.id.wind_direction_icon)
+		windDirectionTextView = findViewById(R.id.wind_direction_text)
 	}
 
 	fun setFeelsLike(temperature: Temperature) {
@@ -112,6 +117,8 @@ class CurrentWeatherView @JvmOverloads constructor(
 			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 		)
 		windView.setText(spannableString, TextView.BufferType.SPANNABLE)
+		windDirectionIconView.rotation = wind.direction.degree
+		windDirectionTextView.text = wind.direction.name
 	}
 
 	fun setPressure(bar: Float) {

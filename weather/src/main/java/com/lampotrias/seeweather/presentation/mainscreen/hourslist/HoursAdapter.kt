@@ -70,7 +70,7 @@ class HourViewHolder(private val binding: HourViewHolderBinding) :
 			hourEntity.icon
 		)
 
-		binding.windPower.text = hourEntity.wind.speed.value.toString()
-		binding.windDirectionIcon.rotation = 0f
+		binding.windPower.text = hourEntity.wind.speed.value.toInt().toString()
+		binding.windDirectionIcon.rotation = hourEntity.wind.direction.degree
 	}
 }
