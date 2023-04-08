@@ -12,4 +12,12 @@ object MeasureConvertor {
 	fun kmphToMsec(kmph: Number): Float {
 		return kmph.toFloat() * 1000 / 3600
 	}
+
+	fun kmToMeter(km: Number): Float {
+		return km.toFloat() * 1000
+	}
+
+	fun kmToMiles(km: Number): Float {
+		return km.toFloat() * 0.621371f
+	}
 }

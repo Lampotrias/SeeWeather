@@ -89,16 +89,21 @@ object WeatherRepoModelMapper {
 			humidity = entity.humidity,
 			precipitation = entity.precipitation,
 			windGust = Speed(
-				when (requestModel.speedUnit) {
+				value = when (requestModel.speedUnit) {
 					SpeedUnit.MPH -> MeasureConvertor.kmphToMph(entity.windGust)
 					SpeedUnit.KPH -> entity.windGust
 					SpeedUnit.MSEC -> MeasureConvertor.kmphToMsec(entity.windGust)
-				}, requestModel.speedUnit
+				},
+				speedUnit = requestModel.speedUnit
 			),
 			uv = entity.uv,
 			visibility = Distance(
-				value = entity.visibility,
-				distanceUnit = DistanceUnit.Kilometres
+				value = when(requestModel.distanceUnit) {
+					DistanceUnit.Meter -> MeasureConvertor.kmToMeter(entity.visibility)
+					DistanceUnit.Kilometres -> entity.visibility
+					DistanceUnit.Miles -> MeasureConvertor.kmToMiles(entity.visibility)
+				},
+				distanceUnit = requestModel.distanceUnit
 			),
 			feelsLike = Temperature(
 				when(requestModel.tempUnit) {

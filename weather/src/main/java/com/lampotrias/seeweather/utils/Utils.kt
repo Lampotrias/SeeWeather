@@ -21,7 +21,8 @@ object Utils {
 			getCoordinatesString(city),
 			"ru",
 			Settings.tempMeasure,
-			Settings.speedMeasure
+			Settings.speedMeasure,
+			Settings.distanceMeasure
 		)
 	}
 

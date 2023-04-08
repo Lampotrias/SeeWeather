@@ -10,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.elevation.SurfaceColors
 import com.lampotrias.seeweather.R
 import com.lampotrias.seeweather.utils.Settings
+import com.lampotrias.seeweather.utils.Settings.PREF_DISTANCE_KEY
 import com.lampotrias.seeweather.utils.Settings.PREF_SPEED_KEY
 import com.lampotrias.seeweather.utils.Settings.PREF_TEMP_KEY
 
@@ -40,6 +41,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 			screen.addPreference(it)
 		}
 
+		val distancePref = Settings.getDistancePref()
+		ListPreference(context).apply {
+			key = PREF_DISTANCE_KEY
+			title = getString(R.string.pref_distance)
+			entries = distancePref.values.toTypedArray()
+			entryValues = distancePref.keys.toTypedArray()
+			summary = Settings.distanceMeasure.value
+		}.also {
+			measureUnits.addPreference(it)
+		}
+
 		val speedPref = Settings.getSpeedPref()
 		ListPreference(context).apply {
 			key = PREF_SPEED_KEY
@@ -61,9 +73,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		}.also {
 			measureUnits.addPreference(it)
 		}
-//		findPreference<ListPreference>("units_of_measure124")?.apply {
-//			setDefaultValue("11")
-//		}
 		preferenceScreen = screen
 	}
 

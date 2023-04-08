@@ -22,9 +22,13 @@
     <string name="measure_units_category">Units of measure</string>
     <string name="speed_mph_title">miles per hour</string>
     <string name="speed_kph">kilometre per hour</string>
+    <string name="settings_distance_meter">metres</string>
+    <string name="settings_distance_kilometer">kilometres</string>
+    <string name="settings_distance_miles">miles</string>
     <string name="temp_f">Fahrenheit</string>
     <string name="temp_c">Celsius</string>
     <string name="pref_speed">Speed</string>
+    <string name="pref_distance">Distance</string>
     <string name="pref_temp">Temperature</string>
     <string name="city_search_hint">Enter the name of city</string>
     <string name="select_city_button">S</string>
