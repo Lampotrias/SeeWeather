@@ -1,5 +1,6 @@
 package com.lampotrias.seeweather.presentation.mainscreen
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,6 +27,20 @@ class MainScreenFragment : Fragment() {
 
 	private val hoursAdapter = HoursAdapter()
 	private val daysAdapter = DayListAdapter()
+
+	override fun onAttach(context: Context) {
+		super.onAttach(context)
+
+		activity?.supportFragmentManager?.setFragmentResultListener(RESULT_KEY_RESELECT_TAB, this) { requestKey, _ ->
+			if (requestKey == RESULT_KEY_RESELECT_TAB) {
+				if (binding.scrollContainer.canScrollVertically(-1)) {
+					binding.scrollContainer.smoothScrollTo(0, 0)
+				} else {
+					viewModel.loadLastCity()
+				}
+			}
+		}
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -111,6 +126,7 @@ class MainScreenFragment : Fragment() {
 
 	companion object {
 		const val RESULT_KEY_FROM_CITY_LIST = "RESULT_KEY_FROM_CITY_LIST"
+		const val RESULT_KEY_RESELECT_TAB = "RESULT_KEY_RESELECT_TAB"
 		const val BUNDLE_KEY_CITY_ID = "BUNDLE_KEY_CITY_ID"
 	}
 }

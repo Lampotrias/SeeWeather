@@ -2,6 +2,7 @@ package com.lampotrias.seeweather
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -47,15 +48,24 @@ class WeatherActivity : AppCompatActivity() {
 			}
 		}
 
-		supportFragmentManager.setFragmentResultListener(MainScreenFragment.RESULT_KEY_FROM_CITY_LIST, this) { requestKey, bundle ->
-			if (requestKey == MainScreenFragment.RESULT_KEY_FROM_CITY_LIST) {
-//				val city = bundle.getInt(MainScreenFragment.BUNDLE_KEY_CITY_ID)
-//				if (city > 0) {
-					binding.bottomNavigation.selectedItemId = R.id.current_weather
-//				}
+		binding.bottomNavigation.setOnItemReselectedListener { item ->
+			when (item.itemId) {
+				R.id.current_weather -> {
+					supportFragmentManager.setFragmentResult(
+						MainScreenFragment.RESULT_KEY_RESELECT_TAB, bundleOf()
+					)
+				}
 			}
 		}
 
+		supportFragmentManager.setFragmentResultListener(
+			MainScreenFragment.RESULT_KEY_FROM_CITY_LIST,
+			this
+		) { requestKey, _ ->
+			if (requestKey == MainScreenFragment.RESULT_KEY_FROM_CITY_LIST) {
+				binding.bottomNavigation.selectedItemId = R.id.current_weather
+			}
+		}
 	}
 
 	override fun onBackPressed() {
